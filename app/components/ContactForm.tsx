@@ -93,7 +93,6 @@ function Form({ className }: { className?: string }) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{ type: "success" | "error" | null; message: string }>({ type: null, message: "" });
 
   const isValidForm = firstName.trim() !== "" && lastName.trim() !== "" && email.trim() !== "" && message.trim() !== ""
 
@@ -105,7 +104,6 @@ function Form({ className }: { className?: string }) {
     }
 
     setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: "" });
 
     try {
       const result = await sendEmail({
@@ -116,26 +114,16 @@ function Form({ className }: { className?: string }) {
       });
 
       if (result.success) {
-        setSubmitStatus({
-          type: "success",
-          message: "Thank you! Your message has been sent successfully."
-        });
-        // Reset form
+        alert("Thank you! Your message has been sent successfully.");
         setFirstName("");
         setLastName("");
         setEmail("");
         setMessage("");
       } else {
-        setSubmitStatus({
-          type: "error",
-          message: result.error || "Failed to send message. Please try again."
-        });
+        alert(result.error || "Failed to send message. Please try again.");
       }
     } catch (error) {
-      setSubmitStatus({
-        type: "error",
-        message: "An unexpected error occurred. Please try again later."
-      });
+      alert("An unexpected error occurred. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -175,16 +163,6 @@ function Form({ className }: { className?: string }) {
           setter={setMessage}
           className="mt-4"
         />
-
-        {/* Status message */}
-        {submitStatus.type && (
-          <div className={`mt-4 p-3 rounded-sm text-sm ${submitStatus.type === "success"
-            ? "bg-green-50 text-green-800 border border-green-200"
-            : "bg-red-50 text-red-800 border border-red-200"
-            }`}>
-            {submitStatus.message}
-          </div>
-        )}
 
         <button
           type="submit"

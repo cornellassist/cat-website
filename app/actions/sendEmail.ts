@@ -48,7 +48,7 @@ export async function sendEmail(data: ContactFormData): Promise<{ success: boole
 
     // Send email
     const result = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>", // Change this to your verified domain in Resend
+      from: "onboarding@resend.dev", // Change this to your verified domain in Resend
       to: RECIPIENT_EMAIL,
       replyTo: data.email.trim(), // Allow replying directly to the sender
       subject: subject,
@@ -58,9 +58,13 @@ export async function sendEmail(data: ContactFormData): Promise<{ success: boole
     // Check if email was sent successfully
     if (result.error) {
       console.error("Resend API error:", result.error);
+      const message =
+        process.env.NODE_ENV === "development" && result.error?.message
+          ? result.error.message
+          : "Failed to send email. Please try again later.";
       return {
         success: false,
-        error: "Failed to send email. Please try again later."
+        error: message
       };
     }
 

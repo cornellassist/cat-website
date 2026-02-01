@@ -16,7 +16,7 @@ export interface ContactFormData {
  * Recipient email address
  * Change this to the email address where contact form submissions should be sent
  */
-export const RECIPIENT_EMAIL = "bobbybotbop@gmail.com";
+export const RECIPIENT_EMAIL = "briangxia@gmail.com";
 
 /**
  * Email template function
@@ -29,9 +29,9 @@ export const RECIPIENT_EMAIL = "bobbybotbop@gmail.com";
  */
 export function createEmailTemplate(data: ContactFormData): { subject: string; html: string } {
   const { firstName, lastName, email, message } = data;
-  
+
   const subject = `New Contact Form Submission from ${firstName} ${lastName}`;
-  
+
   const html = `
     <!DOCTYPE html>
     <html>
@@ -75,6 +75,6 @@ export function createEmailTemplate(data: ContactFormData): { subject: string; h
       </body>
     </html>
   `;
-  
+
   return { subject, html };
 }
