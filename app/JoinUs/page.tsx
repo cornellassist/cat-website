@@ -8,7 +8,7 @@ export default function JoinUs() {
     <div className="flex flex-col">
       <Navbar />
       <JoinUsHero />
-      <AboutTeams />
+      {/* <AboutTeams /> */}
       <Footer />
     </div>
   );

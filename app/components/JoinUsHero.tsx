@@ -4,18 +4,24 @@ import Image from "next/image"
 import BlurTL from "@/public/assets/blur-tl.png"
 import BlurTR from "@/public/assets/blur-tr.png"
 
+const centered = "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+
 function HeroContent() {
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center gap-2 sm:gap-5">
       <h1 className="mainheading mt-10">Join Us</h1>
-      <p className="subtext mt-4 w-full text-center">We will not be recruiting Spring 2026, but applications will reopen Fall 2026. Thank you for your interest, and we look forward to your applications!</p>
-      <Image src={HeroPic} alt="A Cornell Assistive Technology team work session" height={HeroPic.height} width={HeroPic.width}
-        className="mt-5 h-80 origin-top scale:90 sm:scale-120 xl:scale-130 2xl:scale-140 w-auto rounded-[20px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]" />
-      <div className="mt-12 flex justify-center">
-        {/* <ButtonRed label="Apply Now" to="" behav="External" disabled={true} /> */}
+      <p className="subtext mt-4 w-4/5 text-center">We will not be recruiting Spring 2026, but applications will reopen Fall 2026. Thank you for your interest, and we look forward to your applications!</p>
+      <div className="relative">
+        <Image src={HeroPic} alt="A Cornell Assistive Technology team work session" height={HeroPic.height} width={HeroPic.width}
+          className="mt-5 h-80 origin-top scale:90 sm:scale-120 xl:scale-130 2xl:scale-140 w-auto rounded-[20px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]" />
+        <img src="/assets/JoinUs/hero-shapes.svg" alt="" className={`${centered} scale-120 sm:scale-140 md:scale-145 xl:scale-155 2xl:scale-165 origin-top -z-10`} />
       </div>
 
-    </div>
+      {/* <div className="mt-12 flex justify-center"> */}
+      {/* <ButtonRed label="Apply Now" to="" behav="External" disabled={true} /> */}
+      {/* </div> */}
+
+    </div >
   )
 }
 

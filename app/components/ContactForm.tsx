@@ -69,7 +69,7 @@ function TextField({ label, size, val, setter, className }: TextFieldProps) {
           type="text"
           value={val}
           onChange={event => { setter(event.target.value) }}
-          className="border-2 rounded-sm border-text-grey"
+          className="border-2 rounded-sm border-text-grey w-full"
           required
         />
       ) : (
@@ -142,9 +142,9 @@ function Form({ className }: { className?: string }) {
   };
 
   return (
-    <div className={`flex flex-col bg-theme-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] h-160 lg:w-141 md:w-130 sm:w-120 w-80 rounded-[20px] px-10 pt-4 ${className}`}>
-      <h2 className="heading">Send a Message</h2>
-      <h2 className="subtext">This section is currently under construction, but you can contact us using our social media in the meantime.</h2>
+    <div className={`flex flex-col bg-theme-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] h-160 xl:w-141 w-4/5 rounded-[20px] px-10 pt-4 ${className}`}>
+      <h2 className="formheading">Send a Message</h2>
+      {/* <h2 className="subtext">This section is currently under construction, but you can contact us using our social media in the meantime.</h2> */}
       <form onSubmit={handleSubmit} className="flex flex-col">
         {/* <div className="flex pt-6 gap-10"> */}
         <div className="flex flex-col sm:flex-row sm:pt-6 sm:gap-10">
@@ -202,11 +202,13 @@ function Form({ className }: { className?: string }) {
   );
 }
 
+const centered = "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+
 export function ContactForm() {
   return (
     <div className="h-260 sm:h-230 mt-24 relative overflow-hidden">
       <ContactHeader className="absolute left-0 top-0" />
-      <Form className="absolute left-8 sm:left-24 sm:top-55 top-85" />
+      <Form className="absolute left-1/2 -translate-x-1/2 top-85 sm:top-65 md:top-60 xl:left-90 xl:top-55 " />
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2943.791640024081!2d-76.47607762388589!3d42.45344917118449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d0821a6191da9d%3A0xf50ee64d821b9ff4!2sCornell%20University!5e0!3m2!1sen!2sus!4v1768798639466!5m2!1sen!2sus"
         className="absolute xl:w-100 2xl:w-140 h-100 right-24 top-80 rounded-sm hidden xl:block"
