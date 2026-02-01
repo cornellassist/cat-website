@@ -71,7 +71,7 @@ export function SupportPage() {
     return (
       <div className="bg-theme-white z-10 h-auto mb-12 universepad relative">
         {/* text section */}
-        <div className="flex flex-col w-9/10 gap-6 md:gap-10 lg:gap-14">
+        <div className="flex flex-col w-9/10 gap-6 md:gap-10 lg:gap-12">
           {/* <p className="subtext mt-12">Your sponsorship supports Cornell Assistive
             Technologies’ mission to enhance inclusivity through innovative
             design. Contributions help offset the costs of our student-led projects and community outreach initiatives, each designed to meet the unique needs of individuals with disabilities.</p> */}
@@ -115,7 +115,7 @@ export function SupportPage() {
 
   function DonationPage() {
     return <div className="bg-theme-white z-10 h-auto universepad flex mb-12">
-      <div className="flex flex-col w-9/10 gap-6 md:gap-8 lg:gap-14">
+      <div className="flex flex-col w-9/10 gap-6 md:gap-8 lg:gap-12">
         <div>
           <p className="subtext mt-12">Your contribution as an individual helps us further our mission. There are two ways to give:</p>
           <ol className="subtext list-decimal list-outside pl-10 mt-4 space-y-2">
