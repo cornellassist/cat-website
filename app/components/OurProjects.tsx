@@ -62,7 +62,7 @@ function OurProjectsTopText() {
   return (
     <div className="flex flex-col">
       <h2 className="heading">Our Projects</h2>
-      <p className="subtext mt-3 -mb-4 sm:mb-0">Take a look at some of our featured projects we're currently working on!</p>
+      <p className="subtext mt-3 -mb-4 sm:mb-0">Take a look at some of our projects that we're currently working on!</p>
     </div>
   )
 }
