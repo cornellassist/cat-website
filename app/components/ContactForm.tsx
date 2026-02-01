@@ -180,7 +180,6 @@ function Form({ className }: { className?: string }) {
   );
 }
 
-const centered = "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
 
 export function ContactForm() {
   return (
