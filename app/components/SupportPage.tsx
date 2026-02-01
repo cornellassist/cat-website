@@ -116,15 +116,17 @@ export function SupportPage() {
   function DonationPage() {
     return <div className="bg-theme-white z-10 h-auto universepad flex mb-12">
       <div className="flex flex-col w-9/10 gap-6 md:gap-8 lg:gap-14">
-        <p className="subtext mt-12">Your contribution as an individual helps us further our mission. There are two ways to give:</p>
-        <ol className="subtext list-decimal list-outside pl-10 mt-4 space-y-2">
-          <li>
-            <strong>Donate a Toy</strong>: We adapt donated toys to make play inclusive for children
-          </li>
-          <li>
-            <strong>Donate With Card</strong>: Make a one-time donation to support our mission and work
-          </li>
-        </ol>
+        <div>
+          <p className="subtext mt-12">Your contribution as an individual helps us further our mission. There are two ways to give:</p>
+          <ol className="subtext list-decimal list-outside pl-10 mt-4 space-y-2">
+            <li>
+              <strong>Donate a Toy</strong>: We adapt donated toys to make play inclusive for children
+            </li>
+            <li>
+              <strong>Donate With Card</strong>: Make a one-time donation to support our mission and work
+            </li>
+          </ol>
+        </div>
         <p className="subtext">To donate a toy, please first email us at <a href="mailto:assistivetech@cornell.edu" className="underline underline-offset-2">cornellassist@gmail.com </a> to receive our current toy wishlist and instructions.</p>
         {/* <ButtonRed label="See Wishlist" to="https://www.amazon.com/hz/wishlist/ls/13KDRAOU6ZAPR?ref_=wl_share" size="M" /> */}
         <div>
