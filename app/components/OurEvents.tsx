@@ -1,25 +1,25 @@
 "use client"
-import { StaticImageData } from 'next/image'
-import Image from 'next/image'
 import { ButtonRed, ButtonWhite } from './Buttons';
 
 interface EventCardProps {
   title: string;
   description: string;
-  img?: { pic: StaticImageData; alt: string };
-  redirect?: string;
+  location: string;
+  date: string;
 }
 
 const event1: EventCardProps = {
-  title: "Title",
-  description: "Some description",
-  redirect: "",
+  title: "CAT at Ithaca Sciencenter",
+  description: "Come meet us at the Sciencenter, where we will be teaching the local community’s children and families about assistive engineering.",
+  location: "https://maps.app.goo.gl/hYfXPtxKE5NUZhLG8",
+  date: "Feb. 22, 2-4pm"
 }
 
 const event2: EventCardProps = {
-  title: "Title",
-  description: "Some description",
-  redirect: "",
+  title: "CAT at GST BOCES",
+  description: "We will be going to GST BOCES Bush Campus to teach faculty how to adapt toys!",
+  location: "https://maps.app.goo.gl/xVcuDiP8HkvqRqsYA",
+  date: "Mar. 23, 1:30-2:45pm"
 }
 
 const allEvents = [event1, event2]
@@ -34,28 +34,16 @@ function OurEventsTopText() {
   )
 }
 
-function EventCard({ title, description, img, redirect }: EventCardProps) {
-  const handleRedirect = () => {
-    if (redirect && typeof redirect == "string") {
-      window.location.href = redirect;
-    }
-  }
-
+function EventCard({ title, description, location, date }: EventCardProps) {
   return (
-    <div onClick={handleRedirect}>
-      <div className="flex gap-10 pt-4 pb-4 border-t-1 border-gray-500 hover:bg-gray-100 cursor-pointer">
-        {/* image */}
-        {(img === undefined) ?
-          <div className="bg-theme-grey rounded-[20px] h-50 w-50 drop-shadow-[0_3px_3px_rgba(0,0,0,0.5)]" /> :
-          <Image src={img.pic} alt={img.alt} height={img.pic.height} width={img.pic.width}
-            className="rounded-[20px] h-40 w-40 drop-shadow-[0_3px_3px_rgba(0,0,0,0.5)]" />}
+    <div>
+      <div className="flex flex-col py-6 px-8 cursor-pointer backdrop-blur-[2px] bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] w-full lg:w-4/5 xl:w-2/3 rounded-[20px]">
         {/* text */}
-        <div className="flex flex-col justify-between">
-          <div className="flex flex-col">
-            <h3 className="cardheading">{title}</h3>
-            <p className="cardtext mt-3">{description}</p>
-          </div>
-          {/* {redirect !== undefined && <ButtonRed label="Learn More" to={redirect} size="S" />} */}
+        <h3 className="cardheading">{title}</h3>
+        <p className="cardtext mt-3">{description}</p>
+        <div className="flex justify-between items-center mt-8">
+          <ButtonRed label="See Location" to={location} size="S" behav='External' />
+          <p className="cardtext font-semibold">{date}</p>
         </div>
       </div>
 
@@ -77,10 +65,10 @@ export function OurEvents() {
   return (
     <div className="flex flex-col h-auto w-full universepad py-12 xl:py-18 2xl:py-10" id="our-events">
       <OurEventsTopText />
-      <div className="flex flex-col my-20">
+      <div className="flex flex-col gap-10 mt-10">
         {allEvents.map((item, index) => {
           return (
-            <EventCard key={`event-${index}`} title={item.title} description={item.description} img={item?.img} redirect={item?.redirect} />
+            <EventCard key={`event-${index}`} title={item.title} description={item.description} location={item.location} date={item.date} />
           )
         })}
       </div>
