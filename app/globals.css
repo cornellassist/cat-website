@@ -95,7 +95,7 @@
 
   /* do not add color  */
   .subheading {
-    @apply text-sm sm:text-base md:text-lg xl:text-xl 2xl:text-2xl font-medium
+    @apply text-sm sm:text-base md:text-base xl:text-xl 2xl:text-2xl font-medium
   }
 
   /* do not add color */

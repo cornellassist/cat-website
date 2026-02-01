@@ -19,17 +19,17 @@ const HeroText = () => {
 }
 
 const HeroGraphic = () => {
-  const detailScaleStyles = "origin-bottom lg:origin-right scale-88 sm:scale-100 md:scale-100 lg:scale-70 xl:scale-80 2xl:scale-110"
+  const detailScaleStyles = "origin-bottom lg:origin-right scale-88 sm:scale-100 md:scale-100 lg:scale-70 xl:scale-90 2xl:scale-110"
   return (
     <>
       {/* desktop */}
-      <div className="hidden lg:block w-1/2 xl:w-132 relative self-start mt-10 2xl:-mt-5">
+      <div className="hidden lg:block w-1/2 xl:w-132 relative self-start mt-10 xl:-mt-3 2xl:-mt-5">
         <div className={`relative right-0 top-0 ${detailScaleStyles}`}>
           {/* No alts for decoration */}
           <img src="/assets/Landing/hero-blob-solid.svg" alt="" className={`absolute left-7.25 top-32`} />
           <img src="/assets/Landing/hero-blob-clear.svg" alt="" className={`absolute left-0 top-29`} />
           <Image src={HeroPic} alt="Cornell Assistive Technologies team member helping a student" height={310} width={466}
-            className={`absolute left-15 top-48 rounded-[1000px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] ${imgLoadStyles}`}
+            className={`absolute left-15 top-48 rounded-[1000px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] ${imgLoadStyles}`}
 
             onLoadingComplete={(img) => { loadingComplete(img) }} />
           <img src="/assets/Landing/hero-group.svg" alt="" className={`scale-70 sm:scale-100 absolute left-23 -z-10`} />
@@ -42,7 +42,7 @@ const HeroGraphic = () => {
           <img src="/assets/Landing/hero-blob-solid.svg" alt="" className={`absolute -left-0.75 top-32`} />
           <img src="/assets/Landing/hero-blob-clear.svg" alt="" className={`absolute -left-8 top-29`} />
           <Image src={HeroPic} alt="Cornell Assistive Technologies team member helping a student" height={310} width={466}
-            className={`absolute left-7 top-44 sm:top-48 rounded-[1000px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] ${imgLoadStyles}`}
+            className={`absolute left-7 top-44 sm:top-48 rounded-[1000px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] ${imgLoadStyles}`}
             onLoadingComplete={(img) => { loadingComplete(img) }} />
           <img src="/assets/Landing/hero-group.svg" alt="" className={`scale-60 md:scale-70 lg:scale-100 absolute sm:-top-6 md:top-0 left-10 md:left-8 -z-10`} />
         </div>
