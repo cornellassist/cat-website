@@ -5,7 +5,7 @@ import { PartnersAndSponsors } from "@/app/components/PartnersAndSponsors";
 import { TakePart } from "@/app/components/TakePart";
 import { Footer } from "@/app/components/Footer";
 import { Mission } from "@/app/components/Mission";
-import { UnderConstructionPopup } from "../components/UnderConstructionPopup";
+// import { UnderConstructionPopup } from "../components/UnderConstructionPopup";
 
 
 // no periods for short description
@@ -34,7 +34,7 @@ export default function Home() {
 
   return (
     <div>
-      <UnderConstructionPopup />
+      {/* <UnderConstructionPopup /> */}
       <Navbar />
       <LandingHero />
       <Mission />
