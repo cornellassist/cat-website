@@ -113,6 +113,7 @@ export function SupportPage() {
     );
   }
 
+
   function DonationPage() {
     return <div className="bg-theme-white z-10 h-auto universepad flex mb-12">
       <div className="flex flex-col w-9/10 gap-6 md:gap-8 lg:gap-12">
