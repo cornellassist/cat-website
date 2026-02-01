@@ -195,7 +195,7 @@ function MemberCard({ member, onClick }: { member: MemberCardInfo, onClick: () =
   const linkedinStyles = "bg-theme-white rounded-md border-2 border-theme-white cursor-pointer"
 
   return (
-    <div className="flex flex-col rounded-[20px] max-w-xs scale-90 2xl:scale-100">
+    <div className="flex flex-col rounded-[20px] max-w-xs origin-center scale-90 2xl:scale-100">
       <div className="relative">
         <Image src={img} alt={name} width={img.width} height={img.height}
           className={`w-auto rounded-[15px] cursor-pointer ${imgLoadStyles}`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
@@ -224,7 +224,7 @@ function TeamSection({ title, team, clickMember }: SectionProps) {
   return (
     <div className={`flex flex-col universepad w-full pt-10 pb-15`}>
       <h2 className="teamheading">{title}</h2>
-      <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 2xl:gap-20 xl:gap-12 lg:gap-12 md:gap-15 sm:gap-10 gap-10 mt-10">
+      <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 2xl:gap-20 xl:gap-12 lg:gap-12 md:gap-15 sm:gap-10 gap-10 mt-10 place-items-center">
         {team.map((item, index) => {
           return (
             <MemberCard key={`Team Lead ` + index} member={item} onClick={() => clickMember(item)} />
