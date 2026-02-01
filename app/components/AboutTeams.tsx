@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { StaticImageData } from 'next/image'
 import photoPlaceholder from "@/public/assets/JoinUs/hero-pic.jpg"
+import EngPic from "@/public/assets/JoinUs/eng-pic.jpg"
 
 type Team = {
     imgUrl: StaticImageData,
@@ -9,7 +10,7 @@ type Team = {
 }
 
 const engineeringTeam: Team = {
-    imgUrl: photoPlaceholder,
+    imgUrl: EngPic,
     teamName: "Engineering",
     description: "Design and create assistive solutions for the Ithaca community.",
 }
@@ -43,7 +44,7 @@ export const AboutTeams = () => {
             <p className="subtext">See how you can get involved!</p>
             <div className="flex justify-between mt-10 gap-6 md:gap-8 2xl:gap-10">
                 <TeamCard
-                    imgUrl={outreachAndEducation.imgUrl}
+                    imgUrl={engineeringTeam.imgUrl}
                     teamName={engineeringTeam.teamName}
                     description={engineeringTeam.description} />
 
