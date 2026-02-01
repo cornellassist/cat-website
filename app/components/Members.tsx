@@ -4,6 +4,7 @@ import { StaticImageData } from 'next/image';
 import data from "@/public/assets/AboutUs/team.json";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png"
 import { memo, useState } from "react";
+import { loadingComplete, imgLoadStyles } from "../utils/imgLoad";
 
 interface Member {
   name: string;
@@ -179,10 +180,8 @@ function MemberModal({ member, closeModal }: { member: MemberCardInfo, closeModa
             <p><span className={labelStyles}>College:</span> {member.college}</p>
             {/* <p><span className={labelStyles}>LinkedIn:</span> <a href={member.linkedin} target="_blank" className="text-red-600 visited:text-purple-600">{member.linkedin}</a></p> */}
           </div>
-
         </div>
       </div>
-
     </div>
   )
 }
@@ -199,7 +198,7 @@ function MemberCard({ member, onClick }: { member: MemberCardInfo, onClick: () =
     <div className="flex flex-col rounded-[20px] max-w-xs scale-90 2xl:scale-100">
       <div className="relative">
         <Image src={img} alt={name} width={img.width} height={img.height}
-          className="w-auto rounded-[15px] cursor-pointer" onClick={onClick} />
+          className={`w-auto rounded-[15px] cursor-pointer ${imgLoadStyles}`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
         {/* mobile linkedin button */}
         <img src="/assets/linkedin.svg" alt={`Visit ${name}'s LinkedIn profile`}
           className={`${linkedin === "" ? "hidden" : "block lg:hidden"} absolute right-3 bottom-3 sm:bottom-5 sm:right-5 h-9 sm:h-12 ${linkedinStyles}`}

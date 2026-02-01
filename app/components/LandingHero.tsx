@@ -30,7 +30,6 @@ const HeroGraphic = () => {
           <img src="/assets/Landing/hero-blob-clear.svg" alt="" className={`absolute left-0 top-29`} />
           <Image src={HeroPic} alt="Cornell Assistive Technologies team member helping a student" height={310} width={466}
             className={`absolute left-15 top-48 rounded-[1000px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] ${imgLoadStyles}`}
-
             onLoadingComplete={(img) => { loadingComplete(img) }} />
           <img src="/assets/Landing/hero-group.svg" alt="" className={`scale-70 sm:scale-100 absolute left-23 -z-10`} />
         </div>
