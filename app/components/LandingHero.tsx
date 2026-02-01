@@ -10,7 +10,7 @@ import { useEffect } from "react"
 const HeroText = () => {
   return (
     <div className="flex flex-col justify-center items-center lg:items-start mt-10 lg:max-w-[50%] lg-mt-0">
-      <h1 className="mainheading w-full mb-6 text-center lg:text-left z-10 bg-white sm:bg-none">Making Assistive Technologies Accessible for All</h1>
+      <h1 className="mainheading w-full mb-6 text-center lg:text-left z-10 bg-white sm:bg-transparent">Making Assistive Technologies Accessible for All</h1>
       <p className="subtext w-full mb-8 sm:mb-10 lg:mb-16 text-center lg:text-left">We create accessible devices and teach inclusive design to empower communities in Ithaca and beyond.</p>
       <ButtonRed label="Explore Our Work" to="/OurWork" />
     </div>
@@ -53,7 +53,7 @@ const HeroGraphic = () => {
 const HeroContainer = ({ children }: any) => {
   return (
     <div className="flex flex-col-reverse lg:flex-row mt-10 sm:mt-16 lg:mt-24 universepad justify-between items-center relative overflow-hidden h-150 sm:h-200 md:h-220 lg:h-155 xl:h-170 2xl:h-190 mb-20 lg:mb-0 ">
-      <Image src={BlurTL} alt="" height={BlurTL.height / 3} width={BlurTL.width / 3} className="absolute left-0 top-0 -z-10" />
+      <Image src={BlurTL} alt="" height={BlurTL.height / 2} width={BlurTL.width / 2} className="absolute left-0 top-0 -z-10" />
       <Image src={BlurTR} alt="" height={BlurTR.height / 1.5} width={BlurTR.width / 1.5} className="absolute right-0 top-0 -z-10" />
       {children}
     </div>
