@@ -30,7 +30,7 @@ function HeroContent() {
 
 const HeroContainer = ({ children }: any) => {
   return (
-    <div className="mt-24 universepad relative overflow-hidden h-150 sm:h-180 md:h-180 lg:h-190 2xl:h-200">
+    <div className="mt-16 sm:mt-16 md:mt-24 universepad relative overflow-hidden h-150 sm:h-180 md:h-180 lg:h-190 2xl:h-200">
       <Image src={BlurTL} alt="" height={BlurTL.height / 2} width={BlurTL.width / 2} className="absolute left-0 top-0 -z-10" />
       <Image src={BlurTR} alt="" height={BlurTR.height} width={BlurTR.width} className="absolute right-0 top-0 -z-10" />
       {children}

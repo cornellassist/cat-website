@@ -60,7 +60,7 @@ export function SupportPage() {
   }
   function FundingHeader() {
     return (
-      <div className="h-65 w-full bg-linear-to-l from-theme-dk-red to-theme-red flex flex-col gap-3 mt-24 universepad pt-12 relative">
+      <div className="h-65 w-full bg-linear-to-l from-theme-dk-red to-theme-red flex flex-col gap-3 mt-16 sm:mt-16 md:mt-24 universepad pt-12 relative">
         <h1 className="whitemainheading">Support</h1>
         <p className="whitesubtext">Thank you for your support of our initiative! You can assist us by sponsoring us or making an individual donation.</p>
         <FundingTabs className="absolute -bottom-1 w-full sm:w-auto left-0 sm:left-10 md:left-16 lg:left-18" />

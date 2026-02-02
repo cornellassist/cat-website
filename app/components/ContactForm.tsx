@@ -183,7 +183,7 @@ function Form({ className }: { className?: string }) {
 
 export function ContactForm() {
   return (
-    <div className="h-260 sm:h-230 mt-24 relative overflow-hidden">
+    <div className="h-260 sm:h-230 mt-16 sm:mt-16 md:mt-24 relative overflow-hidden">
       <ContactHeader className="absolute left-0 top-0" />
       <Form className="absolute left-1/2 -translate-x-1/2 top-85 sm:top-65 md:top-60 xl:left-90 xl:top-55 " />
       <iframe
