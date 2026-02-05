@@ -35,7 +35,7 @@ function TopFooter() {
         </div>
         <div className="flex flex-col mt-7 ml-0 lg:ml-10 xl:ml-25 gap-2 lg:mr-20">
           <h3 className="footerheading">Address</h3>
-          <p className="footerbottomtext">Cornell University Ithaca, NY 14850 </p>
+          <p className="footerbottomtext">Cornell University, Ithaca, NY 14850 </p>
           <a href="mailto:assistivetech@cornell.edu" className="footerbottomtext underline underline-offset-3">assistivetech@cornell.edu</a>
         </div>
       </div>

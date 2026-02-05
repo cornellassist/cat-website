@@ -18,8 +18,8 @@ const curEvents: Array<[string, { short: string; long: string }, string]> = [
     "09/26/2025"],
   ["GoBabyGo! 2025",
     {
-      short: "Adapting toy cars for children with motor disabilities",
-      long: "Our annual event where we adapt toy cars for children with motor disabilities, in collaboration with Ithaca College Occupational Therapists."
+      short: "Adapting ride-on cars for children with motor disabilities",
+      long: "Our annual event where we adapt ride-on cars for children with motor disabilities, in collaboration with Ithaca College Occupational Therapists."
     },
     "04/12/2025"],
   ["Sciencenter Workshop",
