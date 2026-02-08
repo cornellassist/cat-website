@@ -41,7 +41,9 @@
   --color-theme-red: #d22333;
   --color-theme-white: #FFFFFF;
   --color-theme-offwhite: #f6f7f9;
-  --color-theme-lt-red: #FBE9EB;
+  --color-theme-lt-red: #F2D5D5;
+  --color-theme-lt-blue: #C4FDFF;
+  --color-theme-lt-purple: #E3D4FA;
   --color-theme-m-red: #eda7ad;
   --color-theme-dk-red: #a81c29;
   --color-theme-grey: #D9D9D9;
@@ -68,11 +70,6 @@
     @apply text-5xl font-semibold tracking-[-0.02em] text-theme-white leading-16;
   }
 
-  .whitesubtext {
-    @apply text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-theme-white leading-[160%];
-
-  }
-
   .heading {
     @apply text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-semibold tracking-[-0.02em] text-theme-red leading-8 md:leading-10 lg:leading-16;
   }
@@ -83,6 +80,11 @@
 
   .subtext {
     @apply text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-text-dk-grey leading-[160%];
+  }
+
+  .whitesubtext {
+    @apply text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-theme-white leading-[160%];
+
   }
 
   .footerheading {
@@ -108,7 +110,7 @@
   }
 
   .cardheading {
-    @apply text-base sm:text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-semibold tracking-[-0.02em] text-theme-red;
+    @apply text-lg sm:text-xl xl:text-2xl 2xl:text-3xl font-semibold tracking-[-0.02em] text-theme-red;
   }
 
   .cardtext {
