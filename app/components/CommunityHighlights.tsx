@@ -74,9 +74,9 @@ export function CommunityHighlights({ events }: CommHighProps) {
         <div ref={emblaRef} className="overflow-hidden w-full max-w-full h-90 lg:h-100">
           <div className="flex">
             {pictures.map((pic, index) => (
-              <div key={index} className="flex-[0_0_60%] lg:flex-[0_0_65%] min-w-0 flex justify-center relative px-2" >
+              <div key={index} className="flex-[0_0_60%] lg:flex-[0_0_70%] min-w-0 flex justify-center relative px-2" >
                 {/* desktop */}
-                <div className={`hidden relative lg:flex backdrop-blur-[2px] bg-bg-x-lt-grey drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)] h-100 w-220 transition-all duration-300  ${index === activeIndex ? 'scale-100 opacity-100 z-10' : 'scale-90 opacity-50'}
+                <div className={`hidden relative lg:flex backdrop-blur-[2px] h-100 w-220 transition-all duration-300  ${index === activeIndex ? 'scale-100 opacity-100 z-10' : 'scale-90 opacity-50'}
               rounded-[20px]`}>
                   <div className="flex h-full w-1/2 items-center ml-7 relative z-10">
                     <div className={`relative w-full max-w-96 h-80`}>
