@@ -76,24 +76,8 @@ export function CommunityHighlights({ events }: CommHighProps) {
             {pictures.map((pic, index) => (
               <div key={index} className="flex-[0_0_60%] lg:flex-[0_0_65%] min-w-0 flex justify-center relative px-2" >
                 {/* desktop */}
-                <div className={`hidden relative lg:flex bg-text-dk-grey/70 backdrop-blur-lg h-100 w-220 transition-all duration-300  ${index === activeIndex ? 'scale-100 opacity-100 z-10' : 'scale-90 opacity-50'}
+                <div className={`hidden relative lg:flex backdrop-blur-[2px] bg-bg-x-lt-grey drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)] h-100 w-220 transition-all duration-300  ${index === activeIndex ? 'scale-100 opacity-100 z-10' : 'scale-90 opacity-50'}
               rounded-[20px]`}>
-                  <div
-                    className="absolute inset-0 rounded-[20px] z-0"
-                    style={{
-                      background: "linear-gradient(135deg, #3a3a3a 0%, #555555 25%, #444444 50%, #5a5a5a 75%, #3d3d3d 100%)",
-                    }}
-                  ></div>
-                  <div
-                    className="absolute inset-0 rounded-[20px] z-0 opacity-40"
-                    style={{
-                      backgroundImage: `
-                      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03) 0%, transparent 50%),
-                      repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px)
-                    `,
-                    }}
-                  ></div>
                   <div className="flex h-full w-1/2 items-center ml-7 relative z-10">
                     <div className={`relative w-full max-w-96 h-80`}>
                       <Image
@@ -107,10 +91,10 @@ export function CommunityHighlights({ events }: CommHighProps) {
                   </div>
                   <div className="flex flex-col my-10 mx-10 w-1/2 justify-between relative z-10">
                     <div className="flex flex-col">
-                      <h3 className={`underline decoration-2 underline-offset-10 decoration-theme-red ${activeIndex === index ? "subheading text-text-lt-grey" : "subheading text-text-grey-muted"}`}>{events[index][0]}</h3>
-                      <p className={`mt-8 ${activeIndex === index ? "descriptext text-text-lt-grey-2 mt-2 " : "descriptext text-text-grey-muted mt-2 "}`}>{events[index][1].long}</p>
+                      <h3 className={`underline decoration-2 underline-offset-10 decoration-theme-red ${activeIndex === index ? "subheading text-text-dk-grey" : "subheading text-text-grey-muted"}`}>{events[index][0]}</h3>
+                      <p className={`mt-8 ${activeIndex === index ? "descriptext text-text-dk-grey mt-2 " : "descriptext text-text-grey-muted mt-2 "}`}>{events[index][1].long}</p>
                     </div>
-                    <p className={activeIndex === index ? "descriptext text-text-lt-grey-2 mt-1" : "descriptext text-text-grey-muted"}>{events[index][2]}</p>
+                    <p className={activeIndex === index ? "descriptext text-text-dk-grey mt-1" : "descriptext text-text-grey-muted"}>{events[index][2]}</p>
                   </div>
                 </div>
                 {/* mobile */}
@@ -123,7 +107,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
                     className={`object-cover ${imgStyles}`}
                     sizes="(max-width: 768px) 100vw, 548px"
                   />
-                  <div className={`absolute bottom-0 left-0 bg-text-dk-grey/50 w-full h-28 sm:h-28 rounded-b-[20px] transition-all duration-300 backdrop-blur-sm pl-3 pt-2`}>
+                  <div className={`absolute bottom-0 left-0 w-full h-28 sm:h-28 rounded-b-[20px] transition-all duration-300 backdrop-blur-sm pl-3 pt-2`}>
                     <h3 className={activeIndex === index ? "subheading text-text-lt-grey" : "subheading text-text-grey-muted"}>{events[index][0]}</h3>
                     <p className={activeIndex === index ? "descriptext text-text-lt-grey-2 mt-2 " : "descriptext text-text-grey-muted mt-2 "}>{events[index][1].short}</p>
                     <p className={activeIndex === index ? "descriptext text-text-lt-grey-2 mt-1" : "descriptext text-text-grey-muted"}>{events[index][2]}</p>
