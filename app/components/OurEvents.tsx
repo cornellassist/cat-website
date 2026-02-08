@@ -67,7 +67,7 @@ function EventCard({ title, description, location, date, labels = [], pic }: Eve
         <Image src={pic} alt="" fill className="object-cover" />
       </div>
       {/* content */}
-      <div className="flex flex-col h-1/2 justify-between px-6 sm:px-8">
+      <div className="flex flex-col h-1/2  justify-between px-6 sm:px-8">
         <div>
           <h3 className="cardheading">{title}</h3>
           {/* labels */}
@@ -90,25 +90,6 @@ function EventCard({ title, description, location, date, labels = [], pic }: Eve
 
   )
 }
-
-
-// <div className="flex flex-col py-6 px-8 cursor-pointer backdrop-blur-[2px] bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] w-full lg:w-4/5 xl:w-2/3 rounded-[20px]">
-//     {/* text */}
-//     <h3 className="cardheading">{title}</h3>
-//     <p className="cardtext mt-3">{description}</p>
-//     <div className="flex justify-between items-center mt-8">
-//       <ButtonRed label="See Location" to={location} size="S" behav='External' />
-//       <p className="cardtext font-semibold">{date}</p>
-//     </div>
-//   </div>
-// function OurEventsBottomText() {
-//   return (
-//     <div className="flex flex-col">
-//       <p className="subtext mb-8">Check out our past events on our blog!</p>
-//       <ButtonRed label="Visit Our Blog" to="/Blog" size="M" />
-//     </div>
-//   )
-// }
 
 export function OurEvents() {
   return (

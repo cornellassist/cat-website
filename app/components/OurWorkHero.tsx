@@ -56,10 +56,6 @@ const HeroContainer = ({ children }: any) => {
         <Image src={BlurTR} alt="" height={BlurTL.height / 2} width={BlurTL.width / 2} className="absolute right-0 top-0 -z-10" />
         {children}
       </div>
-      <div className="hidden lg:flex flex-col mt-20 lg:mt-0">
-        <img src="/assets/OurWork/wave-solid-top.svg" className="-z-10 w-full" />
-        <img src="/assets/OurWork/wave-solid-bottom.svg" className="-z-10 -mt-[4.25px] w-full" />
-      </div>
     </div>
   )
 }
