@@ -171,7 +171,7 @@ export function OurProjects() {
     <div className="flex flex-col overflow-x-hidden">
       <div className="h-auto w-full flex flex-col universepad py-8 xl:py-15 2xl:py-24" id="our-projects">
         <OurProjectsTopText />
-        <div className="flex flex-col gap-8 lg:gap-10 xl:gap-15 2xl:gap-25 mt-15 items-center">
+        <div className="flex flex-col gap-8 lg:gap-10 xl:gap-15 2xl:gap-25 mt-15 items-center relative">
           <ProjectCard projects={allProjects} />
           <div className="flex justify-center">
             <ButtonWhite label="Explore All Projects We've Built" to="/assets/OurWork/Extensive-Documentation-of-CAT-Projects.pdf" behav="External" />
