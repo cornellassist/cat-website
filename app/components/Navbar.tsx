@@ -50,8 +50,8 @@ export function Navbar() {
           <Tab routeToPath="/" tabName="Home" />
           <Tab routeToPath="/OurWork" tabName="Our Work" />
           <Tab routeToPath="/AboutUs" tabName="About Us" />
-          {/* <Tab routeToPath="/Blog" tabName="Blog" />
-        <Tab routeToPath="/DIY" tabName="DIY" /> */}
+          <Tab routeToPath="/Blog" tabName="Blog" />
+          {/* <Tab routeToPath="/DIY" tabName="DIY" /> */}
           <Tab routeToPath="/JoinUs" tabName="Join Us" />
           <Tab routeToPath="/Contact" tabName="Contact" />
           <Tab routeToPath="/Support" tabName="Support" />
@@ -70,8 +70,8 @@ export function Navbar() {
             <Tab routeToPath="/" tabName="Home" />
             <Tab routeToPath="/OurWork" tabName="Our Work" />
             <Tab routeToPath="/AboutUs" tabName="About Us" />
-            {/* <Tab routeToPath="/Blog" tabName="Blog" />
-        <Tab routeToPath="/DIY" tabName="DIY" /> */}
+            <Tab routeToPath="/Blog" tabName="Blog" />
+            {/* <Tab routeToPath="/DIY" tabName="DIY" /> */}
             <Tab routeToPath="/JoinUs" tabName="Join Us" />
             <Tab routeToPath="/Contact" tabName="Contact" />
             <Tab routeToPath="/Support" tabName="Support" />
