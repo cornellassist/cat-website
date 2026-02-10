@@ -171,11 +171,10 @@ function MemberModal({ member, closeModal }: { member: MemberCardInfo, closeModa
         <button className="absolute top-2 right-4 text-xl" onClick={closeModal}>
           <img src="/assets/close-x-svgrepo-com.svg" alt="Close" className="h-10 w-10 cursor-pointer invert" />
         </button>
-
         <div className="mt-4 flex flex-col items-center">
-          <Image src={imgSrc()} width="300" height="300" alt={`Photo of ${member.name}`} className={`rounded-[20px] ${imgLoadStyles}`} onLoadingComplete={(img) => { loadingComplete(img) }}/>
-          <div className="mt-4 justify-start whitesubtext">
-            <p><span className={labelStyles}>Name:</span> {member.name}</p>
+          <h1 className="whitesubtext mb-2"><span className={labelStyles}>{member.name}</span></h1>
+          <Image src={imgSrc()} width="300" height="300" alt={`Photo of ${member.name}`} className={`rounded-[20px] ${imgLoadStyles} border-2 border-white`} onLoadingComplete={(img) => { loadingComplete(img) }}/>
+          <div className="mt-4 justify-start whitesubtext text-center">
             <p><span className={labelStyles}>Role:</span> {member.role}</p>
             <p><span className={labelStyles}>Year:</span> {member.year}</p>
             <p><span className={labelStyles}>Major:</span> {member.major}</p>
