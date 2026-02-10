@@ -5,6 +5,7 @@ import data from "@/public/assets/AboutUs/team.json";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png"
 import { memo, useState } from "react";
 import { loadingComplete, imgLoadStyles } from "../utils/imgLoad";
+import { image } from 'framer-motion/client';
 
 interface Member {
   name: string;
@@ -162,16 +163,17 @@ function MemberModal({ member, closeModal }: { member: MemberCardInfo, closeModa
 
   }
 
+
   const labelStyles = "font-semibold"
   return (
     <div className="fixed flex justify-center items-center bg-black/50 inset-0 z-50">
       <div className="bg-text-dk-grey rounded-[20px] max-w-lg w-auto relative px-15 py-8">
         <button className="absolute top-2 right-4 text-xl" onClick={closeModal}>
-          <img src="/assets/close-x-svgrepo-com.svg" alt="Close" className="h-10 w-10 cursor-pointer" />
+          <img src="/assets/close-x-svgrepo-com.svg" alt="Close" className="h-10 w-10 cursor-pointer invert" />
         </button>
 
         <div className="mt-4 flex flex-col items-center">
-          <Image src={imgSrc()} width="300" height="300" alt={`Photo of ${member.name}`} className="rounded-[20px]" />
+          <Image src={imgSrc()} width="300" height="300" alt={`Photo of ${member.name}`} className={`rounded-[20px] ${imgLoadStyles}`} onLoadingComplete={(img) => { loadingComplete(img) }}/>
           <div className="mt-4 justify-start whitesubtext">
             <p><span className={labelStyles}>Name:</span> {member.name}</p>
             <p><span className={labelStyles}>Role:</span> {member.role}</p>
@@ -195,10 +197,11 @@ function MemberCard({ member, onClick }: { member: MemberCardInfo, onClick: () =
   const linkedinStyles = "bg-theme-white rounded-md border-2 border-theme-white cursor-pointer"
 
   return (
-    <div className="flex flex-col rounded-[20px] max-w-xs origin-center scale-90 2xl:scale-100">
+    <div className="flex flex-col rounded-[20px] max-w-xs origin-center scale-90 2xl:scale-100 drop-shadow-xl/50">
       <div className="relative">
         <Image src={img} alt={name} width={img.width} height={img.height}
-          className={`w-auto rounded-[15px] cursor-pointer ${imgLoadStyles}`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
+          // className={`w-auto rounded-[15px] cursor-pointer ${imgLoadStyles}`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
+          className={`2xl-100 xl:w-70 lg:w-60 rounded-[15px] cursor-pointer border border-gray-500/50 p-1 transition duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.75)]`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
         {/* mobile linkedin button */}
         <img src="/assets/linkedin.svg" alt={`Visit ${name}'s LinkedIn profile`}
           className={`${linkedin === "" ? "hidden" : "block lg:hidden"} absolute right-3 bottom-3 sm:bottom-5 sm:right-5 h-9 sm:h-12 ${linkedinStyles}`}
@@ -223,7 +226,7 @@ function MemberCard({ member, onClick }: { member: MemberCardInfo, onClick: () =
 function TeamSection({ title, team, clickMember }: SectionProps) {
   return (
     <div className={`flex flex-col universepad w-full pt-10 pb-15`}>
-      <h2 className="teamheading">{title}</h2>
+      <h2 className="teamheading text-center border-2 rounded-sm bg-gradient-to-r from-black-500 via-gray-500 to-black-500">{title}</h2>
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 2xl:gap-20 xl:gap-12 lg:gap-12 md:gap-15 sm:gap-10 gap-10 mt-10 place-items-center">
         {team.map((item, index) => {
           return (
@@ -263,8 +266,11 @@ export function Members() {
   `,
       }}>
       <TeamSection title="Our Team Leads" team={teamLeads} clickMember={clickMember} />
+      <hr className="border-gray-500 border-2"></hr>
       <TeamSection title="Engineering Subteam" team={engSubteam} clickMember={clickMember} />
+      <hr className="border-gray-500 border-2"></hr>
       <TeamSection title="Outreach & Education Subteam" team={eduOutSubteam} clickMember={clickMember} />
+      <hr className="border-gray-500 border-2"></hr>
       <TeamSection title="Operations Subteam" team={opsSubteam} clickMember={clickMember} />
       {/* <TeamSection title="Our Alumni" team={alumni} clickMember={clickMember} /> */}
 
