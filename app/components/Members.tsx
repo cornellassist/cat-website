@@ -1,11 +1,11 @@
-"use client"
-import Image from 'next/image';
-import { StaticImageData } from 'next/image';
+"use client";
+import Image from "next/image";
+import { StaticImageData } from "next/image";
 import data from "@/public/assets/AboutUs/team.json";
-import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png"
+import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
 import { memo, useState } from "react";
 import { loadingComplete, imgLoadStyles } from "../utils/imgLoad";
-import { image } from 'framer-motion/client';
+import { image } from "framer-motion/client";
 
 interface Member {
   name: string;
@@ -30,29 +30,31 @@ interface SectionProps {
   clickMember: (member: MemberCardInfo) => void;
 }
 
-const teamData: Member[] = data
+const teamData: Member[] = data;
 
 function lookupHelper(name: string): Member {
-  const member = teamData.find((curMember) => (curMember.name === name));
+  const member = teamData.find((curMember) => curMember.name === name);
   if (member === undefined) {
-    console.error("Member not found: ", name)
+    console.error("Member not found: ", name);
     return {
       name: name,
       role: "",
       year: "",
       major: "",
       college: "",
-    }
+    };
   } else {
     return member;
   }
-};
+}
 
 function getMemberImage(name: string) {
   const fullName = name.split(" ");
   const [fName, lName] = [fullName[0], fullName[fullName.length - 1]];
   try {
-    return require(`@/public/assets/AboutUs/ProfilePics/${fName.toLowerCase()}-${lName.toLowerCase()}.png`);
+    return require(
+      `@/public/assets/AboutUs/ProfilePics/${fName.toLowerCase()}-${lName.toLowerCase()}.png`,
+    );
   } catch {
     return undefined;
   }
@@ -60,199 +62,269 @@ function getMemberImage(name: string) {
 
 function createMemberCardInfo({ name }: CreateMemberCardProps): MemberCardInfo {
   const member = lookupHelper(name);
-  const img = getMemberImage(name)
+  const img = getMemberImage(name);
   // const img = undefined
   if (img !== undefined) {
-    console.log("Found img")
+    console.log("Found img");
     return {
       ...member,
-      img: img
-    }
+      img: img,
+    };
   } else {
-    console.log("No img")
+    console.log("No img");
     return member;
   }
 }
 
 const teamLeadsInfo: CreateMemberCardProps[] = [
-  { name: 'Lucas Keith' },
-  { name: 'Mae Sliwinski' },
-  { name: 'Natalie Shepherd' },
-  { name: 'Chris Parker' },
-  { name: 'William Ellis' },
-  { name: 'Savaas Iqbal' },
-  { name: 'Josephine Kelly' },
-  { name: 'Zaid Al-Shoha' },
-  { name: 'Richard Ballard' },
-  { name: 'Abigail Jin' }
-]
+  { name: "Lucas Keith" },
+  { name: "Mae Sliwinski" },
+  { name: "Natalie Shepherd" },
+  { name: "Chris Parker" },
+  { name: "William Ellis" },
+  { name: "Savaas Iqbal" },
+  { name: "Josephine Kelly" },
+  { name: "Zaid Al-Shoha" },
+  { name: "Richard Ballard" },
+  { name: "Abigail Jin" },
+];
 
 const engSubteamInfo: CreateMemberCardProps[] = [
-  { name: 'Shannon Lin' },
-  { name: 'Alan Wu' },
-  { name: 'Annie Park' },
-  { name: 'Rishabh Dholakia' },
-  { name: 'Emily Wang' },
-  { name: 'Liz Pappania' },
-  { name: 'Ajaa-Sungma Sigri-Naah' },
-  { name: 'Madhu Balaji' },
-  { name: 'Selin Toker' },
-  { name: 'Lila Alderete' },
-  { name: 'Diya Sheth' },
-  { name: 'Merve Tutar' },
-  { name: 'Jay Zhu' },
-  { name: 'Jenny Dong' },
-  { name: 'Jayesha Sharma' },
-  { name: 'Serena Inderjit' },
-  { name: 'Sahana Behera' },
-  { name: 'David Shepherd' },
-  { name: 'Brian Xia' },
-  { name: 'Saejoon Park' },
-  { name: 'Neha Chigurupati' },
-  { name: 'Elom Eskender' },
-  { name: 'Mihika Mukherjee' },
-]
+  { name: "Shannon Lin" },
+  { name: "Alan Wu" },
+  { name: "Annie Park" },
+  { name: "Rishabh Dholakia" },
+  { name: "Emily Wang" },
+  { name: "Liz Pappania" },
+  { name: "Ajaa-Sungma Sigri-Naah" },
+  { name: "Madhu Balaji" },
+  { name: "Selin Toker" },
+  { name: "Lila Alderete" },
+  { name: "Diya Sheth" },
+  { name: "Merve Tutar" },
+  { name: "Jay Zhu" },
+  { name: "Jenny Dong" },
+  { name: "Jayesha Sharma" },
+  { name: "Serena Inderjit" },
+  { name: "Sahana Behera" },
+  { name: "David Shepherd" },
+  { name: "Brian Xia" },
+  { name: "Saejoon Park" },
+  { name: "Neha Chigurupati" },
+  { name: "Elom Eskender" },
+  { name: "Mihika Mukherjee" },
+];
 
 const eduOutSubteamInfo: CreateMemberCardProps[] = [
-  { name: 'Sarah Swee' },
-  { name: 'Rafael Green Mendez' },
-  { name: 'Emmanuella Umoh' },
-  { name: 'David Han' },
-  { name: 'Evan Lee' },
-  { name: 'Sophia Roache' },
-  { name: 'Morgan Ogata' },
-  { name: 'Rachel Turney' },
-  { name: 'Vanessa Chen Hsieh' },
-  { name: 'Omar Alkhitan' },
-  { name: 'Chloe Jung' },
-  { name: 'Neel Behari' }
-]
+  { name: "Sarah Swee" },
+  { name: "Emmanuella Umoh" },
+  { name: "David Han" },
+  { name: "Evan Lee" },
+  { name: "Sophia Roache" },
+  { name: "Morgan Ogata" },
+  { name: "Rachel Turney" },
+  { name: "Vanessa Chen Hsieh" },
+  { name: "Omar Alkhitan" },
+  { name: "Chloe Jung" },
+  { name: "Neel Behari" },
+];
 
 const opsSubteamInfo: CreateMemberCardProps[] = [
-  { name: 'Andy Chen' },
-  { name: 'Ariana Sanchez' },
-  { name: 'Scott Zinman' },
-  { name: 'Sonya Zheng' },
-  { name: 'Jason Yang' },
-  { name: 'Dina Shlufman' },
-  { name: 'William Chen' }
-]
+  { name: "Andy Chen" },
+  { name: "Ariana Sanchez" },
+  { name: "Scott Zinman" },
+  { name: "Sonya Zheng" },
+  { name: "Jason Yang" },
+  { name: "Dina Shlufman" },
+];
 
 // const alumniInfo: CreateMemberCardProps[] = [
 //   { name: 'Alum' },
 // ]
 
+const teamLeads: MemberCardInfo[] = teamLeadsInfo.map((member) =>
+  createMemberCardInfo({ name: member.name }),
+);
 
-const teamLeads: MemberCardInfo[] = teamLeadsInfo.map((member) => (createMemberCardInfo({ name: member.name })))
+const engSubteam: MemberCardInfo[] = engSubteamInfo.map((member) =>
+  createMemberCardInfo({ name: member.name }),
+);
 
-const engSubteam: MemberCardInfo[] = engSubteamInfo.map((member) => (createMemberCardInfo({ name: member.name })))
+const eduOutSubteam: MemberCardInfo[] = eduOutSubteamInfo.map((member) =>
+  createMemberCardInfo({ name: member.name }),
+);
 
-const eduOutSubteam: MemberCardInfo[] = eduOutSubteamInfo.map((member) => (createMemberCardInfo({ name: member.name })))
-
-const opsSubteam: MemberCardInfo[] = opsSubteamInfo.map((member) => (createMemberCardInfo({ name: member.name })))
+const opsSubteam: MemberCardInfo[] = opsSubteamInfo.map((member) =>
+  createMemberCardInfo({ name: member.name }),
+);
 
 // const alumni: MemberCardInfo[] = alumniInfo.map((member) => (createMemberCardInfo({ name: member.name })))
 
-function MemberModal({ member, closeModal }: { member: MemberCardInfo, closeModal: () => void }) {
+function MemberModal({
+  member,
+  closeModal,
+}: {
+  member: MemberCardInfo;
+  closeModal: () => void;
+}) {
   const imgSrc = () => {
     if (member.img) {
-      return member.img
+      return member.img;
     } else {
-      return "/assets/photo-placeholder.png"
+      return "/assets/photo-placeholder.png";
     }
+  };
 
-  }
-
-
-  const labelStyles = "font-semibold"
+  const labelStyles = "font-semibold";
   return (
     <div className="fixed flex justify-center items-center bg-black/50 inset-0 z-50">
       <div className="bg-text-dk-grey rounded-[20px] max-w-lg w-auto relative px-15 py-8">
         <button className="absolute top-2 right-4 text-xl" onClick={closeModal}>
-          <img src="/assets/close-x-svgrepo-com.svg" alt="Close" className="h-10 w-10 cursor-pointer invert" />
+          <img
+            src="/assets/close-x-svgrepo-com.svg"
+            alt="Close"
+            className="h-10 w-10 cursor-pointer"
+          />
         </button>
         <div className="mt-4 flex flex-col items-center">
-          <h1 className="whitesubtext mb-2"><span className={labelStyles}>{member.name}</span></h1>
-          <Image src={imgSrc()} width="300" height="300" alt={`Photo of ${member.name}`} className={`rounded-[20px] ${imgLoadStyles} border-2 border-white`} onLoadingComplete={(img) => { loadingComplete(img) }}/>
-          <div className="mt-4 justify-start whitesubtext text-center">
-            <p><span className={labelStyles}>Role:</span> {member.role}</p>
-            <p><span className={labelStyles}>Year:</span> {member.year}</p>
-            <p><span className={labelStyles}>Major:</span> {member.major}</p>
-            <p><span className={labelStyles}>College:</span> {member.college}</p>
+          <Image
+            src={imgSrc()}
+            width="300"
+            height="300"
+            alt={`Photo of ${member.name}`}
+            className="rounded-[20px]"
+          />
+          <div className="mt-4 justify-start whitesubtext">
+            <p>
+              <span className={labelStyles}>Name:</span> {member.name}
+            </p>
+            <p>
+              <span className={labelStyles}>Role:</span> {member.role}
+            </p>
+            <p>
+              <span className={labelStyles}>Year:</span> {member.year}
+            </p>
+            <p>
+              <span className={labelStyles}>Major:</span> {member.major}
+            </p>
+            <p>
+              <span className={labelStyles}>College:</span> {member.college}
+            </p>
             {/* <p><span className={labelStyles}>LinkedIn:</span> <a href={member.linkedin} target="_blank" className="text-red-600 visited:text-purple-600">{member.linkedin}</a></p> */}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-function MemberCard({ member, onClick }: { member: MemberCardInfo, onClick: () => void }) {
-  const name = member.name
-  const role = member.role
-  const img = member.img ?? portraitPlaceholder
-  const linkedin = member.linkedin
+function MemberCard({
+  member,
+  onClick,
+}: {
+  member: MemberCardInfo;
+  onClick: () => void;
+}) {
+  const name = member.name;
+  const role = member.role;
+  const img = member.img ?? portraitPlaceholder;
+  const linkedin = member.linkedin;
 
-  const linkedinStyles = "bg-theme-white rounded-md border-2 border-theme-white cursor-pointer"
+  const linkedinStyles =
+    "bg-theme-white rounded-md border-2 border-theme-white cursor-pointer";
 
   return (
     <div className="flex flex-col rounded-[20px] max-w-xs origin-center scale-90 2xl:scale-100 drop-shadow-xl/50">
       <div className="relative">
-        <Image src={img} alt={name} width={img.width} height={img.height}
-          // className={`w-auto rounded-[15px] cursor-pointer ${imgLoadStyles}`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
-          className={`2xl-100 xl:w-70 lg:w-60 rounded-[15px] cursor-pointer border border-gray-500/50 p-1 transition duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.75)]`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
+        <Image
+          src={img}
+          alt={name}
+          width={img.width}
+          height={img.height}
+          className={`w-auto rounded-[15px] cursor-pointer ${imgLoadStyles}`}
+          onClick={onClick}
+          onLoadingComplete={(img) => {
+            loadingComplete(img);
+          }}
+        />
         {/* mobile linkedin button */}
-        <img src="/assets/linkedin.svg" alt={`Visit ${name}'s LinkedIn profile`}
+        <img
+          src="/assets/linkedin.svg"
+          alt={`Visit ${name}'s LinkedIn profile`}
           className={`${linkedin === "" ? "hidden" : "block lg:hidden"} absolute right-3 bottom-3 sm:bottom-5 sm:right-5 h-9 sm:h-12 ${linkedinStyles}`}
-          onClick={() => window.open((linkedin !== undefined ? linkedin : ""), '_blank')} />
+          onClick={() =>
+            window.open(linkedin !== undefined ? linkedin : "", "_blank")
+          }
+        />
       </div>
       <div className="flex flex-col pt-3 px-2">
         <div className="flex justify-between items-center">
-          <h4 className={`max-w-4/5 ${name.length <= 14 ? "membername" : "longmembername"}`}>{name}</h4>
-          <img src="/assets/linkedin.svg" alt={`Visit ${name}'s LinkedIn profile`} className={`${linkedin === "" ? "hidden" : "hidden lg:block"} lg:h-9 2xl:h-10 ${linkedinStyles}`}
-            onClick={() => window.open((linkedin !== undefined ? linkedin : ""), '_blank')} />
+          <h4
+            className={`max-w-4/5 ${name.length <= 14 ? "membername" : "longmembername"}`}
+          >
+            {name}
+          </h4>
+          <img
+            src="/assets/linkedin.svg"
+            alt={`Visit ${name}'s LinkedIn profile`}
+            className={`${linkedin === "" ? "hidden" : "hidden lg:block"} lg:h-9 2xl:h-10 ${linkedinStyles}`}
+            onClick={() =>
+              window.open(linkedin !== undefined ? linkedin : "", "_blank")
+            }
+          />
         </div>
-        {role !== "" &&
+        {role !== "" && (
           <div className="bg-theme-offwhite w-fit rounded-lg mt-4">
             <p className="membertag px-2 py-1">{role}</p>
           </div>
-        }
+        )}
       </div>
     </div>
-  )
+  );
 }
 
 function TeamSection({ title, team, clickMember }: SectionProps) {
   return (
     <div className={`flex flex-col universepad w-full pt-10 pb-15`}>
-      <h2 className="teamheading text-center border-2 rounded-sm bg-gradient-to-r from-black-500 via-gray-500 to-black-500">{title}</h2>
+      <h2 className="teamheading text-center border-2 rounded-sm bg-gradient-to-r from-black-500 via-gray-500 to-black-500">
+        {title}
+      </h2>
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 2xl:gap-20 xl:gap-12 lg:gap-12 md:gap-15 sm:gap-10 gap-10 mt-10 place-items-center">
         {team.map((item, index) => {
           return (
-            <MemberCard key={`Team Lead ` + index} member={item} onClick={() => clickMember(item)} />
-          )
+            <MemberCard
+              key={`Team Lead ` + index}
+              member={item}
+              onClick={() => clickMember(item)}
+            />
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
 
-
 export function Members() {
-  const [selectedMember, setSelectedMember] = useState<MemberCardInfo | null>(null);
+  const [selectedMember, setSelectedMember] = useState<MemberCardInfo | null>(
+    null,
+  );
   const clickMember = (member: MemberCardInfo) => {
-    setSelectedMember(member)
-  }
+    setSelectedMember(member);
+  };
 
   let modal = null;
   if (selectedMember !== null) {
     modal = (
-      <MemberModal member={selectedMember} closeModal={() => setSelectedMember(null)} />
+      <MemberModal
+        member={selectedMember}
+        closeModal={() => setSelectedMember(null)}
+      />
     );
   }
 
   return (
-    <div className="bg-bg-dk-grey b-10 mt-5 relative pt-5"
+    <div
+      className="bg-bg-dk-grey b-10 mt-5 relative pt-5"
       style={{
         backgroundImage: `
     repeating-linear-gradient(
@@ -263,14 +335,28 @@ export function Members() {
       rgba(255,255,255,0.02) 4px
     )
   `,
-      }}>
-      <TeamSection title="Our Team Leads" team={teamLeads} clickMember={clickMember} />
-      <hr className="border-gray-500 border-2"></hr>
-      <TeamSection title="Engineering Subteam" team={engSubteam} clickMember={clickMember} />
-      <hr className="border-gray-500 border-2"></hr>
-      <TeamSection title="Outreach & Education Subteam" team={eduOutSubteam} clickMember={clickMember} />
-      <hr className="border-gray-500 border-2"></hr>
-      <TeamSection title="Operations Subteam" team={opsSubteam} clickMember={clickMember} />
+      }}
+    >
+      <TeamSection
+        title="Our Team Leads"
+        team={teamLeads}
+        clickMember={clickMember}
+      />
+      <TeamSection
+        title="Engineering Subteam"
+        team={engSubteam}
+        clickMember={clickMember}
+      />
+      <TeamSection
+        title="Outreach & Education Subteam"
+        team={eduOutSubteam}
+        clickMember={clickMember}
+      />
+      <TeamSection
+        title="Operations Subteam"
+        team={opsSubteam}
+        clickMember={clickMember}
+      />
       {/* <TeamSection title="Our Alumni" team={alumni} clickMember={clickMember} /> */}
 
       {/* <img src="/assets/AboutUs/wave-top.svg" alt="" className="absolute bottom-full left-0 w-full scale-x-[-1]"
@@ -278,5 +364,5 @@ export function Members() {
 
       {modal}
     </div>
-  )
+  );
 }
