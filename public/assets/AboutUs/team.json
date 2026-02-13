@@ -228,11 +228,19 @@
   },
   {
     "name": "Jay Zhu",
-    "role": "Engineering ",
+    "role": "Engineering",
     "year": "2029",
     "major": "Computer Science",
     "college": "College of Arts and Sciences",
     "linkedin": "https://www.linkedin.com/in/jay-zhu-ab2603361/"
+  },
+  {
+    "name": "Logan Roberts",
+    "role": "",
+    "year": "",
+    "major": "",
+    "college": "",
+    "linkedin": ""
   },
   {
     "name": "Rachel Turney",
@@ -253,10 +261,10 @@
   {
     "name": "Tanvi Saxena",
     "role": "Engineering",
-    "year": "",
-    "major": "",
-    "college": "College of Agriculture and Life Sciences",
-    "linkedin": ""
+    "year": "2029",
+    "major": "Electrical & Computer Engineering",
+    "college": "College of Engineering",
+    "linkedin": "https://www.linkedin.com/in/saxena-tanvi/"
   },
   {
     "name": "William Ellis",

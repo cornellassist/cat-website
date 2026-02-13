@@ -5,6 +5,7 @@ import data from "@/public/assets/AboutUs/team.json";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
 import { memo, useState } from "react";
 import { loadingComplete, imgLoadStyles } from "../utils/imgLoad";
+import { image } from "framer-motion/client";
 
 interface Member {
   name: string;
@@ -185,7 +186,6 @@ function MemberModal({
             className="h-10 w-10 cursor-pointer"
           />
         </button>
-
         <div className="mt-4 flex flex-col items-center">
           <Image
             src={imgSrc()}
@@ -234,7 +234,7 @@ function MemberCard({
     "bg-theme-white rounded-md border-2 border-theme-white cursor-pointer";
 
   return (
-    <div className="flex flex-col rounded-[20px] max-w-xs origin-center scale-90 2xl:scale-100">
+    <div className="flex flex-col rounded-[20px] max-w-xs origin-center scale-90 2xl:scale-100 drop-shadow-xl/50">
       <div className="relative">
         <Image
           src={img}
@@ -286,7 +286,9 @@ function MemberCard({
 function TeamSection({ title, team, clickMember }: SectionProps) {
   return (
     <div className={`flex flex-col universepad w-full pt-10 pb-15`}>
-      <h2 className="teamheading">{title}</h2>
+      <h2 className="teamheading text-center border-2 rounded-sm bg-gradient-to-r from-black-500 via-gray-500 to-black-500">
+        {title}
+      </h2>
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 2xl:gap-20 xl:gap-12 lg:gap-12 md:gap-15 sm:gap-10 gap-10 mt-10 place-items-center">
         {team.map((item, index) => {
           return (
