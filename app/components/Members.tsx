@@ -180,7 +180,7 @@ function MemberModal({
     <div className="fixed flex justify-center items-center bg-black/50 inset-0 z-50">
       <div className="bg-text-dk-grey rounded-[20px] max-w-lg w-auto relative px-15 py-8">
         <button className="absolute top-2 right-4 text-xl" onClick={closeModal}>
-          <img src="/assets/close-x-svgrepo-com.svg" alt="Close" className="h-10 w-10 cursor-pointer filter invert transition duration-300 hover:invert-[0.75]" />
+          <img src="/assets/close-icon.svg" alt="Close" className="h-10 w-10 cursor-pointer transition duration-300 hover:invert-[0.25]" />
         </button>
         <div className="mt-4 flex flex-col items-center">
           <Image
@@ -188,7 +188,7 @@ function MemberModal({
             width="300"
             height="300"
             alt={`Photo of ${member.name}`}
-            className="rounded-[20px]"
+            className="rounded-[20px] border-2 border-gray-100"
           />
           <div className="mt-4 justify-start whitesubtext">
             <p>
