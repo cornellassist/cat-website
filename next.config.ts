@@ -4,8 +4,13 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'static.wixstatic.com',
+        protocol: "https",
+        hostname: "static.wixstatic.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.supabase.co",
+        pathname: "/storage/v1/object/public/**",
       },
     ],
   },
