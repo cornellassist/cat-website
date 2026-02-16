@@ -43,6 +43,7 @@ model Event {
   date     DateTime
   time     String
   location String
+  imageUrl     String
 }
 
 model Member {
