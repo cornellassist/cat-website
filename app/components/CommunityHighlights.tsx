@@ -8,6 +8,7 @@ import Image from "next/image";
 import { ButtonRed, ButtonWhite } from "./Buttons";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { convertDate } from "@/utils/convertDate";
 
 interface CommHighProps {
   events: {
@@ -18,11 +19,6 @@ interface CommHighProps {
     date: string;
     imageUrl: string;
   }[];
-}
-
-function convertDate(dateStr: string) {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString("en-US");
 }
 
 const imgStyles =
