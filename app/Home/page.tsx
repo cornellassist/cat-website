@@ -19,7 +19,7 @@ export default function Home() {
       try {
         const { data } = await axios.get("/api/highlights");
         setHighlights(data);
-        console.log("Success, data: ", JSON.stringify(data));
+        // console.log("Success, data: ", JSON.stringify(data));
       } catch (error) {
         console.error("Error: ", error);
       }
