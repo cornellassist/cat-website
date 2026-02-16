@@ -180,11 +180,7 @@ function MemberModal({
     <div className="fixed flex justify-center items-center bg-black/50 inset-0 z-50">
       <div className="bg-text-dk-grey rounded-[20px] max-w-lg w-auto relative px-15 py-8">
         <button className="absolute top-2 right-4 text-xl" onClick={closeModal}>
-          <img
-            src="/assets/close-x-svgrepo-com.svg"
-            alt="Close"
-            className="h-10 w-10 cursor-pointer"
-          />
+          <img src="/assets/close-icon.svg" alt="Close" className="h-10 w-10 cursor-pointer transition duration-300 hover:invert-[0.25]" />
         </button>
         <div className="mt-4 flex flex-col items-center">
           <Image
@@ -192,7 +188,7 @@ function MemberModal({
             width="300"
             height="300"
             alt={`Photo of ${member.name}`}
-            className="rounded-[20px]"
+            className="rounded-[20px] border-2 border-gray-100"
           />
           <div className="mt-4 justify-start whitesubtext">
             <p>
@@ -233,24 +229,29 @@ function MemberCard({
   const linkedinStyles =
     "bg-theme-white rounded-md border-2 border-theme-white cursor-pointer";
 
+  const roleTagBackground = () => {
+    if (role !== "") {
+      const lowerCaseRole = role.toLowerCase()
+      if (lowerCaseRole.toLowerCase().includes("lead")) {
+        return "bg-[#444444]"
+      } else if (lowerCaseRole == "engineering") {
+        return "bg-[#D23333]"
+      } else if (lowerCaseRole == "outreach & education") {
+        return "bg-[#8E2800]"
+      } else {
+        return "bg-[#004AB9]"
+      }
+    }
+  }
+
   return (
-    <div className="flex flex-col rounded-[20px] max-w-xs origin-center scale-90 2xl:scale-100 drop-shadow-xl/50">
+    <div className="flex flex-col rounded-[20px] max-w-xs origin-center scale-90 2xl:scale-100 drop-shadow-xl/50 bg-white p-4 transition duration-300 hover:shadow-[0_0_15px_rgba(0,0,0,0.5)]">
       <div className="relative">
-        <Image
-          src={img}
-          alt={name}
-          width={img.width}
-          height={img.height}
-          className={`w-auto rounded-[15px] cursor-pointer ${imgLoadStyles}`}
-          onClick={onClick}
-          onLoadingComplete={(img) => {
-            loadingComplete(img);
-          }}
-        />
+        <Image src={img} alt={name} width={img.width} height={img.height}
+          // className={`w-auto rounded-[15px] cursor-pointer ${imgLoadStyles}`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
+          className={`2xl-100 xl:w-70 lg:w-60 rounded-[15px] cursor-pointer border border-gray-500/50 p-1`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
         {/* mobile linkedin button */}
-        <img
-          src="/assets/linkedin.svg"
-          alt={`Visit ${name}'s LinkedIn profile`}
+        <img src="/assets/colored-linkedin.svg" alt={`Visit ${name}'s LinkedIn profile`}
           className={`${linkedin === "" ? "hidden" : "block lg:hidden"} absolute right-3 bottom-3 sm:bottom-5 sm:right-5 h-9 sm:h-12 ${linkedinStyles}`}
           onClick={() =>
             window.open(linkedin !== undefined ? linkedin : "", "_blank")
@@ -259,36 +260,36 @@ function MemberCard({
       </div>
       <div className="flex flex-col pt-3 px-2">
         <div className="flex justify-between items-center">
-          <h4
-            className={`max-w-4/5 ${name.length <= 14 ? "membername" : "longmembername"}`}
-          >
-            {name}
-          </h4>
-          <img
-            src="/assets/linkedin.svg"
-            alt={`Visit ${name}'s LinkedIn profile`}
-            className={`${linkedin === "" ? "hidden" : "hidden lg:block"} lg:h-9 2xl:h-10 ${linkedinStyles}`}
-            onClick={() =>
-              window.open(linkedin !== undefined ? linkedin : "", "_blank")
-            }
-          />
+          <h4 className={`max-w-4/5 ${name.length <= 14 ? "membername" : "longmembername"} text-black`}>{name}</h4>
+          <img src="/assets/colored-linkedin.svg" alt={`Visit ${name}'s LinkedIn profile`} className={`${linkedin === "" ? "hidden" : "hidden lg:block"} lg:h-9 2xl:h-10 ${linkedinStyles}`}
+            onClick={() => window.open((linkedin !== undefined ? linkedin : ""), '_blank')} />
         </div>
-        {role !== "" && (
-          <div className="bg-theme-offwhite w-fit rounded-lg mt-4">
-            <p className="membertag px-2 py-1">{role}</p>
+        {role !== "" &&
+          <div className={`${roleTagBackground()} w-fit rounded-lg mt-4`}>
+            <p className="membertag px-2 py-1 font-semibold">{role}</p>
           </div>
-        )}
+        }
       </div>
     </div>
   );
 }
 
 function TeamSection({ title, team, clickMember }: SectionProps) {
+  const generateId = () => {
+    const lowerCaseTitle = title.toLowerCase();
+    if (lowerCaseTitle.includes("lead")) {
+      return "teamLeads"
+    } else if (lowerCaseTitle.includes("engineering")) {
+      return "engineering";
+    } else if (lowerCaseTitle.includes("outreach")) {
+      return "outreachAndEducation"
+    } else {
+      return "operations"
+    }
+  }
   return (
-    <div className={`flex flex-col universepad w-full pt-10 pb-15`}>
-      <h2 className="teamheading text-center border-2 rounded-sm bg-gradient-to-r from-black-500 via-gray-500 to-black-500">
-        {title}
-      </h2>
+    <div id={generateId()} className={`flex flex-col universepad w-full pt-10 pb-15`}>
+      <h2 className="teamheading text-center rounded-sm mb-5">{title}</h2>
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 2xl:gap-20 xl:gap-12 lg:gap-12 md:gap-15 sm:gap-10 gap-10 mt-10 place-items-center">
         {team.map((item, index) => {
           return (
@@ -323,8 +324,7 @@ export function Members() {
   }
 
   return (
-    <div
-      className="bg-bg-dk-grey b-10 mt-5 relative pt-5"
+    <div className="bg-[#D0D0D0] b-10 relative pt-5"
       style={{
         backgroundImage: `
     repeating-linear-gradient(

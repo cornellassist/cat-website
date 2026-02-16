@@ -40,6 +40,7 @@
   --font-mono: var(--font-geist-mono);
   --color-theme-red: #d22333;
   --color-theme-white: #FFFFFF;
+  --color-theme-black: #000000;
   --color-theme-offwhite: #f6f7f9;
   --color-theme-lt-red: #F2D5D5;
   --color-theme-lt-blue: #C4FDFF;
@@ -118,20 +119,20 @@
   }
 
   .teamheading {
-    @apply text-4xl font-semibold tracking-[-0.02em] leading-16 text-theme-white;
+    @apply text-4xl font-semibold tracking-[-0.02em] leading-16 text-theme-black;
   }
 
   .membername {
-    @apply text-xl sm:text-2xl leading-normal text-theme-white font-medium
+    @apply text-xl sm:text-2xl leading-normal text-theme-black font-medium
   }
 
   .longmembername {
-    @apply text-base sm:text-xl leading-normal text-theme-white font-medium
+    @apply text-base sm:text-xl leading-normal text-theme-black font-medium
   }
 
 
   .membertag {
-    @apply text-sm leading-normal text-text-red
+    @apply text-sm leading-normal text-white
   }
 
   .formlabel {
