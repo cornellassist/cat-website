@@ -4,7 +4,7 @@ import { StaticImageData } from "next/image";
 import data from "@/public/assets/AboutUs/team.json";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
 import { memo, useState } from "react";
-import { loadingComplete, imgLoadStyles } from "../utils/imgLoad";
+import { loadingComplete, imgLoadStyles } from "../../utils/imgLoad";
 import { image } from "framer-motion/client";
 
 interface Member {

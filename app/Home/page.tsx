@@ -1,3 +1,5 @@
+"use client";
+
 import { Navbar } from "@/app/components/Navbar";
 import { LandingHero } from "@/app/components/LandingHero";
 import { CommunityHighlights } from "@/app/components/CommunityHighlights";
@@ -6,9 +8,13 @@ import { TakePart } from "@/app/components/TakePart";
 import { Footer } from "@/app/components/Footer";
 import { Mission } from "@/app/components/Mission";
 import { EventNotif } from "../components/EventNotif";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 // import { UnderConstructionPopup } from "../components/UnderConstructionPopup";
 
 // no periods for short description
+
 const curEvents: Array<[string, { short: string; long: string }, string]> = [
   [
     "ISLAND Conference",
@@ -37,6 +43,19 @@ const curEvents: Array<[string, { short: string; long: string }, string]> = [
 ];
 
 export default function Home() {
+  const [highlights, setHighlights] = useState();
+  useEffect(() => {
+    async function fetchHighlights() {
+      try {
+        const { data } = await axios.get("/api/highlights");
+        setHighlights(data);
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    }
+    fetchHighlights();
+  }, []);
+
   return (
     <div>
       {/* <UnderConstructionPopup /> */}
