@@ -1,5 +1,5 @@
 import prisma from "@/utils/prisma";
-import { Event as EventType } from "@/app/generated/prisma/client";
+import { Event as EventType } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function GET() {
