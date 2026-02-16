@@ -1,39 +1,63 @@
-"use client"
-import { ButtonRed } from "./Buttons"
-import HeroPic from "@/public/assets/Landing/hero-pic-full.jpg"
-import BlurTL from "@/public/assets/blur-tl.png"
-import BlurTR from "@/public/assets/blur-tr.png"
-import Image from 'next/image';
-import { loadingComplete, imgLoadStyles } from "../utils/imgLoad";
-import HeroFrame from "@/public/assets/Landing/hero-complete-frame.svg"
+"use client";
+import { ButtonRed } from "./Buttons";
+import HeroPic from "@/public/assets/Landing/hero-pic-full.jpg";
+import BlurTL from "@/public/assets/blur-tl.png";
+import BlurTR from "@/public/assets/blur-tr.png";
+import Image from "next/image";
+import { loadingComplete, imgLoadStyles } from "../../utils/imgLoad";
+import HeroFrame from "@/public/assets/Landing/hero-complete-frame.svg";
 
 const HeroText = () => {
   return (
     <div className="flex flex-col justify-center items-center lg:items-start sm:mt-10 lg:max-w-[50%] lg-mt-0">
-      <h1 className="mainheading w-full mb-6 text-center lg:text-left z-10 bg-white sm:bg-transparent">Making Assistive Technologies Accessible for All</h1>
-      <p className="subtext w-full mb-8 sm:mb-10 lg:mb-16 text-center lg:text-left">We create accessible devices and teach inclusive design to empower communities in Ithaca and beyond.</p>
+      <h1 className="mainheading w-full mb-6 text-center lg:text-left z-10 bg-white sm:bg-transparent">
+        Making Assistive Technologies Accessible for All
+      </h1>
+      <p className="subtext w-full mb-8 sm:mb-10 lg:mb-16 text-center lg:text-left">
+        We create accessible devices and teach inclusive design to empower
+        communities in Ithaca and beyond.
+      </p>
       <ButtonRed label="Explore Our Work" to="/OurWork" />
     </div>
+  );
+};
 
-  )
-}
-
-const centered = "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+const centered = "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2";
 
 const HeroGraphic = () => {
-  const detailScaleStyles = "origin-bottom lg:origin-right scale-120 sm:scale-100 md:scale-100 lg:scale-80 xl:scale-90 2xl:scale-110"
+  const detailScaleStyles =
+    "origin-bottom lg:origin-right scale-120 sm:scale-100 md:scale-100 lg:scale-80 xl:scale-90 2xl:scale-110";
   return (
     <>
       {/* desktop */}
       <div className="hidden lg:block w-1/2 xl:w-132 relative self-start xl:-mt-3 2xl:-mt-5">
         <div className={`relative right-0 top-0 ${detailScaleStyles}`}>
           {/* No alts for decoration */}
-          <img src="/assets/Landing/hero-blob-solid.svg" alt="" className={`absolute left-7.25 top-32`} />
-          <img src="/assets/Landing/hero-blob-clear.svg" alt="" className={`absolute left-0 top-29`} />
-          <Image src={HeroPic} alt="Cornell Assistive Technologies team member helping a student" height={310} width={466}
+          <img
+            src="/assets/Landing/hero-blob-solid.svg"
+            alt=""
+            className={`absolute left-7.25 top-32`}
+          />
+          <img
+            src="/assets/Landing/hero-blob-clear.svg"
+            alt=""
+            className={`absolute left-0 top-29`}
+          />
+          <Image
+            src={HeroPic}
+            alt="Cornell Assistive Technologies team member helping a student"
+            height={310}
+            width={466}
             className={`absolute left-15 top-48 rounded-[1000px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] ${imgLoadStyles}`}
-            onLoadingComplete={(img) => { loadingComplete(img) }} />
-          <img src="/assets/Landing/hero-group.svg" alt="" className={`scale-70 sm:scale-100 absolute left-23 -z-10`} />
+            onLoadingComplete={(img) => {
+              loadingComplete(img);
+            }}
+          />
+          <img
+            src="/assets/Landing/hero-group.svg"
+            alt=""
+            className={`scale-70 sm:scale-100 absolute left-23 -z-10`}
+          />
         </div>
       </div>
       {/* mobile */}
@@ -42,9 +66,16 @@ const HeroGraphic = () => {
           <div className={`relative right-0 top-0  ${detailScaleStyles}`}>
             {/* No alts for decoration */}
             <Image src={HeroFrame} alt="" />
-            <Image src={HeroPic} alt="Cornell Assistive Technologies team member helping a student" height={310} width={466}
+            <Image
+              src={HeroPic}
+              alt="Cornell Assistive Technologies team member helping a student"
+              height={310}
+              width={466}
               className={`absolute top-5/9 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-90 origin-right rounded-[1000px] drop-shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] ${imgLoadStyles}`}
-              onLoadingComplete={(img) => { loadingComplete(img) }} />
+              onLoadingComplete={(img) => {
+                loadingComplete(img);
+              }}
+            />
             {/* <img src="/assets/Landing/hero-blob-solid.svg" alt="" className={`absolute -left-0.75 top-32`} />
             <img src="/assets/Landing/hero-blob-clear.svg" alt="" className={`absolute -left-8 top-29`} />
           
@@ -53,18 +84,30 @@ const HeroGraphic = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 const HeroContainer = ({ children }: any) => {
   return (
     <div className="flex flex-col-reverse lg:flex-row mt-16 sm:mt-16 md:mt-24 universepad justify-between items-center relative overflow-hidden h-150 sm:h-200 md:h-205 lg:h-155 xl:h-170 2xl:h-190 mb-20 lg:mb-0 ">
-      <Image src={BlurTL} alt="" height={BlurTL.height / 2} width={BlurTL.width / 2} className="absolute left-0 top-0 -z-10" />
-      <Image src={BlurTR} alt="" height={BlurTR.height / 1.5} width={BlurTR.width / 1.5} className="absolute right-0 top-0 -z-10" />
+      <Image
+        src={BlurTL}
+        alt=""
+        height={BlurTL.height / 2}
+        width={BlurTL.width / 2}
+        className="absolute left-0 top-0 -z-10"
+      />
+      <Image
+        src={BlurTR}
+        alt=""
+        height={BlurTR.height / 1.5}
+        width={BlurTR.width / 1.5}
+        className="absolute right-0 top-0 -z-10"
+      />
       {children}
     </div>
-  )
-}
+  );
+};
 
 export const LandingHero = () => {
   return (
@@ -72,5 +115,5 @@ export const LandingHero = () => {
       <HeroText />
       <HeroGraphic />
     </HeroContainer>
-  )
-}
+  );
+};
