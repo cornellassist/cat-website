@@ -1,5 +1,5 @@
 import prisma from "@/utils/prisma";
-import { CommunityHighlights as CommunityHighlightType } from "@prisma/client";
+import type { CommunityHighlights as CommunityHighlightType } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function GET() {
