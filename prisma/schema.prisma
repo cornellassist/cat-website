@@ -19,6 +19,7 @@ model CommunityHighlights {
   shortDescrip String
   date         DateTime
   imageUrl     String
+  imageAlt     String?
 }
 
 model Sponsor {
@@ -31,7 +32,9 @@ model Project {
   id        Int      @id @default(autoincrement())
   title     String
   descrip   String
-  cta       String?
+  descrip2  String?
+  ctaTitle  String?
+  ctaLink   String?
   imageUrls String[]
 }
 
@@ -43,7 +46,7 @@ model Event {
   date     DateTime
   time     String
   location String
-  imageUrl     String
+  imageUrl String
 }
 
 model Member {
