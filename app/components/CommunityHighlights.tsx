@@ -15,6 +15,7 @@ interface CommHighProps {
     shortDescrip: string;
     date: string;
     imageUrl: string;
+    imageAlt: string;
   }[];
 }
 
@@ -107,7 +108,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
                     <div className={`relative w-full max-w-96 h-80`}>
                       <Image
                         src={pic}
-                        alt={altDescriptions[index]}
+                        alt={events[index].imageAlt}
                         fill
                         className={`object-cover ${imgStyles} origin-left scale-100 border border-white/20`}
                         sizes="(max-width: 768px) 100vw, 548px"

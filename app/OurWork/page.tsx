@@ -10,6 +10,8 @@ import axios from "axios";
 
 export default function OurWork() {
   const [ourEvents, setOurEvents] = useState([]);
+  const [projects, setProjects] = useState([]);
+
   useEffect(() => {
     async function fetchOurEvents() {
       try {
@@ -20,7 +22,18 @@ export default function OurWork() {
         console.error("Error: ", error);
       }
     }
+
+    async function fetchProjects() {
+      try {
+        const { data } = await axios.get("/api/projects");
+        setProjects(data);
+        console.log("Success: \n", JSON.stringify(data));
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    }
     fetchOurEvents();
+    fetchProjects();
   }, []);
   return (
     <div className="flex flex-col">
