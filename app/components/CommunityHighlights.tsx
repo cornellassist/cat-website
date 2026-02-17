@@ -1,9 +1,6 @@
 "use client";
 
 import { useState, useEffect, use } from "react";
-import Pic1 from "@/public/assets/Landing/comm-high-1.png";
-import Pic2 from "@/public/assets/Landing/comm-high-2.png";
-import Pic3 from "@/public/assets/Landing/comm-high-3.webp";
 import Image from "next/image";
 import { ButtonRed, ButtonWhite } from "./Buttons";
 import useEmblaCarousel from "embla-carousel-react";

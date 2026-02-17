@@ -1,7 +1,7 @@
 "use client";
+
 import { ButtonRed, ButtonWhite } from "./Buttons";
 import Image from "next/image";
-import Sciencenter from "@/public/assets/OurWork/sciencenter.jpeg";
 import { convertDate } from "@/utils/convertDate";
 import { useEffect, useState } from "react";
 
