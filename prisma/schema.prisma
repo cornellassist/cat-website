@@ -36,6 +36,7 @@ model Project {
   ctaTitle  String?
   ctaLink   String?
   imageUrls String[]
+  imageAlts String[] @default([])
 }
 
 model Event {

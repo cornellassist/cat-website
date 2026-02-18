@@ -17,7 +17,7 @@ export default function OurWork() {
       try {
         const { data } = await axios.get("/api/events");
         setOurEvents(data);
-        console.log("Success: \n", JSON.stringify(data));
+        // console.log("Success: \n", JSON.stringify(data));
       } catch (error) {
         console.error("Error: ", error);
       }
@@ -39,7 +39,7 @@ export default function OurWork() {
     <div className="flex flex-col">
       <Navbar />
       <OurWorkHero />
-      <OurProjects />
+      <OurProjects projects={projects} />
       <OurEvents events={ourEvents} />
       <Footer />
     </div>
