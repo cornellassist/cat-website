@@ -71,15 +71,16 @@ export function OurProjects({ projects }: { projects: ProjectCardProps[] }) {
       );
     }
 
+    const cardHeight = "h-130 2xl:h-140";
     return (
       <div className="flex flex-col">
         <div className="overflow-hidden flex" ref={emblaRef}>
-          <div className="flex">
+          <div className={`flex ${cardHeight}`}>
             {projects.map((project, index) => {
               return (
                 <div
                   key={`project-${index}`}
-                  className="flex-[0_0_100%] min-w-0 flex flex-col lg:flex-row items-center lg:items-start h-130 2xl:h-140 lg:justify-end gap-6 lg:gap-10 xl:gap-12 2xl:gap-14 px-4"
+                  className={`flex-[0_0_100%] min-w-0 flex flex-col lg:flex-row items-center lg:items-start ${cardHeight} lg:justify-end gap-6 lg:gap-10 xl:gap-12 2xl:gap-14 px-4`}
                 >
                   <div className="h-full w-[50%] sm:w-[80%] lg:max-h-none lg:w-[50%] relative rounded-[20px] overflow-hidden">
                     {project.imageUrls.map((item, index) => (
@@ -168,7 +169,9 @@ export function OurProjects({ projects }: { projects: ProjectCardProps[] }) {
         id="our-projects"
       >
         <OurProjectsTopText />
-        <div className="flex flex-col gap-8 lg:gap-10 xl:gap-15 2xl:gap-25 mt-15 items-center relative">
+        <div
+          className={`flex flex-col gap-8 lg:gap-10 xl:gap-15 2xl:gap-25 mt-15 items-center relative`}
+        >
           <ProjectCard projects={projects} />
           <div className="flex justify-center">
             <ButtonWhite
