@@ -27,7 +27,7 @@ export default function OurWork() {
       try {
         const { data } = await axios.get("/api/projects");
         setProjects(data);
-        console.log("Success: \n", JSON.stringify(data));
+        // console.log("Success: \n", JSON.stringify(data));
       } catch (error) {
         console.error("Error: ", error);
       }
