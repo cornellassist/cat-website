@@ -87,7 +87,7 @@ export function OurProjects({ projects }: { projects: ProjectCardProps[] }) {
                       <Image
                         key={index}
                         src={item}
-                        alt={project?.imageAlts?.[index] ?? ""}
+                        alt={project?.imageAlts?.[curPicIdx] ?? ""}
                         fill
                         loading={index === activeTab ? "eager" : "lazy"}
                         className={`object-cover absolute inset-0 transition-opacity duration-300 ease-in-out ${index === curPicIdx ? "opacity-100" : "opacity-0"}
