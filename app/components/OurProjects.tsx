@@ -106,7 +106,7 @@ export function OurProjects({ projects }: { projects: ProjectCardProps[] }) {
                           >
                             <Image
                               src={item}
-                              alt={project?.imageUrls?.[index] ?? ""}
+                              alt={project?.imageAlts?.[index] ?? ""}
                               fill
                               priority={index === activeTab && index === 0}
                               // loading={index === activeTab ? "eager" : "lazy"}
