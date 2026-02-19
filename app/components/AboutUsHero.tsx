@@ -40,7 +40,7 @@ const HeroGraphic = () => {
 const HeroContainer = ({ children }: any) => {
   return (
     <div className="flex flex-col">
-      <div className="mt-10 sm:mt-16 md:mt-24 xl:mt-24 py-10 sm:py-12 lg:py-26 xl:py-30 2xl:py-40 h-auto universepad flex flex-col lg:flex-row lg:justify-between items-center gap-6 lg:gap-20 relative">
+      <div className="mt-0 sm:mt-16 md:mt-24 xl:mt-24 py-10 sm:py-12 lg:py-26 xl:py-30 2xl:py-40 h-auto universepad flex flex-col lg:flex-row lg:justify-between items-center gap-12 lg:gap-20 relative">
         <Image
           src={BlurTL}
           alt=""
@@ -76,5 +76,3 @@ export const AboutUsHero = () => {
     </HeroContainer>
   );
 };
-
-// min-h-96 h-160 sm:h-200 md:h-200 lg:h-155 xl:h-170 2xl:h-190
