@@ -65,13 +65,13 @@ function createMemberCardInfo({ name }: CreateMemberCardProps): MemberCardInfo {
   const img = getMemberImage(name);
   // const img = undefined
   if (img !== undefined) {
-    console.log("Found img");
+    // console.log("Found img");
     return {
       ...member,
       img: img,
     };
   } else {
-    console.log("No img");
+    // console.log("No img");
     return member;
   }
 }
@@ -228,7 +228,7 @@ function MemberCard({
   const name = member.name;
   const role = member.role;
   const img = member.img ?? portraitPlaceholder;
-  const linkedin = member.linkedin;
+  const linkedin = member.linkedin ?? "";
 
   const linkedinStyles =
     "bg-theme-white rounded-md border-2 border-theme-white cursor-pointer";
@@ -387,10 +387,6 @@ export function Members() {
         clickMember={clickMember}
       />
       {/* <TeamSection title="Our Alumni" team={alumni} clickMember={clickMember} /> */}
-
-      {/* <img src="/assets/AboutUs/wave-top.svg" alt="" className="absolute bottom-full left-0 w-full scale-x-[-1]"
-        /> */}
-
       {modal}
     </div>
   );
