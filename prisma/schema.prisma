@@ -65,3 +65,17 @@ enum MemberRole {
   OUTREACH_EDU
   OPERATIONS
 }
+
+model Blog {
+  id           Int      @id @default(autoincrement())
+  title        String
+  excerpt      String
+  authorName   String
+  authorAvatar String
+  publishDate  DateTime
+  categories   String[]
+  readTime     Int
+  image        String
+  slug         String
+  content      String
+}
