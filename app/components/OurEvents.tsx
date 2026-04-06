@@ -81,8 +81,9 @@ export function OurEvents({ events }: OurEventsProps) {
     return (
       <div
         className={`backdrop-blur-[2px] bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)]
-    rounded-[20px] pb-6 ${cardHeight} w-full lg:w-1/2`}
+    rounded-[20px] pb-6 ${cardHeight} w-full `}
       >
+      
         {!loading && (
           <div className="flex flex-col gap-4 md:gap-6 h-full">
             {/* photo */}
@@ -90,7 +91,7 @@ export function OurEvents({ events }: OurEventsProps) {
               <Image src={imageUrl} alt="" fill className="object-cover" />
             </div>
             {/* content */}
-            <div className="flex flex-col h-1/2  justify-between px-6 sm:px-8">
+            <div className="flex flex-col h-1/2 justify-between px-6 sm:px-8">
               <div>
                 <h3 className="cardheading">{title}</h3>
                 {/* labels */}
@@ -136,7 +137,7 @@ export function OurEvents({ events }: OurEventsProps) {
       id="our-events"
     >
       <OurEventsTopText />
-      <div className={`flex gap-10 mt-10 ${cardHeight}`}>
+      <div className={`grid 2xl:grid-cols-2 xl:grid-cols-2 grid-cols-1 gap-10 mt-10`}>
         {allEvents.map((item, index) => {
           return (
             <EventCard
