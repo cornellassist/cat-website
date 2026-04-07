@@ -1,5 +1,4 @@
 "use client";
-import { ButtonWhite } from "../components/Buttons";
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = "https://xeoirovwlonjmhxycfxs.supabase.co";
