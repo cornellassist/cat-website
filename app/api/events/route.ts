@@ -1,5 +1,6 @@
 import prisma from "@/utils/prisma";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
+import { createClient } from "@/utils/supabase/server";
 
 export async function GET() {
   const events = await prisma.event.findMany({
