@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { json } from "stream/consumers";
 
-
 export async function GET() {
   const events = await prisma.event.findMany({
     orderBy: { id: "asc" },
@@ -16,14 +15,25 @@ export async function POST(request: NextRequest) {
   const { data } = await supabase.auth.getUser();
 
   if (!data.user) {
-    return NextResponse.json( {error: "Unauthorized User"}, {status: 401} );
+    return NextResponse.json({ error: "Unauthorized User" }, { status: 401 });
   }
 
   const body = await request.json();
 
-  await prisma.event.create({data: {id: 1, title: "hi", tags: ["Kids"], descrip: "hi", date: "date", time: "time", location: "location", imageUrl: "image"}});
+  await prisma.event.create({
+    data: {
+      id: 1,
+      title: "hi",
+      tags: ["Kids"],
+      descrip: "hi",
+      date: "date",
+      time: "time",
+      location: "location",
+      imageUrl: "image",
+    },
+  });
 
-  return NextResponse.json( {success: true}, {status: 200} )
+  return NextResponse.json({ success: true }, { status: 200 });
 }
 
 export async function DELETE() {
