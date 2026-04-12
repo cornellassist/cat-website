@@ -1,11 +1,7 @@
 "use client";
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@/utils/supabase/client";
 
-const supabaseUrl = "https://xeoirovwlonjmhxycfxs.supabase.co";
-const anonKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhlb2lyb3Z3bG9uam1oeHljZnhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExOTE0MzksImV4cCI6MjA4Njc2NzQzOX0.UFqN7WwavTXd5zkRGw8JWCdfwduE5crpNxXJRsHl408";
-
-const supabase = createClient(supabaseUrl, anonKey);
+const supabase = createClient();
 
 export default function AdminLogin() {
   return (
@@ -31,6 +27,9 @@ function LoginCard() {
           onClick={() => {
             supabase.auth.signInWithOAuth({
               provider: "google",
+              options: {
+                redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
+              },
             });
           }}
           className={`
