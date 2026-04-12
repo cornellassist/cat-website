@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const events = await prisma.event.findMany({
-    orderBy: {id: "asc"}
+    orderBy: { id: "asc" },
   });
   return NextResponse.json(events);
 }
