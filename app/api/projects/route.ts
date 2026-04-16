@@ -6,6 +6,7 @@ export async function GET() {
   const projects = await prisma.project.findMany({
     orderBy: { id: "asc" },
   });
+  console.log("hi");
   return NextResponse.json(projects);
 }
 
@@ -18,18 +19,42 @@ export async function POST(request: NextRequest) {
   }
   const body = await request.json();
 
-  const project = await prisma.project.create({
-    data: { title: "hi", descrip: "hi", descrip2: "bruh", imageUrls: ["", ""] },
-  });
-  console.log(project);
+  try {
+    const project = await prisma.project.create({
+      data: {
+        title: "hi",
+        descrip: "hi",
+        descrip2: "bruh",
+        imageUrls: ["", ""],
+      },
+    });
+    console.log(project);
 
-  return NextResponse.json({ success: true }, { status: 200 });
+    return NextResponse.json({ success: true }, { status: 201 }); // http status codes
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
 }
 
 export async function DELETE(request: NextRequest) {
-  const supabase = await createClient();
+  const supabase = await createClient(); // create server supabase
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized user" }, { status: 401 });
+  }
 
-  const body = await request.json();
+  try {
+    const deleteProject = await prisma.project.delete({
+      where: { id: 8 },
+    });
+    console.log(deleteProject);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
 
-  return;
+  return NextResponse.json({ success: true }, { status: 200 });
 }
