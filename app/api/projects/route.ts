@@ -1,13 +1,23 @@
 import prisma from "@/utils/prisma";
 import { NextResponse, NextRequest } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import {
+  unauthorized,
+  created,
+  internalServerError,
+  ok,
+  deleted,
+} from "@/utils/http";
 
 export async function GET() {
-  const projects = await prisma.project.findMany({
-    orderBy: { id: "asc" },
-  });
-  console.log("hi");
-  return NextResponse.json(projects);
+  try {
+    const projects = await prisma.project.findMany({
+      orderBy: { id: "asc" },
+    });
+    return NextResponse.json(projects);
+  } catch (error) {
+    return internalServerError(error);
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -15,7 +25,7 @@ export async function POST(request: NextRequest) {
   const { data } = await supabase.auth.getUser();
   if (!data.user) {
     // if the user not found
-    return NextResponse.json({ error: "Unauthorized user" }, { status: 401 });
+    return unauthorized();
   }
   const body = await request.json();
 
@@ -30,10 +40,10 @@ export async function POST(request: NextRequest) {
     });
     console.log(project);
 
-    return NextResponse.json({ success: true }, { status: 201 }); // http status codes
+    return created(); // http status codes
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: error }, { status: 500 });
+    return internalServerError(error);
   }
 }
 
@@ -43,7 +53,7 @@ export async function DELETE(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized user" }, { status: 401 });
+    return unauthorized();
   }
 
   try {
@@ -51,10 +61,30 @@ export async function DELETE(request: NextRequest) {
       where: { id: 8 },
     });
     console.log(deleteProject);
+    return deleted();
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: error }, { status: 500 });
+    console.error(error);
+    return internalServerError(error);
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return unauthorized();
   }
 
-  return NextResponse.json({ success: true }, { status: 200 });
+  try {
+    const updatedProject = prisma.project.update({
+      where: { id: 100 },
+      data: { title: "hi" },
+    });
+    return ok();
+  } catch (error) {
+    console.error(error);
+    return internalServerError(error);
+  }
 }
