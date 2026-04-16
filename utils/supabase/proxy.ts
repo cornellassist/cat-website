@@ -52,7 +52,8 @@ export async function updateSession(request: NextRequest) {
   } else if (
     user &&
     !request.nextUrl.pathname.startsWith("/AdminDashboard") &&
-    !request.nextUrl.pathname.startsWith("/auth")
+    !request.nextUrl.pathname.startsWith("/auth") &&
+    !request.nextUrl.pathname.startsWith("/api") // needs to allow api through too
   ) {
     // logged-in users should stay on dashboard
     const url = request.nextUrl.clone();

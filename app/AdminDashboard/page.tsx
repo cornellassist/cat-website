@@ -2,22 +2,32 @@
 import { createClient } from "@/utils/supabase/client";
 import axios from "axios";
 
-const supabase = createClient();
-
 export default function AdminDashboard() {
+  const supabase = createClient();
   async function putProject() {
     try {
       const response = await axios.post("/api/projects", {});
-      if (response.status == 200) {
-        console.log("good");
+      if (response.status === 201) {
         console.log(response);
       } else {
-        console.log("bad");
+        console.log(response);
       }
     } catch (error) {
       console.error("Error: ", error);
     }
   }
+
+  async function deleteProject() {
+    try {
+      const response = await axios.delete("/api/projects", {});
+      if (response.status == 204) {
+        console.log("success");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
   return (
     <div className="h-20 w-20">
       <button
@@ -29,14 +39,23 @@ export default function AdminDashboard() {
       >
         Sign out
       </button>
-      <button
+      <div
         className="bg-amber-200 h-20 w-30 cursor-pointer"
         onClick={async () => {
           await putProject();
         }}
       >
         Add a project
-      </button>
+      </div>
+
+      <div
+        className="bg-amber-200 h-20 w-30 cursor-pointer"
+        onClick={async () => {
+          await deleteProject();
+        }}
+      >
+        Delete Project
+      </div>
     </div>
   );
 }
