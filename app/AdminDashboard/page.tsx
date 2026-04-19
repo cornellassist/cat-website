@@ -33,6 +33,9 @@ export default function AdminDashboard() {
   return (
     <div className="">
       <Sidebar />
+      <div className="flex justify-end">
+        <ProfileMenu />
+      </div>
     </div>
   );
 }

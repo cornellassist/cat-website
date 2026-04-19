@@ -24,7 +24,7 @@ export default function Home() {
         console.error("Error: ", error);
       }
     }
-    fetchHighlights();
+    fetchHighlights(); // in lifecycle
   }, []);
 
   return (
