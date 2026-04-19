@@ -9,10 +9,17 @@ export function ProfileMenu() {
   useEffect(() => {
     async function getUser() {
       try {
+        // local storage cache
+        const cachedName = localStorage.getItem("name");
+        if (cachedName) {
+          setName(cachedName);
+          return;
+        }
         const user = await supabase.auth.getUser();
         const name = user.data.user?.email ?? "User";
 
         setName(name.split("@")[0]);
+        localStorage.setItem("name", name.split("@")[0]);
       } catch (error) {
         console.error(error);
       }

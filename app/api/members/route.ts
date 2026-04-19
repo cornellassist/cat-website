@@ -11,7 +11,6 @@ import { checkAuth } from "@/utils/checkAuth";
 import prisma from "@/utils/prisma";
 
 export async function GET() {
-  // probably cache this
   try {
     const member = await prisma.member.findMany({
       orderBy: { id: "asc" },
