@@ -1,8 +1,7 @@
 "use client";
 import { createClient } from "@/utils/supabase/client";
 import axios from "axios";
-import { ProfileMenu } from "../components/ProfileMenu";
-import { Sidebar } from "../components/Sidebar";
+import { DashboardWrapper } from "../components/DashboardWrapper";
 
 export default function AdminDashboard() {
   // const supabase = createClient();
@@ -30,14 +29,7 @@ export default function AdminDashboard() {
   //   }
   // }
 
-  return (
-    <div className="">
-      <Sidebar />
-      <div className="flex justify-end">
-        <ProfileMenu />
-      </div>
-    </div>
-  );
+  return <DashboardWrapper></DashboardWrapper>;
 }
 
 // <button

@@ -79,13 +79,15 @@ export function Sidebar() {
             }`}
           >
             {dropdown.map((entry, index) => {
+              console.log(label);
+              console.log("entry: ", entry);
               return (
                 <div
-                  className={`pl-12 pr-5 descriptext ${path.includes(entry) ? "bg-text-lt-grey" : "bg-transparent"} rounded-sm`}
+                  className={`pl-12 pr-5 descriptext cursor-pointer ${path.includes(entry) ? "bg-text-lt-grey" : "bg-transparent"} rounded-sm`}
                   key={index}
                   onClick={() => {
                     router.push(
-                      `AdminDashboard/${label}/${entry.replaceAll(" ", "")}`,
+                      `/AdminDashboard/${label}/${entry.split(" ").join("")}`,
                     );
                   }}
                 >
@@ -108,7 +110,6 @@ export function Sidebar() {
         {tabs.map((tab, index) => {
           const splitPath = path.split("/");
           const curPath = splitPath.length > 2 ? splitPath.pop() : "Home";
-          console.log(splitPath);
           return (
             <Tab
               label={tab.label}
