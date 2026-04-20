@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { DocumentIcon, ArrowUpTrayIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 
+const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"];
 function UploadImgButton() {
   const [file, setFile] = useState<File>();
-
   return (
     <div className="flex flex-col w-127 gap-2">
       <div className="flex items-center">
@@ -40,7 +40,9 @@ function UploadImgButton() {
 }
 
 export function UploadImg() {
-  const [pictureList, setPictureList] = useState<string[]>();
+  const [picNameList, setPicNameList] = useState<string[]>();
+  const [picLinkList, setPicLinkList] = useState<string[]>();
+
   const [curTab, setCurTab] = useState<string>("community-highlights");
   const [file, setFile] = useState<File>();
   useEffect(() => {
@@ -52,12 +54,19 @@ export function UploadImg() {
           },
         });
         console.log(data);
-        setPictureList(data);
+        setPicNameList(data);
+        const links = data.map(
+          (pic: any) =>
+            `${supabaseUrl}/storage/v1/object/public/cat-website-pics/${curTab}/${pic.name}`,
+        );
+        console.log(links);
+        setPicLinkList(data);
       } catch (error) {
         console.error(error);
       }
     }
     fetchPictures(curTab);
   }, [curTab]);
+
   return <UploadImgButton />;
 }

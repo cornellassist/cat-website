@@ -34,7 +34,7 @@ export async function GET(request: Request) {
         sortBy: { column: "name", order: "asc" },
       });
     if (error) throw error;
-    console.log(data);
+    // console.log(data);
     const res = data
       ?.filter((item) => item.id !== null)
       .map((item) => item.name);
