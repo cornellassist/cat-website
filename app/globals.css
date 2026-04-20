@@ -3,7 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --red: #DD2233;
+  --red: #dd2233;
   --dk-red: #a81c29;
 
   /* Hero Graphic Layout Variables */
@@ -18,17 +18,17 @@
   --hero-graphic-margin-left-lg: 0;
   --hero-graphic-scale-base: 0.55;
   --hero-graphic-scale-sm: 0.55;
-  --hero-graphic-scale-md: 0.60;
-  --hero-graphic-scale-lg: 0.70;
-  --hero-graphic-scale-xl: 0.80;
-  --hero-graphic-scale-2xl: 0.90;
+  --hero-graphic-scale-md: 0.6;
+  --hero-graphic-scale-lg: 0.7;
+  --hero-graphic-scale-xl: 0.8;
+  --hero-graphic-scale-2xl: 0.9;
   --hero-blob-solid-left: 24.25;
   --hero-blob-solid-top: 32;
   --hero-blob-clear-left: 17;
   --hero-blob-clear-top: 29;
   --hero-pic-left: 32;
   --hero-pic-top: 48;
-  --hero-group-scale-base: 0.70;
+  --hero-group-scale-base: 0.7;
   --hero-group-scale-sm: 1;
   --hero-group-left: 40;
 }
@@ -39,33 +39,31 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-theme-red: #d22333;
-  --color-theme-white: #FFFFFF;
+  --color-theme-white: #ffffff;
   --color-theme-black: #000000;
   --color-theme-offwhite: #f6f7f9;
-  --color-theme-lt-red: #F2D5D5;
-  --color-theme-lt-blue: #C4FDFF;
-  --color-theme-lt-purple: #E3D4FA;
+  --color-theme-lt-red: #f2d5d5;
+  --color-theme-lt-blue: #c4fdff;
+  --color-theme-lt-purple: #e3d4fa;
   --color-theme-m-red: #eda7ad;
   --color-theme-dk-red: #a81c29;
-  --color-theme-grey: #D9D9D9;
-  --color-bg-x-lt-grey: #EFEFEF;
-  --color-bg-lt-grey: #E5E5E5;
+  --color-theme-grey: #d9d9d9;
+  --color-bg-x-lt-grey: #efefef;
+  --color-bg-lt-grey: #e5e5e5;
   --color-bg-m-grey: #898989;
   --color-bg-dk-grey: #404040;
   --color-text-lt-grey: #eeeeee;
   --color-text-lt-grey-2: #d6d6d6;
-  --color-text-grey-muted: #ABABAB;
+  --color-text-grey-muted: #ababab;
   --color-text-grey: #828282;
   --color-text-dk-grey: #404040;
-  --color-text-red: #C51F2F;
+  --color-text-red: #c51f2f;
 }
-
 
 @layer utilities {
   .mainheading {
     @apply text-2xl sm:text-4xl xl:text-5xl font-semibold tracking-[-0.02em] text-theme-red leading-8 sm:leading-14 lg:leading-16 2xl:leading-20;
   }
-
 
   .whitemainheading {
     @apply text-5xl font-semibold tracking-[-0.02em] text-theme-white leading-16;
@@ -73,6 +71,10 @@
 
   .heading {
     @apply text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-semibold tracking-[-0.02em] text-theme-red leading-8 md:leading-10 lg:leading-16;
+  }
+
+  .blackheading {
+    @apply text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-semibold tracking-[-0.02em] text-text-dk-grey leading-8 md:leading-10 lg:leading-16;
   }
 
   .formheading {
@@ -85,7 +87,6 @@
 
   .whitesubtext {
     @apply text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-theme-white leading-[160%];
-
   }
 
   .footerheading {
@@ -93,7 +94,7 @@
   }
 
   .footerbottomtext {
-    @apply text-xs md:text-sm xl:text-base leading-normal text-text-dk-grey
+    @apply text-xs md:text-sm xl:text-base leading-normal text-text-dk-grey;
   }
 
   .ctaheading {
@@ -102,7 +103,7 @@
 
   /* do not add color  */
   .subheading {
-    @apply text-sm sm:text-base md:text-base xl:text-xl 2xl:text-2xl font-medium
+    @apply text-sm sm:text-base md:text-base xl:text-xl 2xl:text-2xl font-medium;
   }
 
   /* do not add color */
@@ -115,7 +116,7 @@
   }
 
   .cardtext {
-    @apply text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-normal text-text-dk-grey
+    @apply text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl leading-normal text-text-dk-grey;
   }
 
   .teamheading {
@@ -123,16 +124,15 @@
   }
 
   .membername {
-    @apply text-xl sm:text-2xl leading-normal text-theme-black font-medium
+    @apply text-xl sm:text-2xl leading-normal text-theme-black font-medium;
   }
 
   .longmembername {
-    @apply text-base sm:text-xl leading-normal text-theme-black font-medium
+    @apply text-base sm:text-xl leading-normal text-theme-black font-medium;
   }
 
-
   .membertag {
-    @apply text-sm leading-normal text-white
+    @apply text-sm leading-normal text-white;
   }
 
   .formlabel {
@@ -140,19 +140,19 @@
   }
 
   .universepad {
-    @apply px-5 sm:px-10 md:px-16 lg:px-18
+    @apply px-5 sm:px-10 md:px-16 lg:px-18;
   }
 
   .lgbutton {
-    @apply px-4 md:px-6 lg:px-8 xl:px-12 text-sm sm:text-base md:text-lg xl:text-xl 2xl:text-2xl py-0 sm:py-3 h-9 sm:h-13 2xl:h-16 min-w-20 sm:min-w-35 md:min-w-45 xl:min-w-60
+    @apply px-4 md:px-6 lg:px-8 xl:px-12 text-sm sm:text-base md:text-lg xl:text-xl 2xl:text-2xl py-0 sm:py-3 h-9 sm:h-13 2xl:h-16 min-w-20 sm:min-w-35 md:min-w-45 xl:min-w-60;
   }
 
   .midbutton {
-    @apply px-4 lg:px-6 2xl:px-8 text-base xl:text-lg 2xl:text-xl py-2 h-11 2xl:h-14 min-w-30
+    @apply px-4 lg:px-6 2xl:px-8 text-base xl:text-lg 2xl:text-xl py-2 h-11 2xl:h-14 min-w-30;
   }
 
   .smbutton {
-    @apply px-4 h-10 text-xs sm:text-sm
+    @apply px-4 h-10 text-xs sm:text-sm;
   }
 }
 

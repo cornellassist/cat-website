@@ -83,7 +83,7 @@ export function Sidebar() {
               // console.log("entry: ", entry);
               return (
                 <div
-                  className={`pl-12 pr-5 descriptext cursor-pointer ${path.includes(entry) ? "bg-text-lt-grey" : "bg-transparent"} rounded-sm`}
+                  className={`pl-12 pr-5 py-1 descriptext cursor-pointer ${path.includes(entry.split(" ").join("")) ? "bg-text-lt-grey" : "bg-transparent"} rounded-sm`}
                   key={index}
                   onClick={() => {
                     router.push(
@@ -110,12 +110,13 @@ export function Sidebar() {
         {tabs.map((tab, index) => {
           const splitPath = path.split("/");
           const curPath = splitPath.length > 2 ? splitPath.pop() : "Home";
+          console.log(tab.label);
           return (
             <Tab
               label={tab.label}
               icon={tab.icon}
               key={index}
-              isActive={tab.label === curPath}
+              isActive={tab.label.split(" ").join("") === curPath}
               dropdown={tab?.dropdown}
             />
           );

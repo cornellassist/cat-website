@@ -11,7 +11,7 @@ import {
 // import { checkAuth } from "@/utils/checkAuth";
 // since we have to make supabase client anyway for storage
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   // wasnt working because of policies
   const supabase = await createClient();
   const {
@@ -34,7 +34,7 @@ export async function GET(request: Request) {
         sortBy: { column: "name", order: "asc" },
       });
     if (error) throw error;
-    console.log(data);
+    // console.log(data);
     const res = data
       ?.filter((item) => item.id !== null)
       .map((item) => item.name);
@@ -52,16 +52,43 @@ export async function POST(request: NextRequest) {
     return unauthorized();
   }
   try {
-    const body = await request.json();
+    const formData = await request.formData();
+    const file = formData.get("file") as File; // data, not param
+    const folder = formData.get("folder") as string;
+    const name = file.name.replace(/[^a-zA-Z0-9._-]/g, "_"); // sanitize
     const { data, error } = await supabase.storage
       .from("cat-website-pics")
-      .upload("community-highlights", body, {
+      .upload(`${folder}/${name}`, file, {
         cacheControl: "3600",
         upsert: false,
       });
     if (error) throw error;
     return created();
   } catch (error) {
+    console.error(error);
+    return internalServerError(error);
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return unauthorized();
+  }
+  try {
+    const { searchParams } = new URL(request.url);
+    const fileName = searchParams.get("fileName");
+    const folder = searchParams.get("folder");
+    const { data, error } = await supabase.storage
+      .from("cat-website-pics")
+      .remove([`${folder}/${fileName}`]);
+    if (error) throw error;
+    return ok();
+  } catch (error) {
+    console.log(error);
     return internalServerError(error);
   }
 }
