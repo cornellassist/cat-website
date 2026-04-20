@@ -79,8 +79,8 @@ export function Sidebar() {
             }`}
           >
             {dropdown.map((entry, index) => {
-              console.log(label);
-              console.log("entry: ", entry);
+              // console.log(label);
+              // console.log("entry: ", entry);
               return (
                 <div
                   className={`pl-12 pr-5 descriptext cursor-pointer ${path.includes(entry) ? "bg-text-lt-grey" : "bg-transparent"} rounded-sm`}
