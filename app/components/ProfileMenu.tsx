@@ -48,7 +48,7 @@ export function ProfileMenu() {
       }}
     >
       <div className="flex gap-4 mr-10 mt-3 items-center">
-        <div className="bg-theme-red rounded-[2000px] w-12 h-12 flex justify-center items-center text-text-lt-grey text-2xl">
+        <div className="bg-theme-red rounded-[2000px] w-10 h-10 flex justify-center items-center text-text-lt-grey text-xl">
           <div className="select-none">{name.charAt(0).toUpperCase()}</div>
         </div>
         <div className="subtext select-none">{name}</div>
