@@ -61,7 +61,7 @@ export function UploadImg() {
       }
     }
     return (
-      <div className="bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] pl-5 h-50 flex flex-col gap-5 pt-3 rounded-xl">
+      <div className="bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] pl-5 h-50 flex flex-col gap-5 pt-3 rounded-xl mb-5">
         <h2 className="subheading">
           Upload to <span className="text-theme-dk-red">{curTab}</span> Folder
         </h2>
@@ -160,7 +160,7 @@ export function UploadImg() {
     return (
       <div className="flex flex-col gap-5">
         <h1 className="blackheading">
-          All <span className="text-theme-dk-red">{curTab}</span> Images
+          Images: <span className="text-theme-dk-red">{curTab}</span>
         </h1>
         <TabSelect />
         <div className="flex gap-5 flex-wrap">

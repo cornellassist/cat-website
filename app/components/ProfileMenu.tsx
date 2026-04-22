@@ -41,7 +41,7 @@ export function ProfileMenu() {
   }, []);
   return (
     <div
-      className="flex flex-col items-center cursor-pointer w-40"
+      className="flex flex-col items-center cursor-pointer w-40 mt-2"
       ref={ref}
       onClick={() => {
         setDropdownHidden(!dropdownHidden);
