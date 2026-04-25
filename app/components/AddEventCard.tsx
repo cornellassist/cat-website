@@ -1,112 +1,177 @@
-"use client"
+"use client";
 import { EventCard } from "@/app/components/OurEvents";
 import { useState } from "react";
 
-export function AddEventCard() {
-    const tagSelections = ["In-Person", "Virtual", "Panel", "Workshop", "All Ages", "Seniors", "Kids"]
+// TODO: import all relevant component cards that need to be displayed
 
-    const [title, setTitle] = useState("");
-    const [descrip, setDescrip] = useState("");
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
-    const [location, setLocation] = useState("");
-    const [imageURL, setImageURL] = useState("")
-    const [tags, setTags] = useState<String[]>([]);
-    const [showPreview, setShowPreview] = useState(false);
-    const inputCss = "border border-gray-300 rounded w-full p-2 mb-4"
+const componentCategories = [
+  "Blog",
+  "Highlight",
+  "Member",
+  "Project",
+  "Sponsors",
+] as const; // for readonly, type assertion
 
-    function toggleTag(tag: String) {
-        if (tags.includes(tag)) {
-            setTags(tags.filter((t) => t !== tag));
-        } else {
-            setTags([...tags, tag]);
-        }
+type AddEventCardProps = {
+  componentCategory?: (typeof componentCategories)[number]; // indexed access type. TODO: remove ?: when done
+};
 
+export function AddEventCard({ componentCategory }: AddEventCardProps) {
+  // lookup the right keys and values from whatever was passed in as a prop
+  // - Could be automatic, if the string is a url
+  // - should probably not, be restricted
+
+  // TODO: Make API GET() calls to each of the component categories, and get key labels and value types
+
+  // TODO: Make API GET() call to storage with param projects, to get all project images available
+
+  // TODO: Make API POST() function to be able to add images
+
+  const tagSelections = [
+    "In-Person",
+    "Virtual",
+    "Panel",
+    "Workshop",
+    "All Ages",
+    "Seniors",
+    "Kids",
+  ];
+
+  // TODO: Replace these with reusable components for each type of input
+  // Leave edge cases for stuff like tag
+  // Also the components are generally going to be "short string", "long string", etc, with the actual key name inserted after
+  const [title, setTitle] = useState("");
+  const [descrip, setDescrip] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [location, setLocation] = useState("");
+  const [imageURL, setImageURL] = useState("");
+  const [tags, setTags] = useState<String[]>([]);
+  const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
+
+  function toggleTag(tag: String) {
+    if (tags.includes(tag)) {
+      setTags(tags.filter((t) => t !== tag));
+    } else {
+      setTags([...tags, tag]);
     }
+  }
 
-    return (
-        <div className="flex flex-col md:flex-row">
-            <div className="flex-1 w-full lg:w:1/2 border-r border-gray-100 p-15 ovrflow-y-auto">
-                <div className="border border-gray-200 rounded-2xl p-8">
-                    <form className="">
-                        <h1 className="mainheading">Add Event Component</h1>
-                        <h2 className="subheading">Title</h2>
-                        <input value={title} onChange={(e) => setTitle(e.target.value)} className={inputCss} placeholder="Event Title"/>
+  // TODO: make a component that assembles all the previously made components together
+  // TODO: Make a component for displaying images from project folder, and to be able to add to storage. Refreshes once new things are added
 
-                        <h2 className="subheading">Description</h2>
-                        <textarea value={descrip} onChange={(e) => setDescrip(e.target.value)} className={inputCss} placeholder="Description..."/>
-                        
-                        <h2 className="subheading">Date</h2>
-                        <input value={date} onChange={(e) => setDate(e.target.value)} className={inputCss} placeholder="Date: MM/DD/YYYY" />
-                        
-                        <h2 className="subheading">Time</h2>
-                        <input value={time} onChange={(e) => setTime(e.target.value)} className={inputCss} placeholder="Start Time - End Time" />
-                        
-                        <h2 className="subheading">Location URL</h2>
-                        <input value={location} onChange={(e) => setLocation(e.target.value)} className={inputCss} placeholder="Location URL"/>
+  return (
+    // TODO: Change design to be a popup modal instead, with transparent background
+    <div className="flex flex-col md:flex-row">
+      <div className="flex-1 w-full lg:w:1/2 border-r border-gray-100 p-15 ovrflow-y-auto">
+        <div className="border border-gray-200 rounded-2xl p-8">
+          <form className="">
+            <h1 className="mainheading">Add Event Component</h1>
+            <h2 className="subheading">Title</h2>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className={inputCss}
+              placeholder="Event Title"
+            />
 
-                        <h2 className="subheading">Image</h2>
-                        <input type="file"
-                            id="image-upload"
-                            accept="image/*"
-                            onChange={(e) => {
-                                const file = e.target.files?.[0];
-                                if (!file) return;
-                                const reader = new FileReader();
-                                reader.onload = () => setImageURL(reader.result as string);
-                                reader.readAsDataURL(file);
-                            }}
-                            className="hidden"
-                            />
+            <h2 className="subheading">Description</h2>
+            <textarea
+              value={descrip}
+              onChange={(e) => setDescrip(e.target.value)}
+              className={inputCss}
+              placeholder="Description..."
+            />
 
-                        <label htmlFor="image-upload"
-                        className="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-4 inline-block">
-                        Upload image</label>
+            <h2 className="subheading">Date</h2>
+            <input
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className={inputCss}
+              placeholder="Date: MM/DD/YYYY"
+            />
 
-                        <h2 className="subheading mb-1">Tag</h2>
-                        {tagSelections.map((tag) => (
-                        <label key={tag} className="flex items-center gap-2 cursor-pointer pl-1">
-                            <input
-                            type="checkbox"
-                            checked={tags.includes(tag)}
-                            onChange={() => toggleTag(tag)}
-                            className="accent-red-500"
-                            />
-                            <span className="text-sm">{tag}</span>
-                        </label>
-                        ))}
+            <h2 className="subheading">Time</h2>
+            <input
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              className={inputCss}
+              placeholder="Start Time - End Time"
+            />
 
+            <h2 className="subheading">Location URL</h2>
+            <input
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className={inputCss}
+              placeholder="Location URL"
+            />
 
-                        <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full">Create Component</button>
-                    </form>
-                </div>
+            <h2 className="subheading">Image</h2>
+            <input
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => setImageURL(reader.result as string);
+                reader.readAsDataURL(file);
+              }}
+              className="hidden"
+            />
 
-            </div>
+            <label
+              htmlFor="image-upload"
+              className="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-4 inline-block"
+            >
+              Upload image
+            </label>
 
-        <div className="flex-1 bg-gray-50 items-start justify-start p-12">
-            <h1 className="mt-5 mb-5">Preview</h1>
-            {title || descrip || imageURL ? (
-                <div className="bg-white rounded-[20px] 2xl:w-[550px] xl:w-[500px] h-[560px] border border-gray-100 mx-auto">
-                    <EventCard
-                        title={title}
-                        descrip={descrip}
-                        date={date}
-                        time={time}
-                        location={location}
-                        imageUrl={imageURL}
-                        tags={tags as any}
-                    />
-                </div>
-            ) : (
-                <div className="h-[560px] w-full rounded-[20px] border-2 border-dashed border-gray-200 flex items-center justify-center">
-                    <p className="text-sm text-gray-300">Preview here</p>
-                </div>
-            )}
+            <h2 className="subheading mb-1">Tag</h2>
+            {tagSelections.map((tag) => (
+              <label
+                key={tag}
+                className="flex items-center gap-2 cursor-pointer pl-1"
+              >
+                <input
+                  type="checkbox"
+                  checked={tags.includes(tag)}
+                  onChange={() => toggleTag(tag)}
+                  className="accent-red-500"
+                />
+                <span className="text-sm">{tag}</span>
+              </label>
+            ))}
+
+            <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full">
+              Create Component
+            </button>
+          </form>
         </div>
+      </div>
 
-
-
-        </div>
-    );
-
+      <div className="flex-1 bg-gray-50 items-start justify-start p-12">
+        <h1 className="mt-5 mb-5">Preview</h1>
+        {title || descrip || imageURL ? (
+          <div className="bg-white rounded-[20px] 2xl:w-[550px] xl:w-[500px] h-[560px] border border-gray-100 mx-auto">
+            <EventCard
+              title={title}
+              descrip={descrip}
+              date={date}
+              time={time}
+              location={location}
+              imageUrl={imageURL}
+              tags={tags as any}
+            />
+          </div>
+        ) : (
+          <div className="h-[560px] w-full rounded-[20px] border-2 border-dashed border-gray-200 flex items-center justify-center">
+            <p className="text-sm text-gray-300">Preview here</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
