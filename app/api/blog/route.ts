@@ -8,17 +8,18 @@ import {
   ok,
   deleted,
 } from "@/utils/http";
-import { create } from "domain";
 
 export async function GET() {
-    const blog = await prisma.blog.findMany();
-    // order by date
-    return NextResponse.json(blog);
+  const blog = await prisma.blog.findMany();
+  // order by date
+  return NextResponse.json(blog);
 }
 
 export async function POST(request: NextRequest) {
   const supabase = await createClient(); // so that cookies are tied with incoming request
-  const { data: {user} } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     return unauthorized();
@@ -26,8 +27,8 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json();
   try {
-    await prisma.blog.create({ data: body});
-    return create();
+    await prisma.blog.create({ data: body });
+    return created();
   } catch (error) {
     console.error(error);
     return internalServerError(error);
