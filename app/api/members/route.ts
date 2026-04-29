@@ -11,12 +11,23 @@ import { checkAuth } from "@/utils/checkAuth";
 import prisma from "@/utils/prisma";
 
 export async function GET() {
+  const roleOrder = {
+    TEAM_LEADS: 0,
+    ENGINEERING_LEADS: 1,
+    OUTREACH_EDU_LEADS: 2,
+    OPERATIONS_LEADS: 3,
+    ENGINEERING: 4,
+    OUTREACH_EDU: 5,
+    OPERATIONS: 6,
+  };
   try {
     const member = await prisma.member.findMany({
-      orderBy: { id: "asc" },
+      orderBy: { role: "asc" },
     });
+    member.sort((a, b) => roleOrder[a.role] - roleOrder[b.role]);
     return NextResponse.json(member);
   } catch (error) {
+    console.log(error);
     return internalServerError(error);
   }
 }
