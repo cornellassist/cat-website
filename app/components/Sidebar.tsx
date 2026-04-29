@@ -33,7 +33,7 @@ export function Sidebar() {
       dropdown: ["Projects", "Community Highlights", "Events", "Sponsors"],
     },
     { label: "Images", icon: PhotoIcon },
-    { label: "Team", icon: UserGroupIcon },
+    { label: "Teams", icon: UserGroupIcon },
   ];
 
   function Tab({ label, icon, isActive, dropdown }: TabProp) {
