@@ -1,6 +1,7 @@
 "use client";
 import { EventCard } from "@/app/components/OurEvents";
 import { useState } from "react";
+import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
 
 // TODO: import all relevant component cards that need to be displayed
 
@@ -40,12 +41,12 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
   // TODO: Replace these with reusable components for each type of input
   // Leave edge cases for stuff like tag
   // Also the components are generally going to be "short string", "long string", etc, with the actual key name inserted after
-  const [title, setTitle] = useState("");
-  const [descrip, setDescrip] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [location, setLocation] = useState("");
-  const [imageURL, setImageURL] = useState("");
+  const [title, setTitle] = useState("Event Title");
+  const [descrip, setDescrip] = useState("A short description of the event...");
+  const [date, setDate] = useState("01/01/2026");
+  const [time, setTime] = useState("12:00 PM - 2:00 PM");
+  const [location, setLocation] = useState("https://www.google.com/maps");
+  const [imageURL, setImageURL] = useState(portraitPlaceholder.src);
   const [tags, setTags] = useState<String[]>([]);
   const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
 
@@ -70,18 +71,20 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
             <h2 className="subheading">Title</h2>
             <input
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value.slice(0, 50))}
               className={inputCss}
               placeholder="Event Title"
             />
+            <p className="text-xs text-gray-400 -mt-3 mb-4 text-right">{title.length}/50</p>
 
             <h2 className="subheading">Description</h2>
             <textarea
               value={descrip}
-              onChange={(e) => setDescrip(e.target.value)}
+              onChange={(e) => setDescrip(e.target.value.slice(0, 300))}
               className={inputCss}
               placeholder="Description..."
             />
+            <p className="text-xs text-gray-400 -mt-3 mb-4 text-right">{descrip.length}/300</p>
 
             <h2 className="subheading">Date</h2>
             <input
@@ -144,6 +147,7 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
                 <span className="text-sm">{tag}</span>
               </label>
             ))}
+            <p className="text-xs text-gray-400 mt-1 mb-4">Maximum tags: 4</p>
 
             <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full">
               Create Component
