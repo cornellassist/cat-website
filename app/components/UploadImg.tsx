@@ -63,7 +63,7 @@ export function UploadImg() {
     return (
       <div className="bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] pl-5 h-50 flex flex-col gap-5 pt-3 rounded-xl mb-5">
         <h2 className="subheading">
-          Upload to <span className="text-theme-dk-red">{curTab}</span> Folder
+          Upload to <span className="text-theme-red">{curTab}</span> Folder
         </h2>
         <div className="flex flex-col w-127 gap-2">
           <div className="flex items-center">
@@ -112,7 +112,7 @@ export function UploadImg() {
           return (
             <div
               key={index}
-              className={`${tab === curTab ? "bg-theme-dk-red text-white" : "bg-transparent text-text-dk-grey border-text-dk-grey border"}  px-3 py-1 rounded-[200px]
+              className={`${tab === curTab ? "bg-theme-red text-white" : "bg-transparent text-text-dk-grey border-text-dk-grey border"}  px-3 py-1 rounded-[200px]
              select-none cursor-pointer`}
               onClick={() => {
                 setCurTab(tab);
@@ -160,7 +160,7 @@ export function UploadImg() {
     return (
       <div className="flex flex-col gap-5">
         <h1 className="blackheading">
-          Images: <span className="text-theme-dk-red">{curTab}</span>
+          Images: <span className="text-theme-red">{curTab}</span>
         </h1>
         <TabSelect />
         <div className="flex gap-5 flex-wrap">
