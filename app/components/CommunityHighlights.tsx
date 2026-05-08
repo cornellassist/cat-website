@@ -152,7 +152,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
                     sizes="(max-width: 768px) 100vw, 548px"
                   />
                   <div
-                    className={`absolute bottom-0 left-0 w-full h-28 sm:h-28 rounded-b-[20px] transition-all duration-300 backdrop-blur-sm pl-3 pt-2`}
+                    className={`absolute bottom-0 left-0 w-full h-28 sm:h-28 rounded-b-[20px] transition-all duration-300 backdrop-blur-sm pl-3 pt-2 bg-bg-dk-grey/60`}
                   >
                     <h3
                       className={
