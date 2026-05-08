@@ -176,8 +176,9 @@ export function OurEvents({ events }: OurEventsProps) {
             );
           })
         ) : (
-          <div className="descriptext text-text-dk-grey ">
-            We're working on new events, stay tuned!
+          <div className="descriptext text-text-dk-grey">
+            We're working on new events, stay tuned! An archive of past events
+            is currently in progress.
           </div>
         )}
       </div>
