@@ -160,20 +160,26 @@ export function OurEvents({ events }: OurEventsProps) {
       <div
         className={`grid 2xl:grid-cols-2 xl:grid-cols-2 grid-cols-1 gap-10 mt-10`}
       >
-        {allEvents.map((item, index) => {
-          return (
-            <EventCardContainer
-              key={`event-${index}`}
-              title={item.title}
-              descrip={item.descrip}
-              location={item.location}
-              date={item.date}
-              time={item.time}
-              tags={item?.tags}
-              imageUrl={item.imageUrl}
-            />
-          );
-        })}
+        {allEvents.length ? (
+          allEvents.map((item, index) => {
+            return (
+              <EventCardContainer
+                key={`event-${index}`}
+                title={item.title}
+                descrip={item.descrip}
+                location={item.location}
+                date={item.date}
+                time={item.time}
+                tags={item?.tags}
+                imageUrl={item.imageUrl}
+              />
+            );
+          })
+        ) : (
+          <div className="descriptext text-text-dk-grey ">
+            We're working on new events, stay tuned!
+          </div>
+        )}
       </div>
     </div>
   );
