@@ -26,9 +26,9 @@ function MissionMainCard() {
         <div className="flex flex-col">
           <h2 className="heading">Our Mission</h2>
           <p className="subtext mt-2 sm:mt-6">
-            We are a student-led team working with community partners to design
-            assistive technologies and promote accessibility for people with
-            disabilities in Ithaca and beyond.
+            We are a student-led project team working with community partners to
+            design assistive technologies and promote accessibility for people
+            with disabilities in Ithaca and beyond.
           </p>
           <p className="subtext mt-4 sm:mt-6 w-3/4">
             We work with individuals, families, and organizations to create
