@@ -1,28 +1,51 @@
 "use client";
 import { EventCard } from "@/app/components/OurEvents";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
-
+import axios from "axios";
+import { AddEventCardProps } from "../AdminDashboard/CreateEvent/page";
 // TODO: import all relevant component cards that need to be displayed
 
-const componentCategories = [
-  "Blog",
-  "Highlight",
-  "Member",
-  "Project",
-  "Sponsors",
-] as const; // for readonly, type assertion
-
-type AddEventCardProps = {
-  componentCategory?: (typeof componentCategories)[number]; // indexed access type. TODO: remove ?: when done
+type field = {
+  name: string;
+  type: string;
 };
 
 export function AddEventCard({ componentCategory }: AddEventCardProps) {
-  // lookup the right keys and values from whatever was passed in as a prop
-  // - Could be automatic, if the string is a url
-  // - should probably not, be restricted
+  const [eventFields, setEventFields] = useState([]);
+  const [highlightFields, setHighlightFields] = useState([]);
 
-  // TODO: Make API GET() calls to each of the component categories, and get key labels and value types
+  async function getEventFields() {
+    try {
+      const fields = await (
+        await fetch("/api/events/fields", { method: "GET" })
+      ).json();
+      console.log(fields);
+      setEventFields(fields);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function getHighlightFields() {
+    try {
+      const fields = await (
+        await fetch("/api/highlights/fields", { method: "GET" })
+      ).json();
+      setHighlightFields(fields);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const fetchMap = {
+    Event: getEventFields,
+    Highlight: getHighlightFields,
+  };
+
+  useEffect(() => {
+    fetchMap["Event"]?.();
+  }, []);
 
   // TODO: Make API GET() call to storage with param projects, to get all project images available
 
@@ -41,6 +64,62 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
   // TODO: Replace these with reusable components for each type of input
   // Leave edge cases for stuff like tag
   // Also the components are generally going to be "short string", "long string", etc, with the actual key name inserted after
+  const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
+
+  function FormField({
+    field,
+    value,
+    onChange,
+  }: {
+    field: field;
+    value: string;
+    onChange: any;
+  }) {
+    const capitalizedName = field.name[0].toUpperCase() + field.name.slice(1);
+    function renderField() {
+      switch (field.type) {
+        case "String":
+          return (
+            <input
+              type="text"
+              value={value}
+              onChange={onChange}
+              className="inputCss"
+              placeholder={field.name}
+            />
+          );
+        case "String[]":
+          return <div>Tags: todo</div>;
+        case "Int":
+          return (
+            <input
+              type="number"
+              value={value}
+              onChange={(e) => onChange(e.target.value.slice(0, 50))}
+              className="inputCss"
+            />
+          );
+        case "DateTime":
+          return (
+            <input
+              type="date"
+              value={value}
+              onChange={onChange}
+              className="inputCss"
+            />
+          );
+        default:
+          return <div>Unidentified type</div>;
+      }
+    }
+    return (
+      <div className="flex flex-col">
+        <div className="subheading">{capitalizedName}</div>
+        {renderField()}
+      </div>
+    );
+  }
+
   const [title, setTitle] = useState("Event Title");
   const [descrip, setDescrip] = useState("A short description of the event...");
   const [date, setDate] = useState("01/01/2026");
@@ -48,7 +127,8 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
   const [location, setLocation] = useState("https://www.google.com/maps");
   const [imageURL, setImageURL] = useState(portraitPlaceholder.src);
   const [tags, setTags] = useState<String[]>([]);
-  const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
+
+  const [formData, setFormData] = useState<Record<string, string>>({});
 
   function toggleTag(tag: String) {
     if (tags.includes(tag)) {
@@ -64,10 +144,20 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
   return (
     // TODO: Change design to be a popup modal instead, with transparent background
     <div className="flex flex-col md:flex-row">
+      {eventFields.map((e: field) => (
+        <FormField
+          key={e.name}
+          field={e}
+          value={formData[e.name]}
+          onChange={setFormData}
+        />
+      ))}
       <div className="flex-1 w-full lg:w:1/2 border-r border-gray-100 p-15 ovrflow-y-auto">
         <div className="border border-gray-200 rounded-2xl p-8">
           <form className="">
-            <h1 className="mainheading">Add Event Component</h1>
+            <h1 className="mainheading">
+              Add {componentCategory ?? "Event"} Component
+            </h1>
             <h2 className="subheading">Title</h2>
             <input
               value={title}
@@ -75,7 +165,9 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
               className={inputCss}
               placeholder="Event Title"
             />
-            <p className="text-xs text-gray-400 -mt-3 mb-4 text-right">{title.length}/50</p>
+            <p className="text-xs text-gray-400 -mt-3 mb-4 text-right">
+              {title.length}/50
+            </p>
 
             <h2 className="subheading">Description</h2>
             <textarea
@@ -84,7 +176,9 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
               className={inputCss}
               placeholder="Description..."
             />
-            <p className="text-xs text-gray-400 -mt-3 mb-4 text-right">{descrip.length}/300</p>
+            <p className="text-xs text-gray-400 -mt-3 mb-4 text-right">
+              {descrip.length}/300
+            </p>
 
             <h2 className="subheading">Date</h2>
             <input
