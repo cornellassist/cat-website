@@ -5,11 +5,76 @@ import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-pl
 import axios from "axios";
 import { AddEventCardProps } from "../AdminDashboard/CreateEvent/page";
 // TODO: import all relevant component cards that need to be displayed
+const tagSelections = [
+  "In-Person",
+  "Virtual",
+  "Panel",
+  "Workshop",
+  "All Ages",
+  "Seniors",
+  "Kids",
+];
 
 type field = {
   name: string;
   type: string;
 };
+const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
+
+function FormField({
+  field,
+  value,
+  onChange,
+}: {
+  field: field;
+  value: string;
+  onChange: (name: string, val: string) => void;
+}) {
+  if (field.type === "String[]") return; // probably a special field that needs custom component
+  const capitalizedName = field.name[0].toUpperCase() + field.name.slice(1);
+  function renderField() {
+    switch (field.type) {
+      case "String":
+        return (
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => onChange(field.name, e.target.value)}
+            className={inputCss}
+            placeholder={field.name}
+          />
+        );
+      case "String[]":
+        return <div>Tag: todo</div>;
+      case "Int":
+        return (
+          <input
+            type="number"
+            value={value}
+            onChange={(e) => onChange(field.name, e.target.value.slice(0, 50))}
+            className={inputCss}
+          />
+        );
+      case "DateTime":
+        return (
+          <input
+            type="date"
+            value={value}
+            onChange={(e) => onChange(field.name, e.target.value)}
+            className={inputCss}
+          />
+        );
+      default:
+        return <div>Unidentified type</div>;
+    }
+  }
+  return (
+    <div className="flex flex-col">
+      <h2 className="subheading">{capitalizedName}</h2>
+      {renderField()}
+    </div>
+  );
+}
 
 export function AddEventCard({ componentCategory }: AddEventCardProps) {
   const [eventFields, setEventFields] = useState([]);
@@ -51,74 +116,9 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
 
   // TODO: Make API POST() function to be able to add images
 
-  const tagSelections = [
-    "In-Person",
-    "Virtual",
-    "Panel",
-    "Workshop",
-    "All Ages",
-    "Seniors",
-    "Kids",
-  ];
-
   // TODO: Replace these with reusable components for each type of input
   // Leave edge cases for stuff like tag
   // Also the components are generally going to be "short string", "long string", etc, with the actual key name inserted after
-  const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
-
-  function FormField({
-    field,
-    value,
-    onChange,
-  }: {
-    field: field;
-    value: string;
-    onChange: any;
-  }) {
-    const capitalizedName = field.name[0].toUpperCase() + field.name.slice(1);
-    function renderField() {
-      switch (field.type) {
-        case "String":
-          return (
-            <input
-              type="text"
-              value={value}
-              onChange={onChange}
-              className="inputCss"
-              placeholder={field.name}
-            />
-          );
-        case "String[]":
-          return <div>Tags: todo</div>;
-        case "Int":
-          return (
-            <input
-              type="number"
-              value={value}
-              onChange={(e) => onChange(e.target.value.slice(0, 50))}
-              className="inputCss"
-            />
-          );
-        case "DateTime":
-          return (
-            <input
-              type="date"
-              value={value}
-              onChange={onChange}
-              className="inputCss"
-            />
-          );
-        default:
-          return <div>Unidentified type</div>;
-      }
-    }
-    return (
-      <div className="flex flex-col">
-        <div className="subheading">{capitalizedName}</div>
-        {renderField()}
-      </div>
-    );
-  }
 
   const [title, setTitle] = useState("Event Title");
   const [descrip, setDescrip] = useState("A short description of the event...");
@@ -126,11 +126,11 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
   const [time, setTime] = useState("12:00 PM - 2:00 PM");
   const [location, setLocation] = useState("https://www.google.com/maps");
   const [imageURL, setImageURL] = useState(portraitPlaceholder.src);
-  const [tags, setTags] = useState<String[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
 
   const [formData, setFormData] = useState<Record<string, string>>({});
 
-  function toggleTag(tag: String) {
+  function toggleTag(tag: string) {
     if (tags.includes(tag)) {
       setTags(tags.filter((t) => t !== tag));
     } else {
@@ -144,21 +144,23 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
   return (
     // TODO: Change design to be a popup modal instead, with transparent background
     <div className="flex flex-col md:flex-row">
-      {eventFields.map((e: field) => (
-        <FormField
-          key={e.name}
-          field={e}
-          value={formData[e.name]}
-          onChange={setFormData}
-        />
-      ))}
       <div className="flex-1 w-full lg:w:1/2 border-r border-gray-100 p-15 ovrflow-y-auto">
         <div className="border border-gray-200 rounded-2xl p-8">
           <form className="">
             <h1 className="mainheading">
               Add {componentCategory ?? "Event"} Component
             </h1>
-            <h2 className="subheading">Title</h2>
+            {eventFields.map((e: field) => (
+              <FormField
+                key={e.name}
+                field={e}
+                value={formData[e.name] ?? ""}
+                onChange={(name, val) =>
+                  setFormData((prev) => ({ ...prev, [name]: val }))
+                }
+              />
+            ))}
+            {/* <h2 className="subheading">Title</h2>
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value.slice(0, 50))}
@@ -217,7 +219,7 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
                 reader.readAsDataURL(file);
               }}
               className="hidden"
-            />
+            /> */}
 
             <label
               htmlFor="image-upload"
@@ -225,23 +227,28 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
             >
               Upload image
             </label>
-
-            <h2 className="subheading mb-1">Tag</h2>
-            {tagSelections.map((tag) => (
-              <label
-                key={tag}
-                className="flex items-center gap-2 cursor-pointer pl-1"
-              >
-                <input
-                  type="checkbox"
-                  checked={tags.includes(tag)}
-                  onChange={() => toggleTag(tag)}
-                  className="accent-red-500"
-                />
-                <span className="text-sm">{tag}</span>
-              </label>
-            ))}
-            <p className="text-xs text-gray-400 mt-1 mb-4">Maximum tags: 4</p>
+            {eventFields && (
+              <div>
+                <h2 className="subheading mb-1">Tag</h2>
+                {tagSelections.map((tag) => (
+                  <label
+                    key={tag}
+                    className="flex items-center gap-2 cursor-pointer pl-1"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={tags.includes(tag)}
+                      onChange={() => toggleTag(tag)}
+                      className="accent-red-500"
+                    />
+                    <span className="text-sm">{tag}</span>
+                  </label>
+                ))}
+                <p className="text-xs text-gray-400 mt-1 mb-4">
+                  Maximum tags: 4
+                </p>
+              </div>
+            )}
 
             <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full">
               Create Component
@@ -254,15 +261,17 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
         <h1 className="mt-5 mb-5">Preview</h1>
         {title || descrip || imageURL ? (
           <div className="bg-white rounded-[20px] 2xl:w-[550px] xl:w-[500px] h-[560px] border border-gray-100 mx-auto">
-            <EventCard
-              title={title}
-              descrip={descrip}
-              date={date}
-              time={time}
-              location={location}
-              imageUrl={imageURL}
-              tags={tags as any}
-            />
+            {eventFields.length !== 0 && (
+              <EventCard
+                title={title}
+                descrip={descrip}
+                date={date}
+                time={time}
+                location={location}
+                imageUrl={imageURL}
+                tags={tags as any}
+              />
+            )}
           </div>
         ) : (
           <div className="h-[560px] w-full rounded-[20px] border-2 border-dashed border-gray-200 flex items-center justify-center">
