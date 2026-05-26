@@ -122,7 +122,7 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
 
   const [title, setTitle] = useState("Event Title");
   const [descrip, setDescrip] = useState("A short description of the event...");
-  const [date, setDate] = useState("01/01/2026");
+
   const [time, setTime] = useState("12:00 PM - 2:00 PM");
   const [location, setLocation] = useState("https://www.google.com/maps");
   const [imageURL, setImageURL] = useState(portraitPlaceholder.src);
@@ -159,8 +159,65 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
                   setFormData((prev) => ({ ...prev, [name]: val }))
                 }
               />
-            ))}
-            {/* <h2 className="subheading">Title</h2>
+            ))}{" "}
+            <label
+              htmlFor="image-upload"
+              className="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-4 inline-block"
+            >
+              Upload image
+            </label>
+            {componentCategory === "Event" && (
+              <div>
+                <h2 className="subheading mb-1">Tag</h2>
+                {tagSelections.map((tag) => (
+                  <label
+                    key={tag}
+                    className="flex items-center gap-2 cursor-pointer pl-1"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={tags.includes(tag)}
+                      onChange={() => toggleTag(tag)}
+                      className="accent-red-500"
+                    />
+                    <span className="text-sm">{tag}</span>
+                  </label>
+                ))}
+                <p className="text-xs text-gray-400 mt-1 mb-4">
+                  Maximum tags: 4
+                </p>
+              </div>
+            )}
+            <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full">
+              Create Component
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div className="flex-1 bg-gray-50 items-start justify-start p-12">
+        <h1 className="mt-5 mb-5">Preview</h1>
+        <div className="bg-white rounded-[20px] 2xl:w-[550px] xl:w-[500px] h-[560px] border border-gray-100 mx-auto">
+          {componentCategory === "Event" && (
+            <EventCard
+              title={formData["title"] ?? "Event Title"}
+              descrip={
+                formData["descrip"] ?? "A short description of the event..."
+              }
+              date={formData["date"]}
+              time={formData["time"] ?? "12:00 PM - 2:00 PM"}
+              location={formData["location"]}
+              imageUrl={formData["imageUrl"] ?? portraitPlaceholder.src}
+              tags={tags as any}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+{
+  /* <h2 className="subheading">Title</h2>
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value.slice(0, 50))}
@@ -219,66 +276,5 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
                 reader.readAsDataURL(file);
               }}
               className="hidden"
-            /> */}
-
-            <label
-              htmlFor="image-upload"
-              className="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-4 inline-block"
-            >
-              Upload image
-            </label>
-            {eventFields && (
-              <div>
-                <h2 className="subheading mb-1">Tag</h2>
-                {tagSelections.map((tag) => (
-                  <label
-                    key={tag}
-                    className="flex items-center gap-2 cursor-pointer pl-1"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={tags.includes(tag)}
-                      onChange={() => toggleTag(tag)}
-                      className="accent-red-500"
-                    />
-                    <span className="text-sm">{tag}</span>
-                  </label>
-                ))}
-                <p className="text-xs text-gray-400 mt-1 mb-4">
-                  Maximum tags: 4
-                </p>
-              </div>
-            )}
-
-            <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full">
-              Create Component
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div className="flex-1 bg-gray-50 items-start justify-start p-12">
-        <h1 className="mt-5 mb-5">Preview</h1>
-        {title || descrip || imageURL ? (
-          <div className="bg-white rounded-[20px] 2xl:w-[550px] xl:w-[500px] h-[560px] border border-gray-100 mx-auto">
-            {eventFields.length !== 0 && (
-              <EventCard
-                title={title}
-                descrip={descrip}
-                date={date}
-                time={time}
-                location={location}
-                imageUrl={imageURL}
-                tags={tags as any}
-              />
-            )}
-          </div>
-        ) : (
-          <div className="h-[560px] w-full rounded-[20px] border-2 border-dashed border-gray-200 flex items-center justify-center">
-            <p className="text-sm text-gray-300">Preview here</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+            /> */
 }
