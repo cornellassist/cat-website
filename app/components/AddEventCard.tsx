@@ -15,10 +15,21 @@ const tagSelections = [
   "Kids",
 ];
 
-type field = {
+type Field = {
   name: string;
   type: string;
 };
+
+type EventPayload = {
+  title: string;
+  tags: string[];
+  descrip: string;
+  date: Date;
+  time: string;
+  location: string;
+  imageUrl: string;
+};
+
 const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
 
 function FormField({
@@ -26,7 +37,7 @@ function FormField({
   value,
   onChange,
 }: {
-  field: field;
+  field: Field;
   value: string;
   onChange: (name: string, val: string) => void;
 }) {
@@ -112,20 +123,84 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
     fetchMap["Event"]?.();
   }, []);
 
+  function constructEventObj({
+    formData,
+    tags = [],
+  }: {
+    formData: Record<string, string>;
+    tags: string[];
+  }): EventPayload {
+    if (
+      !(
+        formData["title"] &&
+        formData["descrip"] &&
+        formData["date"] &&
+        formData["time"] &&
+        formData["location"] &&
+        formData["imageUrl"]
+      )
+    ) {
+      throw new Error("Unfilled fields");
+    }
+    return {
+      title: formData["title"],
+      tags: tags,
+      descrip: formData["descrip"],
+      date: new Date(formData["date"]),
+      time: formData["time"],
+      location: formData["location"],
+      imageUrl: formData["imageUrl"],
+    };
+  }
+  async function postEvent() {
+    try {
+      const body = constructEventObj({ formData, tags });
+      const res = await fetch("/api/events", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!res.ok) {
+        throw new Error(`Failed to post, ${res.status}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  const postMap = {
+    Event: postEvent,
+    Blog: () => {},
+    Highlight: () => {},
+    Member: () => {},
+    Project: () => {},
+    Sponsors: () => {},
+  };
+
+  function postDispatcher() {
+    try {
+      if (!postMap[componentCategory ?? "Event"])
+        throw new Error("Incomplete post mapping");
+      postMap["Event"]?.();
+      alert(`The ${componentCategory} was succesfully added.`);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function isURL(url: string) {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  }
   // TODO: Make API GET() call to storage with param projects, to get all project images available
 
   // TODO: Make API POST() function to be able to add images
 
-  // TODO: Replace these with reusable components for each type of input
-  // Leave edge cases for stuff like tag
-  // Also the components are generally going to be "short string", "long string", etc, with the actual key name inserted after
-
-  const [title, setTitle] = useState("Event Title");
-  const [descrip, setDescrip] = useState("A short description of the event...");
-
-  const [time, setTime] = useState("12:00 PM - 2:00 PM");
-  const [location, setLocation] = useState("https://www.google.com/maps");
-  const [imageURL, setImageURL] = useState(portraitPlaceholder.src);
   const [tags, setTags] = useState<string[]>([]);
 
   const [formData, setFormData] = useState<Record<string, string>>({});
@@ -142,7 +217,6 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
   // TODO: Make a component for displaying images from project folder, and to be able to add to storage. Refreshes once new things are added
 
   return (
-    // TODO: Change design to be a popup modal instead, with transparent background
     <div className="flex flex-col md:flex-row">
       <div className="flex-1 w-full lg:w:1/2 border-r border-gray-100 p-15 ovrflow-y-auto">
         <div className="border border-gray-200 rounded-2xl p-8">
@@ -150,7 +224,7 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
             <h1 className="mainheading">
               Add {componentCategory ?? "Event"} Component
             </h1>
-            {eventFields.map((e: field) => (
+            {eventFields.map((e: Field) => (
               <FormField
                 key={e.name}
                 field={e}
@@ -188,7 +262,12 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
                 </p>
               </div>
             )}
-            <button className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full">
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full"
+              onClick={() => {
+                postDispatcher();
+              }}
+            >
               Create Component
             </button>
           </form>
@@ -207,7 +286,11 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
               date={formData["date"]}
               time={formData["time"] ?? "12:00 PM - 2:00 PM"}
               location={formData["location"]}
-              imageUrl={formData["imageUrl"] ?? portraitPlaceholder.src}
+              imageUrl={
+                !(isURL(formData["imageUrl"]) && formData["imageUrl"])
+                  ? portraitPlaceholder.src
+                  : formData["imageUrl"]
+              }
               tags={tags as any}
             />
           )}

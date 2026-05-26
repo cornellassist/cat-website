@@ -13,7 +13,7 @@ const componentCategories = [
 ] as const; // for readonly, type assertion
 
 export type AddEventCardProps = {
-  componentCategory?: (typeof componentCategories)[number]; // indexed access type. TODO: remove ?: when done
+  componentCategory?: (typeof componentCategories)[number];
 };
 
 export default function CreateComponent() {
