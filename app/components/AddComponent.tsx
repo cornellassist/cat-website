@@ -176,16 +176,24 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   }
 
   // helper to construct Project obj for POST request body
-  function constructProjectObj() {
+  function constructProjectObj({
+    formData,
+    imageUrls = [],
+    imageAlts = [],
+  }: {
+    formData: Record<string, string>;
+    imageUrls: string[];
+    imageAlts: string[];
+  }) {
     if (!(formData["title"] && formData["descrip"] && formData["descrip2"])) {
       throw new Error("missing project fields");
     }
     const project: ProjectCardProps = {
       title: formData["title"],
       descrip: formData["descrip"],
-      ...(formData["imageUrls"] && { imageUrls: [] }), // opt, not from formData
+      ...(imageUrls && { imageUrls: imageUrls }), // opt, not from formData
       ...(formData["descrip2"] && { descrip2: "string" }), // opt
-      ...(formData["imageAlts"] && { imageAlts: [] }), // opt, not from formData
+      ...(imageAlts && { imageAlts: imageAlts }), // opt, not from formData
       ...(formData["ctaLink"] && { ctaLink: formData["ctaLink"] }), // opt
       ...(formData["ctaTitle"] && { ctaTitle: "string" }), // opt
     };
@@ -250,7 +258,7 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   const [tags, setTags] = useState<string[]>([]);
 
   // project
-  const [imageURLs, setImageURLs] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [imageAlts, setImageAlts] = useState<string[]>([]);
 
   function toggleTag(tag: string) {
@@ -309,6 +317,8 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
             >
               Upload image
             </label>
+            {/* Custom form fields */}
+            {/* tags in Event */}
             {componentCategory === "Event" && (
               <div>
                 <h2 className="subheading mb-1">Tag</h2>
@@ -331,6 +341,8 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
                 </p>
               </div>
             )}
+            {/* todo: imageUrls */}
+            {/* todo: imageAlts */}
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full"
               onClick={() => {

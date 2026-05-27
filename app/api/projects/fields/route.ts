@@ -9,7 +9,10 @@ export async function GET() {
     );
     if (projectModel) {
       const fields = projectModel.fields
-        .filter((f) => f.name !== "id")
+        .filter(
+          (f) =>
+            f.name !== "id" && f.name !== "imageUrls" && f.name !== "imageAlts",
+        )
         .map((f) => {
           // console.log(f);
           return {
