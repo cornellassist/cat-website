@@ -3,7 +3,7 @@ import { EventCard } from "@/app/components/OurEvents";
 import { useState, useEffect } from "react";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
 import axios from "axios";
-import type { AddComponentProps } from "../AdminDashboard/CreateEvent/page";
+import type { AddComponentProps } from "../AdminDashboard/CreateComponent/page";
 // TODO: import all relevant component cards that need to be displayed
 const tagSelections = [
   "In-Person",
