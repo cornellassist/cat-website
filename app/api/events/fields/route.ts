@@ -17,16 +17,17 @@ export async function GET(request: NextRequest) {
       (m) => m.name === "Event",
     );
     if (eventModel) {
-      console.log(eventModel.fields);
-
       const fields = eventModel.fields
-        .filter((f) => f.name !== "id")
+        .filter((f) => f.name !== "id" && f.name !== "tags") // tags manually handled in frontend custom component
         .map((f) => {
+          // console.log(f);
           return {
             name: f.name,
-            type: f.name === "tags" ? f.type + "[]" : f.type,
+            type: f.type,
+            isRequired: !f.hasDefaultValue || f.isRequired,
           };
         });
+      // console.log(fields);
       return NextResponse.json(fields);
     } else {
       throw new Error("eventModel is undefined");

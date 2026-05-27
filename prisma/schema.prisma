@@ -35,7 +35,7 @@ model Project {
   descrip2  String?
   ctaTitle  String?
   ctaLink   String?
-  imageUrls String[]
+  imageUrls String[] @default([])
   imageAlts String[] @default([])
 }
 

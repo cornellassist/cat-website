@@ -6,15 +6,15 @@ import { useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 
-interface ProjectCardProps {
+export type ProjectCardProps = {
   title: string;
   descrip: string;
   descrip2?: string;
-  imageUrls: string[];
+  imageUrls?: string[];
   imageAlts?: string[];
   ctaLink?: string;
   ctaTitle?: string;
-}
+};
 
 function OurProjectsTopText() {
   return (
@@ -27,7 +27,13 @@ function OurProjectsTopText() {
   );
 }
 
-export function OurProjects({ projects }: { projects: ProjectCardProps[] }) {
+export function OurProjects({
+  projects,
+  showButtons = true,
+}: {
+  projects: ProjectCardProps[];
+  showButtons?: boolean;
+}) {
   function ProjectCard({ projects }: { projects: ProjectCardProps[] }) {
     const [emblaRef, emblaApi] = useEmblaCarousel({
       loop: true,
@@ -83,41 +89,43 @@ export function OurProjects({ projects }: { projects: ProjectCardProps[] }) {
                   className={`flex-[0_0_100%] min-w-0 flex flex-col lg:flex-row items-center lg:items-start ${cardHeight} lg:justify-end gap-6 lg:gap-10 xl:gap-12 2xl:gap-14 px-4`}
                 >
                   <div className="h-full w-[50%] sm:w-[80%] lg:max-h-none lg:w-[50%] relative rounded-[20px] overflow-hidden">
-                    {project.imageUrls.map((item, index) => (
-                      <Image
-                        key={index}
-                        src={item}
-                        alt={project?.imageAlts?.[curPicIdx] ?? ""}
-                        fill
-                        loading={index === activeTab ? "eager" : "lazy"}
-                        className={`object-cover absolute inset-0 transition-opacity duration-300 ease-in-out ${index === curPicIdx ? "opacity-100" : "opacity-0"}
+                    {project?.imageUrls &&
+                      project?.imageUrls.map((item, index) => (
+                        <Image
+                          key={index}
+                          src={item}
+                          alt={project?.imageAlts?.[curPicIdx] ?? ""}
+                          fill
+                          loading={index === activeTab ? "eager" : "lazy"}
+                          className={`object-cover absolute inset-0 transition-opacity duration-300 ease-in-out ${index === curPicIdx ? "opacity-100" : "opacity-0"}
                       `}
-                      />
-                    ))}
+                        />
+                      ))}
                   </div>
                   {/* rightside content and selecting photo */}
                   <div className="flex flex-col justify-between w-full lg:w-[50%] lg:h-full">
                     <div className="flex flex-row justify-center lg:flex-col lg:justify-start gap-6">
-                      {project.imageUrls.map((item, index) => (
-                        <div key={`subpic-${index}`}>
-                          <div
-                            className="h-12 w-18 xl:h-14 xl:w-20 2xl:h-16 2xl:w-22 relative rounded-lg overflow-hidden drop-shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] cursor-pointer brightness-90"
-                            onClick={() => setCurPicIdx(index)}
-                          >
-                            <Image
-                              src={item}
-                              alt={project?.imageAlts?.[index] ?? ""}
-                              fill
-                              priority={index === activeTab && index === 0}
-                              // loading={index === activeTab ? "eager" : "lazy"}
-                              className={`object-cover`}
-                            />
-                            {index === curPicIdx && (
-                              <div className="absolute inset-0 bg-white/50 rounded-lg pointer-events-none" />
-                            )}
+                      {project?.imageUrls &&
+                        project?.imageUrls.map((item, index) => (
+                          <div key={`subpic-${index}`}>
+                            <div
+                              className="h-12 w-18 xl:h-14 xl:w-20 2xl:h-16 2xl:w-22 relative rounded-lg overflow-hidden drop-shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] cursor-pointer brightness-90"
+                              onClick={() => setCurPicIdx(index)}
+                            >
+                              <Image
+                                src={item}
+                                alt={project?.imageAlts?.[index] ?? ""}
+                                fill
+                                priority={index === activeTab && index === 0}
+                                // loading={index === activeTab ? "eager" : "lazy"}
+                                className={`object-cover`}
+                              />
+                              {index === curPicIdx && (
+                                <div className="absolute inset-0 bg-white/50 rounded-lg pointer-events-none" />
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
                     </div>
                     {/* text */}
                     <div className="flex flex-col text-center lg:text-start mt-10 lg:mt-0 items-center lg:items-start">
@@ -157,7 +165,7 @@ export function OurProjects({ projects }: { projects: ProjectCardProps[] }) {
             })}
           </div>
         </div>
-        <ProjectButtons />
+        {showButtons && <ProjectButtons />}
       </div>
     );
   }
@@ -173,13 +181,15 @@ export function OurProjects({ projects }: { projects: ProjectCardProps[] }) {
           className={`flex flex-col gap-8 lg:gap-10 xl:gap-15 2xl:gap-25 mt-15 items-center relative`}
         >
           <ProjectCard projects={projects} />
-          <div className="flex justify-center">
-            <ButtonWhite
-              label="Explore All Projects We've Built"
-              to="/assets/OurWork/Extensive-Documentation-of-CAT-Projects.pdf"
-              behav="External"
-            />
-          </div>
+          {showButtons && (
+            <div className="flex justify-center">
+              <ButtonWhite
+                label="Explore All Projects We've Built"
+                to="/assets/OurWork/Extensive-Documentation-of-CAT-Projects.pdf"
+                behav="External"
+              />
+            </div>
+          )}
         </div>
       </div>
       {/* <img src="/assets/OurWork/wave2-solid-top.svg" className="-z-10 w-full -mb-[0.75px]" />
