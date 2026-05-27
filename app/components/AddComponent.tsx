@@ -3,7 +3,7 @@ import { EventCard } from "@/app/components/OurEvents";
 import { useState, useEffect } from "react";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
 import axios from "axios";
-import { AddEventCardProps } from "../AdminDashboard/CreateEvent/page";
+import type { AddComponentProps } from "../AdminDashboard/CreateEvent/page";
 // TODO: import all relevant component cards that need to be displayed
 const tagSelections = [
   "In-Person",
@@ -87,16 +87,17 @@ function FormField({
   );
 }
 
-export function AddEventCard({ componentCategory }: AddEventCardProps) {
+export function AddComponent({ componentCategory }: AddComponentProps) {
   const [eventFields, setEventFields] = useState([]);
   const [highlightFields, setHighlightFields] = useState([]);
+  const [projectFields, setProjectFields] = useState([]);
 
   async function getEventFields() {
     try {
       const fields = await (
         await fetch("/api/events/fields", { method: "GET" })
       ).json();
-      console.log(fields);
+      // console.log(fields);
       setEventFields(fields);
     } catch (error) {
       console.error(error);
@@ -114,13 +115,29 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
     }
   }
 
+  async function getProjectFields() {
+    try {
+      const fields = await (
+        await fetch("/api/projects/fields", { method: "GET" })
+      ).json();
+      // console.log(fields);
+      setProjectFields(fields);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const fetchMap = {
     Event: getEventFields,
     Highlight: getHighlightFields,
+    Blog: () => {},
+    Member: () => {},
+    Project: getProjectFields,
+    Sponsors: () => {},
   };
 
   useEffect(() => {
-    fetchMap["Event"]?.();
+    fetchMap[componentCategory ?? "Event"]?.();
   }, []);
 
   function constructEventObj({
@@ -169,6 +186,7 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
       console.error(error);
     }
   }
+
   const postMap = {
     Event: postEvent,
     Blog: () => {},
@@ -224,16 +242,39 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
             <h1 className="mainheading">
               Add {componentCategory ?? "Event"} Component
             </h1>
-            {eventFields.map((e: Field) => (
-              <FormField
-                key={e.name}
-                field={e}
-                value={formData[e.name] ?? ""}
-                onChange={(name, val) =>
-                  setFormData((prev) => ({ ...prev, [name]: val }))
-                }
-              />
-            ))}{" "}
+            {componentCategory === "Event" &&
+              eventFields.map((e: Field) => (
+                <FormField
+                  key={e.name}
+                  field={e}
+                  value={formData[e.name] ?? ""}
+                  onChange={(name, val) =>
+                    setFormData((prev) => ({ ...prev, [name]: val }))
+                  }
+                />
+              ))}
+            {componentCategory === "Highlight" &&
+              highlightFields.map((e: Field) => (
+                <FormField
+                  key={e.name}
+                  field={e}
+                  value={formData[e.name] ?? ""}
+                  onChange={(name, val) =>
+                    setFormData((prev) => ({ ...prev, [name]: val }))
+                  }
+                />
+              ))}
+            {componentCategory === "Project" &&
+              projectFields.map((e: Field) => (
+                <FormField
+                  key={e.name}
+                  field={e}
+                  value={formData[e.name] ?? ""}
+                  onChange={(name, val) =>
+                    setFormData((prev) => ({ ...prev, [name]: val }))
+                  }
+                />
+              ))}
             <label
               htmlFor="image-upload"
               className="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-4 inline-block"
@@ -276,7 +317,7 @@ export function AddEventCard({ componentCategory }: AddEventCardProps) {
 
       <div className="flex-1 bg-gray-50 items-start justify-start p-12">
         <h1 className="mt-5 mb-5">Preview</h1>
-        <div className="bg-white rounded-[20px] 2xl:w-[550px] xl:w-[500px] h-[560px] border border-gray-100 mx-auto">
+        <div className="bg-white rounded-[20px] 2xl:w-137.5 xl:w-125 h-140 border border-gray-100 mx-auto">
           {componentCategory === "Event" && (
             <EventCard
               title={formData["title"] ?? "Event Title"}

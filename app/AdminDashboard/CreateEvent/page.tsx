@@ -1,7 +1,7 @@
 "use client";
 import { EventCard } from "@/app/components/OurEvents";
 import { useState } from "react";
-import { AddEventCard } from "@/app/components/AddEventCard";
+import { AddComponent } from "@/app/components/AddComponent";
 
 const componentCategories = [
   "Blog",
@@ -12,10 +12,18 @@ const componentCategories = [
   "Event",
 ] as const; // for readonly, type assertion
 
-export type AddEventCardProps = {
+export type AddComponentProps = {
   componentCategory?: (typeof componentCategories)[number];
 };
 
 export default function CreateComponent() {
-  return <AddEventCard componentCategory="Event" />;
+  return (
+    <div>
+      <AddComponent componentCategory="Event" />
+      <AddComponent componentCategory="Blog" />
+      <AddComponent componentCategory="Highlight" />
+      <AddComponent componentCategory="Member" />
+      <AddComponent componentCategory="Project" />
+    </div>
+  );
 }
