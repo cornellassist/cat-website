@@ -29,14 +29,13 @@ export async function POST(request: NextRequest) {
     const event = await prisma.event.create({
       // use same central prisma object, not dependent per-request
       data: {
-        id: 1,
-        title: "hi",
-        tags: ["Kids"],
-        descrip: "hi",
-        date: "date",
-        time: "time",
-        location: "location",
-        imageUrl: "image",
+        title: body.title,
+        tags: body.tags,
+        descrip: body.descrip,
+        date: body.date,
+        time: body.time,
+        location: body.location,
+        imageUrl: body.imageUrl,
       },
     });
     console.log(event);
