@@ -21,7 +21,7 @@ export async function GET() {
             isRequired: !f.hasDefaultValue || f.isRequired, // doesnt work yet
           };
         });
-      console.log(fields);
+      // console.log(fields);
       return NextResponse.json(fields);
     } else {
       throw new Error("projects model not found");

@@ -6,6 +6,7 @@ import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-pl
 import axios from "axios";
 import type { AddComponentProps } from "../AdminDashboard/CreateComponent/page";
 // TODO: import all relevant component cards that need to be displayed
+
 const tagSelections = [
   "In-Person",
   "Virtual",
@@ -34,6 +35,7 @@ type EventPayload = {
 
 const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
 
+// Helper component to dynamically display any field
 function FormField({
   field,
   value,
@@ -94,6 +96,9 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   const [eventFields, setEventFields] = useState([]);
   const [highlightFields, setHighlightFields] = useState([]);
   const [projectFields, setProjectFields] = useState([]);
+  const [blogFields, setBlogFields] = useState([]);
+
+  // client-side fetches for the names + types of fields
 
   async function getEventFields() {
     try {
@@ -129,11 +134,23 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
       console.error(error);
     }
   }
+
+  async function getBlogFields() {
+    try {
+      const fields = await (
+        await fetch("/api/blog/fields", { method: "GET" })
+      ).json();
+      setBlogFields(fields);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   // map of componentCategories to their GET endpoint call
   const getMap = {
     Event: getEventFields,
     Highlight: getHighlightFields,
-    Blog: () => {},
+    Blog: getBlogFields,
     Member: () => {},
     Project: getProjectFields,
     Sponsors: () => {},
@@ -252,8 +269,9 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   // TODO: Make API POST() function to be able to add images
 
   const [formData, setFormData] = useState<Record<string, string>>({});
-
+  //  ---------------------------------
   // component-specific state variables
+  //  ---------------------------------
   // event
   const [tags, setTags] = useState<string[]>([]);
 
@@ -310,6 +328,20 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
                   }
                 />
               ))}
+            {componentCategory === "Blog" && (
+              <div>
+                {blogFields.map((b: Field) => (
+                  <FormField
+                    key={b.name}
+                    field={b}
+                    value={formData[b.name] ?? ""}
+                    onChange={(name, val) =>
+                      setFormData((prev) => ({ ...prev, [name]: val }))
+                    }
+                  />
+                ))}
+              </div>
+            )}
             {/* Todo */}
             <label
               htmlFor="image-upload"
@@ -341,8 +373,14 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
                 </p>
               </div>
             )}
-            {/* todo: imageUrls */}
-            {/* todo: imageAlts */}
+            {/* imageUrls */}
+            {componentCategory === "Project" && (
+              <h2 className="subheading">Image URLs</h2>
+            )}
+            {/* imageAlts */}
+            {componentCategory === "Project" && (
+              <h2 className="subheading">Image Alts</h2>
+            )}
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full"
               onClick={() => {
@@ -378,8 +416,22 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
           )}
           {/* Project */}
           {componentCategory === "Project" && (
-            <OurProjects projects={[]} showButtons={false} />
+            <OurProjects
+              projects={[
+                {
+                  title: formData["title"],
+                  descrip: formData["descrip"],
+                  descrip2: formData["descrip2"],
+                  imageUrls: imageUrls,
+                  imageAlts: imageAlts,
+                  ctaLink: formData["ctaLink"],
+                  ctaTitle: formData["ctaTitle"],
+                },
+              ]}
+              showButtons={false}
+            />
           )}
+          {componentCategory === "Highlight" && <div>hello</div>}
         </div>
       </div>
     </div>
