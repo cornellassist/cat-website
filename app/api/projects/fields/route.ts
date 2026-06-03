@@ -9,7 +9,10 @@ export async function GET() {
     );
     if (projectModel) {
       const fields = projectModel.fields
-        .filter((f) => f.name !== "id")
+        .filter(
+          (f) =>
+            f.name !== "id" && f.name !== "imageUrls" && f.name !== "imageAlts",
+        )
         .map((f) => {
           // console.log(f);
           return {
@@ -18,7 +21,7 @@ export async function GET() {
             isRequired: !f.hasDefaultValue || f.isRequired, // doesnt work yet
           };
         });
-      console.log(fields);
+      // console.log(fields);
       return NextResponse.json(fields);
     } else {
       throw new Error("projects model not found");

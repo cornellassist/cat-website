@@ -6,6 +6,7 @@ import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-pl
 import axios from "axios";
 import type { AddComponentProps } from "../AdminDashboard/CreateComponent/page";
 // TODO: import all relevant component cards that need to be displayed
+
 const tagSelections = [
   "In-Person",
   "Virtual",
@@ -34,6 +35,7 @@ type EventPayload = {
 
 const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
 
+// Helper component to dynamically display any field
 function FormField({
   field,
   value,
@@ -94,6 +96,9 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   const [eventFields, setEventFields] = useState([]);
   const [highlightFields, setHighlightFields] = useState([]);
   const [projectFields, setProjectFields] = useState([]);
+  const [blogFields, setBlogFields] = useState([]);
+
+  // client-side fetches for the names + types of fields
 
   async function getEventFields() {
     try {
@@ -129,11 +134,23 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
       console.error(error);
     }
   }
+
+  async function getBlogFields() {
+    try {
+      const fields = await (
+        await fetch("/api/blog/fields", { method: "GET" })
+      ).json();
+      setBlogFields(fields);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   // map of componentCategories to their GET endpoint call
   const getMap = {
     Event: getEventFields,
     Highlight: getHighlightFields,
-    Blog: () => {},
+    Blog: getBlogFields,
     Member: () => {},
     Project: getProjectFields,
     Sponsors: () => {},
@@ -176,16 +193,24 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   }
 
   // helper to construct Project obj for POST request body
-  function constructProjectObj() {
+  function constructProjectObj({
+    formData,
+    imageUrls = [],
+    imageAlts = [],
+  }: {
+    formData: Record<string, string>;
+    imageUrls: string[];
+    imageAlts: string[];
+  }) {
     if (!(formData["title"] && formData["descrip"] && formData["descrip2"])) {
       throw new Error("missing project fields");
     }
     const project: ProjectCardProps = {
       title: formData["title"],
       descrip: formData["descrip"],
-      ...(formData["imageUrls"] && { imageUrls: [] }), // opt, not from formData
+      ...(imageUrls && { imageUrls: imageUrls }), // opt, not from formData
       ...(formData["descrip2"] && { descrip2: "string" }), // opt
-      ...(formData["imageAlts"] && { imageAlts: [] }), // opt, not from formData
+      ...(imageAlts && { imageAlts: imageAlts }), // opt, not from formData
       ...(formData["ctaLink"] && { ctaLink: formData["ctaLink"] }), // opt
       ...(formData["ctaTitle"] && { ctaTitle: "string" }), // opt
     };
@@ -244,13 +269,14 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   // TODO: Make API POST() function to be able to add images
 
   const [formData, setFormData] = useState<Record<string, string>>({});
-
+  //  ---------------------------------
   // component-specific state variables
+  //  ---------------------------------
   // event
   const [tags, setTags] = useState<string[]>([]);
 
   // project
-  const [imageURLs, setImageURLs] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [imageAlts, setImageAlts] = useState<string[]>([]);
 
   function toggleTag(tag: string) {
@@ -302,6 +328,20 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
                   }
                 />
               ))}
+            {componentCategory === "Blog" && (
+              <div>
+                {blogFields.map((b: Field) => (
+                  <FormField
+                    key={b.name}
+                    field={b}
+                    value={formData[b.name] ?? ""}
+                    onChange={(name, val) =>
+                      setFormData((prev) => ({ ...prev, [name]: val }))
+                    }
+                  />
+                ))}
+              </div>
+            )}
             {/* Todo */}
             <label
               htmlFor="image-upload"
@@ -309,6 +349,8 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
             >
               Upload image
             </label>
+            {/* Custom form fields */}
+            {/* tags in Event */}
             {componentCategory === "Event" && (
               <div>
                 <h2 className="subheading mb-1">Tag</h2>
@@ -330,6 +372,14 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
                   Maximum tags: 4
                 </p>
               </div>
+            )}
+            {/* imageUrls */}
+            {componentCategory === "Project" && (
+              <h2 className="subheading">Image URLs</h2>
+            )}
+            {/* imageAlts */}
+            {componentCategory === "Project" && (
+              <h2 className="subheading">Image Alts</h2>
             )}
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full"
@@ -366,8 +416,22 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
           )}
           {/* Project */}
           {componentCategory === "Project" && (
-            <OurProjects projects={[]} showButtons={false} />
+            <OurProjects
+              projects={[
+                {
+                  title: formData["title"],
+                  descrip: formData["descrip"],
+                  descrip2: formData["descrip2"],
+                  imageUrls: imageUrls,
+                  imageAlts: imageAlts,
+                  ctaLink: formData["ctaLink"],
+                  ctaTitle: formData["ctaTitle"],
+                },
+              ]}
+              showButtons={false}
+            />
           )}
+          {componentCategory === "Highlight" && <div>hello</div>}
         </div>
       </div>
     </div>
