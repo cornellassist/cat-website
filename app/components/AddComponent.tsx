@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
 import axios from "axios";
 import type { AddComponentProps } from "../AdminDashboard/CreateComponent/page";
+import { BlogPostCard, type BlogPostCardProps } from "./BlogPostCard";
 // TODO: import all relevant component cards that need to be displayed
 
 const tagSelections = [
@@ -56,7 +57,7 @@ function FormField({
             value={value}
             onChange={(e) => onChange(field.name, e.target.value)}
             className={inputCss}
-            placeholder={field.name}
+            placeholder={capitalizedName}
           />
         );
       case "Int":
@@ -238,17 +239,19 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
 
   const postMap = {
     Event: postEvent,
-    Blog: () => {},
-    Highlight: () => {},
-    Member: () => {},
-    Project: () => {},
-    Sponsors: () => {},
+    Blog: undefined,
+    Highlight: undefined,
+    Member: undefined,
+    Project: undefined,
+    Sponsors: undefined,
   };
 
   function postDispatcher() {
     try {
-      if (!postMap[componentCategory ?? "Event"])
-        throw new Error("Incomplete post mapping");
+      if (!postMap[componentCategory ?? "Event"]) {
+        alert(`No corresponding POST request found.`);
+        return;
+      }
       postMap["Event"]?.();
       alert(`The ${componentCategory} was succesfully added.`);
     } catch (error) {
@@ -256,7 +259,7 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     }
   }
 
-  function isURL(url: string) {
+  function isURL(url: string): boolean {
     try {
       new URL(url);
       return true;
@@ -268,7 +271,9 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
 
   // TODO: Make API POST() function to be able to add images
 
+  // record uses lowercased keys
   const [formData, setFormData] = useState<Record<string, string>>({});
+
   //  ---------------------------------
   // component-specific state variables
   //  ---------------------------------
@@ -278,6 +283,7 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   // project
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [imageAlts, setImageAlts] = useState<string[]>([]);
+  const [blogCategories, setBlogCategories] = useState<string[]>([]);
 
   function toggleTag(tag: string) {
     if (tags.includes(tag)) {
@@ -432,6 +438,30 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
             />
           )}
           {componentCategory === "Highlight" && <div>hello</div>}
+          {componentCategory === "Blog" && (
+            <BlogPostCard
+              post={{
+                title: formData["title"] ? formData["title"] : "Example",
+                excerpt: formData["excerpt"] ? formData["excerpt"] : "Example",
+                author: {
+                  name: formData["authorName"]
+                    ? formData["authorName"]
+                    : "Example",
+                  avatar: isURL(formData["authorAvatar"])
+                    ? formData["authorAvatar"]
+                    : "",
+                },
+                // publishDate: new Date(formData["date"]),
+                categories: blogCategories,
+                readTime: formData["readTime"]
+                  ? parseInt(formData["readTime"])
+                  : 0,
+                image: isURL(formData["image"]) ? formData["image"] : "",
+                slug: formData["slug"],
+                content: formData["content"] ? formData["content"] : "Example", // doesn't work
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
