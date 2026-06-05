@@ -6,7 +6,7 @@ export interface BlogPost {
     name: string;
     avatar: string;
   };
-  publishDate?: Date;
+  publishDate: string;
   categories: string[];
   readTime: number; // minutes
   image: string;
@@ -26,7 +26,7 @@ export const blogPosts: BlogPost[] = [
       avatar:
         "https://static.wixstatic.com/media/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg/v1/fill/w_1110,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg",
     },
-    publishDate: new Date("2025-04-10"),
+    publishDate: "2025-04-10",
     categories: ["Design", "Retail", "Interviews"],
     readTime: 12,
     image:
@@ -45,7 +45,7 @@ export const blogPosts: BlogPost[] = [
       avatar:
         "https://static.wixstatic.com/media/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg/v1/fill/w_1110,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg",
     },
-    publishDate: new Date("2025-01-16"),
+    publishDate: "2025-01-16",
     categories: ["Design", "Photography", "Interviews"],
     readTime: 8,
     image:
@@ -64,7 +64,7 @@ export const blogPosts: BlogPost[] = [
       avatar:
         "https://static.wixstatic.com/media/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg/v1/fill/w_1110,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg",
     },
-    publishDate: new Date("2025-01-15"),
+    publishDate: "2025-01-15",
     categories: ["Design", "Education"],
     readTime: 6,
     image:
@@ -83,7 +83,7 @@ export const blogPosts: BlogPost[] = [
       avatar:
         "https://static.wixstatic.com/media/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg/v1/fill/w_1110,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg",
     },
-    publishDate: new Date("2025-01-18"),
+    publishDate: "2025-01-18",
     categories: ["Design", "Product"],
     readTime: 5,
     image:
@@ -102,7 +102,7 @@ export const blogPosts: BlogPost[] = [
       avatar:
         "https://static.wixstatic.com/media/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg/v1/fill/w_1110,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg",
     },
-    publishDate: new Date("2025-01-12"),
+    publishDate: "2025-01-12",
     categories: ["Architecture", "Craftsmanship"],
     readTime: 7,
     image:
@@ -121,7 +121,7 @@ export const blogPosts: BlogPost[] = [
       avatar:
         "https://static.wixstatic.com/media/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg/v1/fill/w_1110,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg",
     },
-    publishDate: new Date("2025-01-10"),
+    publishDate: "2025-01-10",
     categories: ["Design", "Collaboration"],
     readTime: 9,
     image:
@@ -140,7 +140,7 @@ export const blogPosts: BlogPost[] = [
       avatar:
         "https://static.wixstatic.com/media/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg/v1/fill/w_1110,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c387f1_fe2b15fbd9514cc299b74afb6df7017e~mv2.jpg",
     },
-    publishDate: new Date("2025-01-08"),
+    publishDate: "2025-01-08",
     categories: ["Business", "Startups"],
     readTime: 10,
     image:

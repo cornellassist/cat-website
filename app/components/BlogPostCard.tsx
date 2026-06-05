@@ -3,20 +3,13 @@ import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import { BlogPost } from "@/app/Blog/blogData";
 import Link from "next/link";
 import { ClockIcon } from "@heroicons/react/24/outline";
+import { convertDate } from "@/utils/convertDate";
 
 export type BlogPostCardProps = {
   post: BlogPost;
 };
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat("en-US", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    }).format(date);
-  };
-
   return (
     <Link href={`/Blog/${post.slug}`}>
       <div className="bg-white rounded-lg shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] overflow-hidden hover:shadow-[0_2px_4px_rgba(0,0,0,0.08),0_16px_32px_rgba(0,0,0,0.12)] transition-shadow duration-200">
@@ -70,7 +63,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
                 {post.author.name}
               </span>
               <span className="text-xs text-text-grey-muted">
-                {/* {formatDate(post.publishDate)} */}
+                {convertDate(post.publishDate)}
               </span>
             </div>
           </div>
