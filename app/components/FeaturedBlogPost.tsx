@@ -1,20 +1,13 @@
 import Image from "next/image";
 import { BlogPost } from "@/app/Blog/blogData";
-import Link from "next/link"
+import Link from "next/link";
+import { convertDate } from "@/utils/convertDate";
 
 interface FeaturedBlogPostProps {
   post: BlogPost;
 }
 
 export function FeaturedBlogPost({ post }: FeaturedBlogPostProps) {
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat("en-US", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }).format(date);
-  };
-
   return (
     <Link href={`/Blog/${post.slug}`}>
       <div className="relative w-full h-[400px] md:h-[480px] lg:h-[480px] overflow-hidden rounded-lg">
@@ -41,7 +34,9 @@ export function FeaturedBlogPost({ post }: FeaturedBlogPostProps) {
           <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 lg:gap-8">
             {/* Author - Left */}
             <div className="flex items-center gap-3">
-              <span className="text-xs md:text-sm text-white/90">Written by</span>
+              <span className="text-xs md:text-sm text-white/90">
+                Written by
+              </span>
               <div className="flex items-center gap-2">
                 <div className="relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden bg-white/20">
                   <Image
@@ -62,7 +57,7 @@ export function FeaturedBlogPost({ post }: FeaturedBlogPostProps) {
               <span className="text-xs md:text-sm text-white/90">
                 Published on{" "}
                 <span className="font-medium">
-                  {formatDate(post.publishDate)}
+                  {convertDate(post.publishDate)}
                 </span>
               </span>
             </div>
