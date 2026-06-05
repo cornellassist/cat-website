@@ -6,8 +6,8 @@ import { Footer } from "@/app/components/Footer";
 
 export default function Blog() {
   // Sort posts by date (most recent first) and get the featured post
-  const sortedPosts = [...blogPosts].sort(
-    (a, b) => b.publishDate.getTime() - a.publishDate.getTime(),
+  const sortedPosts = [...blogPosts].sort((a, b) =>
+    b.publishDate.localeCompare(a.publishDate),
   );
   const featuredPost = sortedPosts[0];
   const remainingPosts = sortedPosts.slice(1);
@@ -26,7 +26,6 @@ export default function Blog() {
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 md:mb-10 lg:mb-12">
           <h2 className="heading mb-4 sm:mb-0">All Blog Posts</h2>
-        
         </div>
 
         {/* Blog Posts Grid */}
