@@ -451,7 +451,7 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
                     ? formData["authorAvatar"]
                     : "",
                 },
-                // publishDate: new Date(formData["date"]),
+                publishDate: new Date(formData["date"]),
                 categories: blogCategories,
                 readTime: formData["readTime"]
                   ? parseInt(formData["readTime"])

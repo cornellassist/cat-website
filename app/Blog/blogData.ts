@@ -6,7 +6,7 @@ export interface BlogPost {
     name: string;
     avatar: string;
   };
-  publishDate?: Date;
+  publishDate: Date;
   categories: string[];
   readTime: number; // minutes
   image: string;

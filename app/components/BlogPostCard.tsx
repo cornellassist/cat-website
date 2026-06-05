@@ -70,7 +70,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
                 {post.author.name}
               </span>
               <span className="text-xs text-text-grey-muted">
-                {/* {formatDate(post.publishDate)} */}
+                {formatDate(post.publishDate)}
               </span>
             </div>
           </div>
