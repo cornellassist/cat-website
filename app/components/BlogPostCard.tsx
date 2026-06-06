@@ -5,9 +5,9 @@ import Link from "next/link";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import { convertDate } from "@/utils/convertDate";
 
-export type BlogPostCardProps = {
+export interface BlogPostCardProps {
   post: BlogPost;
-};
+}
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (

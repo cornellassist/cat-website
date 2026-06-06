@@ -9,6 +9,7 @@ import { BlogPostCard, type BlogPostCardProps } from "./BlogPostCard";
 import {
   constructProjectObj,
   constructEventObj,
+  constructBlogObj,
 } from "@/utils/componentConstruct";
 
 // TODO: import all relevant component cards that need to be displayed
@@ -196,9 +197,28 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     }
   }
 
+  // POST to blog
+  async function postBlog() {
+    try {
+      const body = constructBlogObj({ formData, categories: blogCategories });
+      const res = await fetch("/api/blog", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!res.ok) {
+        throw new Error(`Failed to post, ${res.status}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const postMap = {
     Event: postEvent,
-    Blog: undefined,
+    Blog: postBlog,
     Highlight: undefined,
     Member: undefined,
     Project: postProject,
@@ -237,7 +257,7 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     if (storedFormData) {
       setFormData(JSON.parse(storedFormData));
     }
-  }, []); // do not put formData as dependency
+  }, []); // load once on render
 
   useEffect(() => {
     localStorage.setItem("formData", JSON.stringify(formData));
@@ -377,7 +397,8 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
               <button
                 className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-3 w-full"
                 onClick={() => {
-                  postDispatcher();
+                  const ans = confirm("Do you want to submit your component?");
+                  if (ans) postDispatcher();
                 }}
               >
                 Create Component
