@@ -237,7 +237,7 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     if (storedFormData) {
       setFormData(JSON.parse(storedFormData));
     }
-  }, []); // do not put formData as dependency
+  }, []); // do not put formData as dependency, infinite loop
 
   useEffect(() => {
     localStorage.setItem("formData", JSON.stringify(formData));
