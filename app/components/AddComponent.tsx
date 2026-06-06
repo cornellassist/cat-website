@@ -3,7 +3,7 @@ import { EventCard } from "@/app/components/OurEvents";
 import { OurProjects, type ProjectCardProps } from "./OurProjects";
 import { useState, useEffect } from "react";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
-import axios from "axios";
+// import axios from "axios";
 import type { AddComponentProps } from "../AdminDashboard/CreateComponent/page";
 import { BlogPostCard, type BlogPostCardProps } from "./BlogPostCard";
 // TODO: import all relevant component cards that need to be displayed
@@ -47,6 +47,7 @@ function FormField({
   onChange: (name: string, val: string) => void;
 }) {
   // if (field.type === "String[]") return; //  a special field that needs custom component
+
   const capitalizedName = field.name[0].toUpperCase() + field.name.slice(1);
   function renderField() {
     switch (field.type) {
@@ -271,8 +272,23 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
 
   // TODO: Make API POST() function to be able to add images
 
-  // record uses lowercased keys
-  const [formData, setFormData] = useState<Record<string, string>>({});
+  // record uses lowercased keys, source of truth
+  const [formData, setFormData] = useState<Record<string, string>>(() => {
+    const storedFormData = localStorage.getItem("formData");
+    if (storedFormData) {
+      return JSON.parse(storedFormData);
+    } else return {};
+  });
+
+  useEffect(() => {
+    localStorage.setItem("formData", JSON.stringify(formData));
+    console.log("updated storage");
+  }, [formData]);
+
+  // clear local storage
+  function clearStorage() {
+    localStorage.clear();
+  }
 
   //  ---------------------------------
   // component-specific state variables
@@ -387,14 +403,27 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
             {componentCategory === "Project" && (
               <h2 className="subheading">Image Alts</h2>
             )}
-            <button
-              className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full"
-              onClick={() => {
-                postDispatcher();
-              }}
-            >
-              Create Component
-            </button>
+            <div className="flex flex-col gap-2">
+              <button
+                className=" font-medium py-2 px-4 rounded mt-7 w-1/2 border hover:bg-bg-lt-grey"
+                onClick={() => {
+                  const ans = confirm(
+                    "Do you want to clear your current inputs?",
+                  );
+                  if (ans) clearStorage();
+                }}
+              >
+                Clear Selection
+              </button>
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-3 w-full"
+                onClick={() => {
+                  postDispatcher();
+                }}
+              >
+                Create Component
+              </button>
+            </div>
           </form>
         </div>
       </div>
