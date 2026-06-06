@@ -1,4 +1,5 @@
 import type { ProjectCardProps } from "@/app/components/OurProjects";
+import { BlogPostCardProps } from "@/app/components/BlogPostCard";
 
 interface EventPayload {
   title: string;
@@ -10,6 +11,9 @@ interface EventPayload {
   imageUrl: string;
 }
 
+interface ProjectPayload extends ProjectCardProps {}
+interface BlogPayload extends BlogPostCardProps {}
+
 // helper to construct Project obj for POST request body
 export function constructProjectObj({
   formData,
@@ -19,7 +23,7 @@ export function constructProjectObj({
   formData: Record<string, string>;
   imageUrls: string[];
   imageAlts: string[];
-}) {
+}): ProjectPayload {
   if (!(formData["title"] && formData["descrip"] && formData["descrip2"])) {
     throw new Error("missing project fields");
   }
@@ -63,5 +67,30 @@ export function constructEventObj({
     time: formData["time"],
     location: formData["location"],
     imageUrl: formData["imageUrl"],
+  };
+}
+
+export function constructBlogObj({
+  formData,
+  categories = [],
+}: {
+  formData: Record<string, string>;
+  categories: string[];
+}): BlogPayload {
+  return {
+    post: {
+      title: formData["title"],
+      excerpt: formData["excerpt"],
+      author: {
+        name: formData["name"],
+        avatar: formData["avatar"],
+      },
+      publishDate: formData["publishDate"],
+      categories: categories,
+      readTime: 0,
+      image: formData["image"],
+      slug: formData["slug"],
+      content: formData["content"],
+    },
   };
 }
