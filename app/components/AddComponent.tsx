@@ -6,6 +6,11 @@ import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-pl
 // import axios from "axios";
 import type { AddComponentProps } from "../AdminDashboard/CreateComponent/page";
 import { BlogPostCard, type BlogPostCardProps } from "./BlogPostCard";
+import {
+  constructProjectObj,
+  constructEventObj,
+} from "@/utils/componentConstruct";
+
 // TODO: import all relevant component cards that need to be displayed
 
 const tagSelections = [
@@ -22,16 +27,6 @@ type Field = {
   name: string;
   type: string;
   isRequired: boolean;
-};
-
-type EventPayload = {
-  title: string;
-  tags: string[];
-  descrip: string;
-  date: Date;
-  time: string;
-  location: string;
-  imageUrl: string;
 };
 
 const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
@@ -163,62 +158,6 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     getMap[componentCategory ?? "Event"]?.();
   }, []);
 
-  // helper to construct Event obj for POST request body
-  function constructEventObj({
-    formData,
-    tags = [],
-  }: {
-    formData: Record<string, string>;
-    tags: string[];
-  }): EventPayload {
-    if (
-      !(
-        formData["title"] &&
-        formData["descrip"] &&
-        formData["date"] &&
-        formData["time"] &&
-        formData["location"] &&
-        formData["imageUrl"]
-      )
-    ) {
-      throw new Error("Unfilled fields");
-    }
-    return {
-      title: formData["title"],
-      tags: tags,
-      descrip: formData["descrip"],
-      date: new Date(formData["date"]),
-      time: formData["time"],
-      location: formData["location"],
-      imageUrl: formData["imageUrl"],
-    };
-  }
-
-  // helper to construct Project obj for POST request body
-  function constructProjectObj({
-    formData,
-    imageUrls = [],
-    imageAlts = [],
-  }: {
-    formData: Record<string, string>;
-    imageUrls: string[];
-    imageAlts: string[];
-  }) {
-    if (!(formData["title"] && formData["descrip"] && formData["descrip2"])) {
-      throw new Error("missing project fields");
-    }
-    const project: ProjectCardProps = {
-      title: formData["title"],
-      descrip: formData["descrip"],
-      ...(imageUrls && { imageUrls: imageUrls }), // opt, not from formData
-      ...(formData["descrip2"] && { descrip2: "string" }), // opt
-      ...(imageAlts && { imageAlts: imageAlts }), // opt, not from formData
-      ...(formData["ctaLink"] && { ctaLink: formData["ctaLink"] }), // opt
-      ...(formData["ctaTitle"] && { ctaTitle: "string" }), // opt
-    };
-    return project;
-  }
-
   // POST to Event
   async function postEvent() {
     try {
@@ -249,6 +188,9 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
           "Content-Type": "application/json",
         },
       });
+      if (!res.ok) {
+        throw new Error(`Failed to post, ${res.status}`);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -259,7 +201,7 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     Blog: undefined,
     Highlight: undefined,
     Member: undefined,
-    Project: undefined,
+    Project: postProject,
     Sponsors: undefined,
   };
 
@@ -289,12 +231,13 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   // TODO: Make API POST() function to be able to add images
 
   // record uses lowercased keys, source of truth
-  const [formData, setFormData] = useState<Record<string, string>>(() => {
+  const [formData, setFormData] = useState<Record<string, string>>({});
+  useEffect(() => {
     const storedFormData = localStorage.getItem("formData");
     if (storedFormData) {
-      return JSON.parse(storedFormData);
-    } else return {};
-  });
+      setFormData(JSON.parse(storedFormData));
+    }
+  }, []); // do not put formData as dependency
 
   useEffect(() => {
     localStorage.setItem("formData", JSON.stringify(formData));
