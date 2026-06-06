@@ -219,7 +219,7 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     return project;
   }
 
-  // POST to the Event endpoint
+  // POST to Event
   async function postEvent() {
     try {
       const body = constructEventObj({ formData, tags });
@@ -233,6 +233,22 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
       if (!res.ok) {
         throw new Error(`Failed to post, ${res.status}`);
       }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // POST to project
+  async function postProject() {
+    try {
+      const body = constructProjectObj({ formData, imageUrls, imageAlts });
+      const res = await fetch("/api/projects", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     } catch (error) {
       console.error(error);
     }
