@@ -1,21 +1,14 @@
 "use client";
 import { EventCard } from "@/app/components/OurEvents";
 import { OurProjects, type ProjectCardProps } from "./OurProjects";
+import { CommunityHighlights, type CommHighProps } from "./CommunityHighlights";
+import { Members, MemberCard, type Member } from "./Members";
 import { useState, useEffect } from "react";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
-// import axios from "axios";
+import axios from "axios";
 import type { AddComponentProps } from "../AdminDashboard/CreateComponent/page";
-import { BlogPostCard, type BlogPostCardProps } from "./BlogPostCard";
-import {
-  constructProjectObj,
-  constructEventObj,
-  constructBlogObj,
-} from "@/utils/componentConstruct";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { ImgModal } from "./ImgModal";
 
 // TODO: import all relevant component cards that need to be displayed
-
 const tagSelections = [
   "In-Person",
   "Virtual",
@@ -32,9 +25,18 @@ type Field = {
   isRequired: boolean;
 };
 
+type EventPayload = {
+  title: string;
+  tags: string[];
+  descrip: string;
+  date: Date;
+  time: string;
+  location: string;
+  imageUrl: string;
+};
+
 const inputCss = "border border-gray-300 rounded w-full p-2 mb-4";
 
-// Helper component to dynamically display any field
 function FormField({
   field,
   value,
@@ -45,9 +47,6 @@ function FormField({
   onChange: (name: string, val: string) => void;
 }) {
   // if (field.type === "String[]") return; //  a special field that needs custom component
-  if (field.name.toLowerCase().includes("image")) {
-    return;
-  }
   const capitalizedName = field.name[0].toUpperCase() + field.name.slice(1);
   function renderField() {
     switch (field.type) {
@@ -58,7 +57,7 @@ function FormField({
             value={value}
             onChange={(e) => onChange(field.name, e.target.value)}
             className={inputCss}
-            placeholder={capitalizedName}
+            placeholder={field.name}
           />
         );
       case "Int":
@@ -79,6 +78,23 @@ function FormField({
             className={inputCss}
           />
         );
+        case "MemberRole":
+          return (
+            <select
+          value={value}
+          onChange={(e) => onChange(field.name, e.target.value)}
+          className={inputCss}
+        >
+            <option value="">Select role</option>
+            <option value="TEAM_LEADS">Lead</option>
+            <option value="ENGINEERING_LEADS">Engineering Lead</option>
+            <option value="OPERATIONS_LEADS">Operations Lead</option>
+            <option value="OUTREACH_EDU_LEADS">Outreach & Education Lead</option>
+            <option value="ENGINGEERING">Engineering</option>
+            <option value="OPERATIONS">Operations</option>
+            <option value="OUTREACH_EDU">Outreach & Education</option>
+          </select>
+          );
       default:
         return <div>Unidentified type</div>;
     }
@@ -98,34 +114,7 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   const [eventFields, setEventFields] = useState([]);
   const [highlightFields, setHighlightFields] = useState([]);
   const [projectFields, setProjectFields] = useState([]);
-  const [blogFields, setBlogFields] = useState([]);
   const [memberFields, setMemberFields] = useState([]);
-  const [sponsorFields, setSponsorFields] = useState([]);
-
-  const [containsImg, setContainsImg] = useState<boolean>(true);
-  const [showImgModal, setShowImgModal] = useState<boolean>(false);
-
-  const stateVarMap = {
-    Event: eventFields,
-    Highlight: highlightFields,
-    Blog: blogFields,
-    Project: projectFields,
-    Member: memberFields,
-    Sponsors: sponsorFields,
-  };
-
-  //  ---------------------------------
-  // component-specific state variables
-  //  ---------------------------------
-  // event
-  const [tags, setTags] = useState<string[]>([]);
-
-  // project
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const [imageAlts, setImageAlts] = useState<string[]>([]);
-  const [blogCategories, setBlogCategories] = useState<string[]>([]);
-
-  // client-side fetches for the names + types of fields
 
   async function getEventFields() {
     try {
@@ -149,6 +138,18 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
       console.log(error);
     }
   }
+
+  async function getMemberFields() {
+    try {
+      const fields = await (
+        await fetch("/api/members/fields", {method: "GET"})
+      ).json();
+      setMemberFields(fields);
+    } catch (error) {
+      console.log("ERROR" + error);
+    }
+  }
+
   // GET from the project fields endpoint
   async function getProjectFields() {
     try {
@@ -161,24 +162,12 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
       console.error(error);
     }
   }
-
-  async function getBlogFields() {
-    try {
-      const fields = await (
-        await fetch("/api/blog/fields", { method: "GET" })
-      ).json();
-      setBlogFields(fields);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   // map of componentCategories to their GET endpoint call
   const getMap = {
     Event: getEventFields,
     Highlight: getHighlightFields,
-    Blog: getBlogFields,
-    Member: () => {},
+    Blog: () => {},
+    Member: getMemberFields,
     Project: getProjectFields,
     Sponsors: () => {},
   };
@@ -186,17 +175,95 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   // on every render, call the component type's respective function to perform GET request for fields
   useEffect(() => {
     getMap[componentCategory ?? "Event"]?.();
-  }, []);
+  }, [componentCategory]);
 
-  useEffect(() => {
-    setContainsImg(
-      stateVarMap[componentCategory ?? "Event"].some((e: Field) => {
-        return e.name.toLowerCase().includes("image");
-      }),
-    );
-  }, [eventFields, highlightFields, blogFields, projectFields, memberFields]);
+  // helper to construct Event obj for POST request body
+  function constructEventObj({
+    formData,
+    tags = [],
+  }: {
+    formData: Record<string, string>;
+    tags: string[];
+  }): EventPayload {
+    if (
+      !(
+        formData["title"] &&
+        formData["descrip"] &&
+        formData["date"] &&
+        formData["time"] &&
+        formData["location"] &&
+        formData["imageUrl"]
+      )
+    ) {
+      throw new Error("Unfilled fields");
+    }
+    return {
+      title: formData["title"],
+      tags: tags,
+      descrip: formData["descrip"],
+      date: new Date(formData["date"]),
+      time: formData["time"],
+      location: formData["location"],
+      imageUrl: formData["imageUrl"],
+    };
+  }
 
-  // POST to Event
+  // helper to construct Project obj for POST request body
+  function constructProjectObj() {
+    if (!(formData["title"] && formData["descrip"] && formData["descrip2"])) {
+      throw new Error("missing project fields");
+    }
+    const project: ProjectCardProps = {
+      title: formData["title"],
+      descrip: formData["descrip"],
+      ...(formData["imageUrls"] && { imageUrls: [] }), // opt, not from formData
+      ...(formData["descrip2"] && { descrip2: "string" }), // opt
+      ...(formData["imageAlts"] && { imageAlts: [] }), // opt, not from formData
+      ...(formData["ctaLink"] && { ctaLink: formData["ctaLink"] }), // opt
+      ...(formData["ctaTitle"] && { ctaTitle: "string" }), // opt
+    };
+    return project;
+  }
+
+  function constructHighlightsObj() {
+    if (!(formData["title"] && formData["longDescrip"] && formData["shortDescrip"] && formData["date"] && formData["imageUrl"] && formData["imagealt"])) {
+      throw new Error("missing highlights fields")
+    }
+
+    const highlights: CommHighProps = {
+      events: [
+        {
+          id: 0,
+          title: formData["title"],
+          longDescrip: formData["longdescrip"],
+          shortDescrip: formData["shortdescrip"],
+          date: formData["date"],
+          imageUrl: formData["imageUrl"],
+          imageAlt: formData["imageAlt"]
+        }
+      ]
+    }
+
+    return highlights;
+  }
+
+  function constructMembersObj() {
+    if (!(formData["name"] && formData["role"] && formData["year"] && formData["major"] && formData["college"])) {
+      throw new Error("missing members fields")
+    }
+
+    const members: Member = {
+      name: formData["name"],
+      role: formData["role"],
+      year: formData["year"],
+      major: formData["major"],
+      college: formData["college"],
+    };
+
+    return members;
+  }
+
+  // POST to the Event endpoint
   async function postEvent() {
     try {
       const body = constructEventObj({ formData, tags });
@@ -215,17 +282,17 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     }
   }
 
-  // POST to project
-  async function postProject() {
+  async function postHighlights() {
     try {
-      const body = constructProjectObj({ formData, imageUrls, imageAlts });
-      const res = await fetch("/api/projects", {
+      const body = constructHighlightsObj();
+      const res = await fetch("/api/highlights", {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
           "Content-Type": "application/json",
         },
       });
+      
       if (!res.ok) {
         throw new Error(`Failed to post, ${res.status}`);
       }
@@ -234,48 +301,65 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     }
   }
 
-  // POST to blog
-  async function postBlog() {
+  async function postMembers() {
     try {
-      const body = constructBlogObj({ formData, categories: blogCategories });
-      const res = await fetch("/api/blog", {
+      const body = constructMembersObj();
+      const res = await fetch("/api/members", {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
           "Content-Type": "application/json",
         },
       });
+
+      console.log("res: " + res.status)
+
       if (!res.ok) {
         throw new Error(`Failed to post, ${res.status}`);
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
   const postMap = {
     Event: postEvent,
-    Blog: postBlog,
-    Highlight: undefined,
-    Member: undefined,
-    Project: postProject,
-    Sponsors: undefined,
+    Blog: () => {},
+    Highlight: postHighlights,
+    Member: postMembers,
+    Project: () => {},
+    Sponsors: () => {},
   };
 
   function postDispatcher() {
     try {
-      if (!postMap[componentCategory ?? "Event"]) {
-        alert(`No corresponding POST request found.`);
-        return;
-      }
-      postMap["Event"]?.();
+      if (!postMap[componentCategory ?? "Event"])
+        throw new Error("Incomplete post mapping");
+      postMap[componentCategory ?? "Event"]?.();
       alert(`The ${componentCategory} was succesfully added.`);
     } catch (error) {
       console.error(error);
     }
   }
 
-  function isURL(url: string): boolean {
+//   async function postDispatcher() {
+//   try {
+//     const postFn = postMap[componentCategory ?? "Event"];
+
+//     if (!postFn) {
+//       throw new Error("Incomplete post mapping");
+//     }
+
+//     await postFn();
+
+//     alert(`The ${componentCategory} was successfully added.`);
+//   } catch (error) {
+//     console.error(error);
+//     alert("Failed to create component.");
+//   }
+// }
+
+  function isURL(url: string) {
     try {
       new URL(url);
       return true;
@@ -287,25 +371,15 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
 
   // TODO: Make API POST() function to be able to add images
 
-  // record uses lowercased keys, source of truth
   const [formData, setFormData] = useState<Record<string, string>>({});
-  useEffect(() => {
-    const storedFormData = localStorage.getItem("formData");
-    if (storedFormData) {
-      setFormData(JSON.parse(storedFormData));
-    }
-  }, []); // load once on render
 
-  useEffect(() => {
-    localStorage.setItem("formData", JSON.stringify(formData));
-    console.log("updated storage");
-  }, [formData]);
+  // component-specific state variables
+  // event
+  const [tags, setTags] = useState<string[]>([]);
 
-  // clear local storage and record
-  function clearStorage() {
-    localStorage.clear();
-    setFormData({});
-  }
+  // project
+  const [imageURLs, setImageURLs] = useState<string[]>([]);
+  const [imageAlts, setImageAlts] = useState<string[]>([]);
 
   function toggleTag(tag: string) {
     if (tags.includes(tag)) {
@@ -316,213 +390,185 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
   }
 
   return (
-    <div>
-      {showImgModal && (
-        <ImgModal
-          onClose={() => {
-            setShowImgModal(false);
-          }}
-        />
-      )}
-      <div className="flex flex-col md:flex-row">
-        <div className="flex-1 w-full lg:w:1/2 border-r border-gray-100 p-15 ovrflow-y-auto">
-          <div className="border border-gray-200 rounded-2xl p-8">
-            <form className="">
-              <h1 className="mainheading">
-                Add {componentCategory ?? "Event"} Component
-              </h1>
-              {componentCategory === "Event" &&
-                eventFields.map((e: Field) => (
+    <div className="flex flex-col md:flex-row">
+      <div className="flex-1 w-full lg:w:1/2 border-r border-gray-100 p-15 ovrflow-y-auto">
+        <div className="border border-gray-200 rounded-2xl p-8">
+          <form className="">
+            <h1 className="mainheading">
+              Add {componentCategory ?? "Event"} Component
+            </h1>
+            {componentCategory === "Event" &&
+              eventFields.map((e: Field) => (
+                <FormField
+                  key={e.name}
+                  field={e}
+                  value={formData[e.name] ?? ""}
+                  onChange={(name, val) =>
+                    setFormData((prev) => ({ ...prev, [name]: val }))
+                  }
+                />
+              ))}
+            {componentCategory === "Highlight" &&
+              highlightFields.map((h: Field) => (
+                <FormField
+                  key={h.name}
+                  field={h}
+                  value={formData[h.name] ?? ""}
+                  onChange={(name, val) =>
+                    setFormData((prev) => ({ ...prev, [name]: val }))
+                  }
+                />
+              ))}
+              {componentCategory === "Member" &&
+                memberFields.map((m: Field) => (
                   <FormField
-                    key={e.name}
-                    field={e}
-                    value={formData[e.name] ?? ""}
+                    key={m.name}
+                    field={m}
+                    value={formData[m.name] ?? ""}
                     onChange={(name, val) =>
                       setFormData((prev) => ({ ...prev, [name]: val }))
                     }
                   />
-                ))}
-              {componentCategory === "Highlight" &&
-                highlightFields.map((h: Field) => (
-                  <FormField
-                    key={h.name}
-                    field={h}
-                    value={formData[h.name] ?? ""}
-                    onChange={(name, val) =>
-                      setFormData((prev) => ({ ...prev, [name]: val }))
-                    }
-                  />
-                ))}
-              {componentCategory === "Project" &&
-                projectFields.map((p: Field) => (
-                  <FormField
-                    key={p.name}
-                    field={p}
-                    value={formData[p.name] ?? ""}
-                    onChange={(name, val) =>
-                      setFormData((prev) => ({ ...prev, [name]: val }))
-                    }
-                  />
-                ))}
-              {componentCategory === "Blog" && (
-                <div>
-                  {blogFields.map((b: Field) => (
-                    <FormField
-                      key={b.name}
-                      field={b}
-                      value={formData[b.name] ?? ""}
-                      onChange={(name, val) =>
-                        setFormData((prev) => ({ ...prev, [name]: val }))
-                      }
-                    />
-                  ))}
-                </div>
-              )}
-              {/* Todo */}
-              {containsImg && (
-                <div className="flex">
-                  <button
-                    className="cursor-pointer bg-gray-100 hover:bg-gray-200 
-              text-gray-700 text-sm px-4 py-2 rounded mb-4 flex gap-2 w-fit 
-              items-center justify-center"
-                    type="button"
-                    onClick={() => {
-                      setShowImgModal(!showImgModal);
-                    }}
-                  >
-                    <MagnifyingGlassIcon className="h-5 w-5" />
-                    Choose image
-                  </button>
-                </div>
-              )}
-              {/* Custom form fields */}
-              {/* tags in Event */}
-              {componentCategory === "Event" && (
-                <div>
-                  <h2 className="subheading mb-1">Tag</h2>
-                  {tagSelections.map((tag) => (
-                    <label
-                      key={tag}
-                      className="flex items-center gap-2 cursor-pointer pl-1"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={tags.includes(tag)}
-                        onChange={() => toggleTag(tag)}
-                        className="accent-red-500"
-                      />
-                      <span className="text-sm">{tag}</span>
-                    </label>
-                  ))}
-                  <p className="text-xs text-gray-400 mt-1 mb-4">
-                    Maximum tags: 4
-                  </p>
-                </div>
-              )}
-              {/* imageUrls */}
-              {componentCategory === "Project" && (
-                <h2 className="subheading">Image URLs</h2>
-              )}
-              {/* imageAlts */}
-              {componentCategory === "Project" && (
-                <h2 className="subheading">Image Alts</h2>
-              )}
-              <div className="flex flex-col gap-2">
-                <button
-                  className=" font-medium py-2 px-4 rounded mt-7 w-1/2 border hover:bg-bg-lt-grey"
-                  onClick={() => {
-                    const ans = confirm(
-                      "Do you want to clear your current inputs?",
-                    );
-                    if (ans) clearStorage();
-                  }}
-                >
-                  Clear Selection
-                </button>
-                <button
-                  className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-3 w-full"
-                  onClick={() => {
-                    const ans = confirm(
-                      "Do you want to submit your component?",
-                    );
-                    if (ans) postDispatcher();
-                  }}
-                >
-                  Create Component
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+                ))
+              }
+            {componentCategory === "Project" &&
+              projectFields.map((p: Field) => (
+                <FormField
+                  key={p.name}
+                  field={p}
+                  value={formData[p.name] ?? ""}
+                  onChange={(name, val) =>
+                    setFormData((prev) => ({ ...prev, [name]: val }))
+                  }
+                />
+              ))}
+            {/* Todo */}
+            
 
-        <div className="flex-1 bg-gray-50 items-start justify-start p-12">
-          <h1 className="mt-5 mb-5">Preview</h1>
-          <div className="bg-white rounded-[20px] 2xl:w-137.5 xl:w-125 h-140 border border-gray-100 mx-auto">
-            {/* EventCard */}
+
+            {componentCategory === "Member" && 
+              <div>
+                <h2 className="subheading mb-1">Headshot</h2>
+                <label
+                htmlFor="image-upload"
+                className="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-4 mr-4 inline-block"
+              >
+                Upload image
+              </label>
+                <input
+                  id="image-upload"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                      setFormData((prev) => ({
+                        ...prev,
+                        imageUrl: reader.result as string,
+                      }));
+                    };
+                    reader.readAsDataURL(file);
+                  }}
+                />
+        
+              </div>
+            }
+
             {componentCategory === "Event" && (
-              <EventCard
-                title={formData["title"] ?? "Event Title"}
-                descrip={
-                  formData["descrip"] ?? "A short description of the event..."
-                }
-                date={formData["date"]}
-                time={formData["time"] ?? "12:00 PM - 2:00 PM"}
-                location={formData["location"]}
-                imageUrl={
-                  !(isURL(formData["imageUrl"]) && formData["imageUrl"])
-                    ? portraitPlaceholder.src
-                    : formData["imageUrl"]
-                }
-                tags={tags as any}
-              />
+              <div>
+                <h2 className="subheading mb-1">Tag</h2>
+                {tagSelections.map((tag) => (
+                  <label
+                    key={tag}
+                    className="flex items-center gap-2 cursor-pointer pl-1"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={tags.includes(tag)}
+                      onChange={() => toggleTag(tag)}
+                      className="accent-red-500"
+                    />
+                    <span className="text-sm">{tag}</span>
+                  </label>
+                ))}
+                <p className="text-xs text-gray-400 mt-1 mb-4">
+                  Maximum tags: 4
+                </p>
+              </div>
             )}
-            {/* Project */}
-            {componentCategory === "Project" && (
-              <OurProjects
-                projects={[
-                  {
-                    title: formData["title"],
-                    descrip: formData["descrip"],
-                    descrip2: formData["descrip2"],
-                    imageUrls: imageUrls,
-                    imageAlts: imageAlts,
-                    ctaLink: formData["ctaLink"],
-                    ctaTitle: formData["ctaTitle"],
-                  },
-                ]}
-                showButtons={false}
-              />
-            )}
-            {componentCategory === "Highlight" && <div>hello</div>}
-            {componentCategory === "Blog" && (
-              <BlogPostCard
-                post={{
-                  title: formData["title"] ? formData["title"] : "Example",
-                  excerpt: formData["excerpt"]
-                    ? formData["excerpt"]
-                    : "Example",
-                  author: {
-                    name: formData["authorName"]
-                      ? formData["authorName"]
-                      : "Example",
-                    avatar: isURL(formData["authorAvatar"])
-                      ? formData["authorAvatar"]
-                      : "",
-                  },
-                  publishDate: formData["date"],
-                  categories: blogCategories,
-                  readTime: formData["readTime"]
-                    ? parseInt(formData["readTime"])
-                    : 0,
-                  image: isURL(formData["image"]) ? formData["image"] : "",
-                  slug: formData["slug"],
-                  content: formData["content"]
-                    ? formData["content"]
-                    : "Example", // doesn't work
-                }}
-              />
-            )}
-          </div>
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded mt-7 w-full" type="button"
+              onClick={() => {
+                postDispatcher();
+              }}
+            >
+              Create Component
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div className="flex-1 bg-gray-50 items-start justify-start p-12">
+        <h1 className="mt-5 mb-5">Preview</h1>
+        <div className="bg-white rounded-[20px] 2xl:w-137.5 xl:w-125 h-140 border border-gray-100 mx-auto">
+          {/* EventCard */}
+          {componentCategory === "Event" && (
+            <EventCard
+              title={formData["title"] ?? "Event Title"}
+              descrip={
+                formData["descrip"] ?? "A short description of the event..."
+              }
+              date={formData["date"]}
+              time={formData["time"] ?? "12:00 PM - 2:00 PM"}
+              location={formData["location"]}
+              imageUrl={
+                !(isURL(formData["imageUrl"]) && formData["imageUrl"])
+                  ? portraitPlaceholder.src
+                  : formData["imageUrl"]
+              }
+              tags={tags as any}
+            />
+          )}
+          {/* Highlights */}
+          {componentCategory === "Highlight" && (
+          <CommunityHighlights
+            events={[
+              {
+                id: 0,
+                title: formData["title"] ?? "Title",
+                longDescrip: formData["longDescrip"] ?? "Long description",
+                shortDescrip: formData["shortDescrip"] ?? "Short description",
+                date: formData["date"] ?? "",
+                imageUrl: formData["imageUrl"],
+                imageAlt: formData["imageAlt"] ?? "",
+              },
+            ]}
+          />
+        )}
+
+        {/* Member */}
+        {componentCategory === "Member" && (
+          <MemberCard
+            member={{
+              name: formData["name"] ?? "Name",
+              role: formData["role"] ?? "",
+              year: formData["year"] ?? "",
+              major: formData["major"] ?? "",
+              college: formData["college"] ?? "",
+              linkedin: formData["linkedin"] ?? "",
+              headshot: formData["imageUrl"],
+            }}
+            onClick={() => {}}
+          />
+        )}
+
+        {/* Project */}
+        {componentCategory === "Project" && (
+          <OurProjects projects={[]} showButtons={false} />
+        )}
         </div>
       </div>
     </div>
@@ -589,4 +635,5 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
               }}
               className="hidden"
             /> */
+            
 }
