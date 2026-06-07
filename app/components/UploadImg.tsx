@@ -6,14 +6,13 @@ import {
   TrashIcon,
   ArrowDownTrayIcon,
 } from "@heroicons/react/24/outline";
-import axios from "axios";
-import { postImg, getImage, deleteImg } from "@/utils/imageRequests";
+import { postImg, getImg, deleteImg } from "@/utils/imgRequests";
+
+const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"] ?? "";
 
 const allTabs = ["community-highlights", "event", "project"];
 
 export function UploadImg() {
-  const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"] ?? "";
-
   const [picNameList, setPicNameList] = useState<string[]>([]);
   const [picLinkList, setPicLinkList] = useState<string[]>([]);
 
@@ -21,10 +20,8 @@ export function UploadImg() {
   useEffect(() => {
     async function fetchImages(folder: string) {
       try {
-        const [data, links] = (await getImage({
+        const [data, links] = (await getImg({
           folder,
-          supabaseUrl,
-          curTab,
         })) ?? [[], []];
         setPicNameList(data);
         setPicLinkList(links);
@@ -67,7 +64,7 @@ export function UploadImg() {
             <button
               className="cursor-pointer hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-4 flex gap-2 border disabled:hover:bg-white"
               onClick={() => {
-                file && postImg({ file, curTab });
+                file && postImg({ file, folder: curTab });
               }}
               disabled={!file}
             >
