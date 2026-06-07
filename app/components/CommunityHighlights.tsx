@@ -7,7 +7,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { convertDate } from "@/utils/convertDate";
 
-interface CommHighProps {
+export interface CommHighProps {
   events: {
     id: number;
     title: string;
