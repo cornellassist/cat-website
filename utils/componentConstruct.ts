@@ -1,5 +1,6 @@
 import type { ProjectCardProps } from "@/app/components/OurProjects";
 import { BlogPostCardProps } from "@/app/components/BlogPostCard";
+import type { Member } from "@/app/components/Members";
 
 interface EventPayload {
   title: string;
@@ -93,4 +94,28 @@ export function constructBlogObj({
       content: formData["content"],
     },
   };
+}
+
+export function constructMembersObj(formData: Record<string, string>): Member {
+  if (
+    !(
+      formData["name"] &&
+      formData["role"] &&
+      formData["year"] &&
+      formData["major"] &&
+      formData["college"]
+    )
+  ) {
+    throw new Error("missing members fields");
+  }
+
+  const members: Member = {
+    name: formData["name"],
+    role: formData["role"],
+    year: formData["year"],
+    major: formData["major"],
+    college: formData["college"],
+  };
+
+  return members;
 }

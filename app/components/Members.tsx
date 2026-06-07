@@ -13,10 +13,12 @@ export interface Member {
   major: string;
   college: string;
   linkedin?: string;
-  headshot?: string;
+  image?: string;
 }
 
 interface MemberCardInfo extends Member {
+  // when imgs added to bucket, remove this interface
+  // only to pair static imgs with dynamic members
   img?: StaticImageData;
 }
 
@@ -227,7 +229,7 @@ export function MemberCard({
 }) {
   const name = member.name;
   const role = member.role;
-  const img = member.headshot || member.img || portraitPlaceholder;
+  const img = member.image ?? member.img ?? portraitPlaceholder;
   const linkedin = member.linkedin ?? "";
 
   const linkedinStyles =
