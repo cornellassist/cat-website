@@ -7,33 +7,26 @@ import {
   ArrowDownTrayIcon,
 } from "@heroicons/react/24/outline";
 import axios from "axios";
-
-const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"];
+import { postImg, getImage, deleteImg } from "@/utils/imageRequests";
 
 const allTabs = ["community-highlights", "event", "project"];
 
 export function UploadImg() {
+  const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"] ?? "";
+
   const [picNameList, setPicNameList] = useState<string[]>([]);
   const [picLinkList, setPicLinkList] = useState<string[]>([]);
 
   const [curTab, setCurTab] = useState<string>("community-highlights");
-  const [file, setFile] = useState<File>();
   useEffect(() => {
     async function fetchImages(folder: string) {
       try {
-        setPicNameList([]);
-        const { data } = await axios.get("/api/storage", {
-          params: {
-            folderName: folder,
-          },
-        });
-        console.log(data);
+        const [data, links] = (await getImage({
+          folder,
+          supabaseUrl,
+          curTab,
+        })) ?? [[], []];
         setPicNameList(data);
-        const links = await data.map(
-          (pic: any) =>
-            `${supabaseUrl}/storage/v1/object/public/cat-website-pics/${curTab}/${pic}`,
-        );
-        console.log(links);
         setPicLinkList(links);
       } catch (error) {
         console.error(error);
@@ -43,31 +36,16 @@ export function UploadImg() {
   }, [curTab]);
 
   function UploadImgButton() {
-    async function postImg() {
-      if (!file) return;
-      try {
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("folder", curTab);
-        const res = await axios.post("/api/storage", formData);
-        if (res.status === 201) {
-          console.log("posted img");
-          alert("The image was succesfully added. Reloading the page now.");
-          window.location.reload();
-        }
-      } catch (error) {
-        console.error(error);
-        alert(`The image failed to get added. Error: ${error}`);
-      }
-    }
+    const [file, setFile] = useState<File>();
+
     return (
       <div className="bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] pl-5 h-50 flex flex-col gap-5 pt-3 rounded-xl mb-5">
         <h2 className="subheading">
           Upload to <span className="text-theme-red">{curTab}</span> Folder
         </h2>
-        <div className="flex flex-col w-127 gap-2">
-          <div className="flex items-center">
-            <label className="cursor-pointer select-none">
+        <div className="flex flex-col w-full gap-2">
+          <div className="flex flex-col">
+            <label className="w-fit cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-2">
               <input
                 type="file"
                 accept="image/*"
@@ -78,28 +56,24 @@ export function UploadImg() {
                   }
                 }}
               />
-              <div className="flex items-center justify-center gap-3 rounded-lg border-2 w-55 py-1 bg-theme-white">
-                <DocumentIcon className="h-5 w-5" />
-                <div>Choose Image</div>
+              <div className="flex gap-2 select-none">
+                <ArrowUpTrayIcon className="h-5 w-5" />
+                Upload image
               </div>
             </label>
-            <div className="border-y-2 border-r-2 rounded-r-lg bg-text-lt-grey-2 h-9 min-w-75 -ml-2.25 flex items-center px-5">
-              <div className="overflow-x-auto whitespace-nowrap w-full">
-                {file && file.name}
-              </div>
-            </div>
+            <div className="text-sm h-5">{file && file.name}</div>
           </div>
-          <button
-            className="flex items-center justify-center gap-3 rounded-lg border-2 border-text-dk-grey w-55 py-1 cursor-pointer 
-            bg-theme-lt-red disabled:cursor-default disabled:text-text-grey"
-            disabled={!file}
-            onClick={async () => {
-              postImg();
-            }}
-          >
-            <ArrowUpTrayIcon className="h-5 w-5" />
-            <div>Upload Image</div>
-          </button>
+          <div>
+            <button
+              className="cursor-pointer hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-4 flex gap-2 border disabled:hover:bg-white"
+              onClick={() => {
+                file && postImg({ file, curTab });
+              }}
+              disabled={!file}
+            >
+              Submit Image
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -118,7 +92,7 @@ export function UploadImg() {
                 setCurTab(tab);
               }}
             >
-              {tab}
+              {tab[0].toUpperCase() + tab.slice(1)}
             </div>
           );
         })}
@@ -127,23 +101,6 @@ export function UploadImg() {
   }
 
   function ImageRow() {
-    async function deleteImg(folder: string, fileName: string) {
-      try {
-        const res = await axios.delete("/api/storage", {
-          params: { folder: folder, fileName: fileName },
-        });
-        if (res.status === 200) {
-          // idk why 204 doesnt work
-          console.log("deleted sucessfully");
-          alert(
-            `${fileName} has been deleted from ${folder} succesfully. Reloading the page now.`,
-          );
-          window.location.reload();
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
     async function download(picName: string) {
       // figure this out some time
       const url = `${supabaseUrl}/storage/v1/object/public/cat-website-pics/${curTab}/${picName}`;
@@ -208,7 +165,7 @@ export function UploadImg() {
   }
 
   return (
-    <div className="mx-10 flex flex-col gap-10">
+    <div className="px-10 flex flex-col gap-10">
       <ImageRow />
       <UploadImgButton />
     </div>
