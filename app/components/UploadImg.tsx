@@ -46,9 +46,14 @@ export function UploadImg() {
   }
 
   const [curTab, setCurTab] = useState<string>("");
+  const capitalCurTab = curTab ? curTab[0].toUpperCase() + curTab.slice(1) : "";
   useEffect(() => {
     const pastTab = localStorage.getItem("curTab");
-    if (pastTab) setCurTab(pastTab);
+    if (pastTab) {
+      setCurTab(pastTab);
+    } else {
+      setCurTab(allTabs[0]);
+    }
     setMount(true);
   }, []);
 
@@ -63,7 +68,8 @@ export function UploadImg() {
     return (
       <div className="bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] pl-5 h-50 flex flex-col gap-5 pt-3 rounded-xl mb-5">
         <h2 className="subheading">
-          Upload to <span className="text-theme-red">{curTab}</span> Folder
+          Upload to <span className="text-theme-red">{capitalCurTab}</span>{" "}
+          Folder
         </h2>
         <div className="flex flex-col w-full gap-2">
           <label className="w-fit cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-2">
@@ -137,7 +143,7 @@ export function UploadImg() {
     return (
       <div className="flex flex-col gap-5">
         <h1 className="blackheading">
-          Images: <span className="text-theme-red">{curTab}</span>
+          Images: <span className="text-theme-red">{capitalCurTab}</span>
         </h1>
         <TabSelect />
         <div className="flex gap-5 flex-wrap">
