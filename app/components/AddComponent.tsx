@@ -11,7 +11,8 @@ import {
   constructEventObj,
   constructBlogObj,
 } from "@/utils/componentConstruct";
-import { ArrowUpTrayIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { ImageModal } from "./ImageModal";
 
 // TODO: import all relevant component cards that need to be displayed
 
@@ -345,15 +346,17 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
               </div>
             )}
             {/* Todo */}
-            <label
-              htmlFor="image-upload"
-              className="cursor-pointer bg-gray-100 hover:bg-gray-200 
+            <div className="flex">
+              <label
+                htmlFor="image-upload"
+                className="cursor-pointer bg-gray-100 hover:bg-gray-200 
               text-gray-700 text-sm px-4 py-2 rounded mb-4 flex gap-2 w-fit 
               items-center justify-center"
-            >
-              <ArrowUpTrayIcon className="h-5 w-5" />
-              Upload image
-            </label>
+              >
+                <MagnifyingGlassIcon className="h-5 w-5" />
+                Choose image
+              </label>
+            </div>
             {/* Custom form fields */}
             {/* tags in Event */}
             {componentCategory === "Event" && (
