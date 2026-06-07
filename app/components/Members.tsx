@@ -6,14 +6,13 @@ import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-pl
 import { useState } from "react";
 import { loadingComplete, imgLoadStyles } from "../../utils/imgLoad";
 
-export interface Member {
+interface Member {
   name: string;
   role: string;
   year: string;
   major: string;
   college: string;
   linkedin?: string;
-  headshot?: string;
 }
 
 interface MemberCardInfo extends Member {
@@ -218,7 +217,7 @@ function MemberModal({
   );
 }
 
-export function MemberCard({
+function MemberCard({
   member,
   onClick,
 }: {
@@ -227,7 +226,7 @@ export function MemberCard({
 }) {
   const name = member.name;
   const role = member.role;
-  const img = member.headshot || member.img || portraitPlaceholder;
+  const img = member.img ?? portraitPlaceholder;
   const linkedin = member.linkedin ?? "";
 
   const linkedinStyles =
@@ -254,8 +253,8 @@ export function MemberCard({
         <Image
           src={img}
           alt={name}
-          width={300}
-          height={300}
+          width={img.width}
+          height={img.height}
           // className={`w-auto rounded-[15px] cursor-pointer ${imgLoadStyles}`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
           className={`2xl-100 xl:w-70 lg:w-60 rounded-[15px] cursor-pointer border border-gray-500/50 p-1`}
           onClick={onClick}
