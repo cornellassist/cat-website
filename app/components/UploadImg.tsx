@@ -12,23 +12,48 @@ const supabaseUrl = process.env["NEXT_PUBLIC_SUPABASE_URL"] ?? "";
 
 const allTabs = ["community-highlights", "event", "project"];
 
+export function ImgCard({
+  picLink,
+  picName,
+}: {
+  picLink: string;
+  picName: string;
+}) {
+  return (
+    <div className="flex flex-col items-center">
+      <img src={picLink ?? ""} className="h-40 rounded-md object-contain" />
+      <div className="subtext">{picName}</div>
+    </div>
+  );
+}
+
 export function UploadImg() {
   const [picNameList, setPicNameList] = useState<string[]>([]);
   const [picLinkList, setPicLinkList] = useState<string[]>([]);
+  const [mount, setMount] = useState<boolean>(false);
 
-  const [curTab, setCurTab] = useState<string>("community-highlights");
-  useEffect(() => {
-    async function fetchImages(folder: string) {
-      try {
-        const [data, links] = (await getImg({
-          folder,
-        })) ?? [[], []];
-        setPicNameList(data);
-        setPicLinkList(links);
-      } catch (error) {
-        console.error(error);
-      }
+  async function fetchImages(folder: string) {
+    try {
+      const [data, links] = (await getImg({
+        folder,
+      })) ?? [[], []];
+      setPicNameList(data);
+      setPicLinkList(links);
+    } catch (error) {
+      // intentionally fetch "" first render
+      // console.error(error);
     }
+  }
+
+  const [curTab, setCurTab] = useState<string>("");
+  useEffect(() => {
+    const pastTab = localStorage.getItem("curTab");
+    if (pastTab) setCurTab(pastTab);
+    setMount(true);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("curTab", curTab);
     fetchImages(curTab);
   }, [curTab]);
 
@@ -41,36 +66,34 @@ export function UploadImg() {
           Upload to <span className="text-theme-red">{curTab}</span> Folder
         </h2>
         <div className="flex flex-col w-full gap-2">
-          <div className="flex flex-col">
-            <label className="w-fit cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-2">
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={(event) => {
-                  if (event.target.files) {
-                    setFile(event.target.files[0]);
-                  }
-                }}
-              />
-              <div className="flex gap-2 select-none">
-                <ArrowUpTrayIcon className="h-5 w-5" />
-                Upload image
-              </div>
-            </label>
-            <div className="text-sm h-5">{file && file.name}</div>
-          </div>
-          <div>
-            <button
-              className="cursor-pointer hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-4 flex gap-2 border disabled:hover:bg-white"
-              onClick={() => {
-                file && postImg({ file, folder: curTab });
+          <label className="w-fit cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-2">
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(event) => {
+                if (event.target.files) {
+                  setFile(event.target.files[0]);
+                }
               }}
-              disabled={!file}
-            >
-              Submit Image
-            </button>
-          </div>
+            />
+            <div className="flex gap-2 select-none">
+              <ArrowUpTrayIcon className="h-5 w-5" />
+              Upload image
+            </div>
+          </label>
+          <div className="text-sm h-5">{file && file.name}</div>
+        </div>
+        <div>
+          <button
+            className="cursor-pointer hover:bg-gray-200 text-gray-700 text-sm px-4 py-2 rounded mb-4 flex gap-2 border disabled:hover:bg-white"
+            onClick={() => {
+              file && postImg({ file, folder: curTab });
+            }}
+            disabled={!file}
+          >
+            Submit Image
+          </button>
         </div>
       </div>
     );
@@ -137,7 +160,7 @@ export function UploadImg() {
                       onClick={() => {
                         if (
                           window.confirm(
-                            `Are you sure you want to delete ${picName}?`,
+                            `Are you sure you want to delete ${picName} from ${curTab}?`,
                           )
                         ) {
                           deleteImg(curTab, picName);
@@ -145,11 +168,10 @@ export function UploadImg() {
                       }}
                     />
                   </div>
-                  <img
-                    src={picLinkList?.[index] || ""}
-                    className="h-40 rounded-md object-contain"
+                  <ImgCard
+                    picLink={picLinkList?.[index] ?? ""}
+                    picName={picName}
                   />
-                  <div className="subtext">{picName}</div>
                 </div>
               );
             })
@@ -163,8 +185,12 @@ export function UploadImg() {
 
   return (
     <div className="px-10 flex flex-col gap-10">
-      <ImageRow />
-      <UploadImgButton />
+      {mount && (
+        <div>
+          <ImageRow />
+          <UploadImgButton />
+        </div>
+      )}
     </div>
   );
 }
