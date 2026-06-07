@@ -10,7 +10,10 @@ import {
   constructProjectObj,
   constructEventObj,
   constructBlogObj,
+  constructMembersObj,
 } from "@/utils/componentConstruct";
+import { CommunityHighlights, type CommHighProps } from "./CommunityHighlights";
+import { Members, MemberCard, type Member } from "./Members";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { ImgModal } from "./ImgModal";
 
@@ -78,6 +81,25 @@ function FormField({
             onChange={(e) => onChange(field.name, e.target.value)}
             className={inputCss}
           />
+        );
+      case "MemberRole":
+        return (
+          <select
+            value={value}
+            onChange={(e) => onChange(field.name, e.target.value)}
+            className={inputCss}
+          >
+            <option value="">Select role</option>
+            <option value="TEAM_LEADS">Lead</option>
+            <option value="ENGINEERING_LEADS">Engineering Lead</option>
+            <option value="OPERATIONS_LEADS">Operations Lead</option>
+            <option value="OUTREACH_EDU_LEADS">
+              Outreach & Education Lead
+            </option>
+            <option value="ENGINGEERING">Engineering</option>
+            <option value="OPERATIONS">Operations</option>
+            <option value="OUTREACH_EDU">Outreach & Education</option>
+          </select>
         );
       default:
         return <div>Unidentified type</div>;
@@ -173,12 +195,25 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     }
   }
 
+  async function getMemberFields() {
+    // fields incomplete, needs img/headshot
+    try {
+      const fields = await (
+        await fetch("/api/members/fields", { method: "GET" })
+      ).json();
+      // console.log(fields);
+      setMemberFields(fields);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   // map of componentCategories to their GET endpoint call
   const getMap = {
     Event: getEventFields,
     Highlight: getHighlightFields,
     Blog: getBlogFields,
-    Member: () => {},
+    Member: getMemberFields,
     Project: getProjectFields,
     Sponsors: () => {},
   };
@@ -253,11 +288,31 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
     }
   }
 
+  // POST to members
+  async function postMembers() {
+    try {
+      const body = constructMembersObj(formData);
+      const res = await fetch("/api/members", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      // console.log("res: " + res.status);
+      if (!res.ok) {
+        throw new Error(`Failed to post, ${res.status}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const postMap = {
     Event: postEvent,
     Blog: postBlog,
     Highlight: undefined,
-    Member: undefined,
+    Member: postMembers,
     Project: postProject,
     Sponsors: undefined,
   };
@@ -371,6 +426,20 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
                       key={b.name}
                       field={b}
                       value={formData[b.name] ?? ""}
+                      onChange={(name, val) =>
+                        setFormData((prev) => ({ ...prev, [name]: val }))
+                      }
+                    />
+                  ))}
+                </div>
+              )}
+              {componentCategory === "Member" && (
+                <div>
+                  {memberFields.map((m: Field) => (
+                    <FormField
+                      key={m.name}
+                      field={m}
+                      value={formData[m.name] ?? ""}
                       onChange={(name, val) =>
                         setFormData((prev) => ({ ...prev, [name]: val }))
                       }
@@ -520,6 +589,20 @@ export function AddComponent({ componentCategory }: AddComponentProps) {
                     ? formData["content"]
                     : "Example", // doesn't work
                 }}
+              />
+            )}
+            {componentCategory === "Member" && (
+              <MemberCard
+                member={{
+                  name: formData["name"] ?? "Name",
+                  role: formData["role"] ?? "",
+                  year: formData["year"] ?? "",
+                  major: formData["major"] ?? "",
+                  college: formData["college"] ?? "",
+                  linkedin: formData["linkedin"] ?? "",
+                  image: formData["imageUrl"],
+                }}
+                onClick={() => {}}
               />
             )}
           </div>
