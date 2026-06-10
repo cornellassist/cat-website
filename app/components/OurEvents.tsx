@@ -22,7 +22,7 @@ interface EventCardProps {
   time: string;
   location: string;
   imageUrl: string;
-  archived: boolean;
+  archived?: boolean;
 }
 
 interface OurEventsProps {
@@ -66,7 +66,7 @@ export function EventCard({
   date,
   time,
   tags = [],
-  imageUrl, // prop destructure, do not include archived
+  imageUrl,
 }: EventCardProps) {
   return (
     <div className="flex flex-col gap-4 md:gap-6 h-full">
