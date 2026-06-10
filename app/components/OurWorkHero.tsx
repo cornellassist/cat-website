@@ -1,6 +1,6 @@
 "use client";
 import { ButtonRed, ButtonWhite } from "./Buttons";
-import HeroPic from "@/public/assets/OurWork/hero-pic.png";
+import HeroPic from "@/public/assets/OurWork/our-work-hero.png";
 import BlurTL from "@/public/assets/blur-tl.png";
 import BlurTR from "@/public/assets/blur-tr.png";
 import Image from "next/image";
@@ -8,9 +8,9 @@ import { imgLoadStyles, loadingComplete } from "../../utils/imgLoad";
 
 const HeroText = () => {
   return (
-    <div className="flex flex-col items-center lg:items-start w-full lg:w-1/2 xl:w-1/2 mb-5 lg:mb-0">
+    <div className="flex flex-col items-center lg:items-start w-full lg:w-1/2 xl:w-1/2 mb-5 lg:mb-0 gap-4 md:gap-0">
       <h1 className="mainheading mb-2 md:mb-4 lg:mb-6">Our Work</h1>
-      <p className="subtext mb-6 md:mb-10 lg:mb-16 text-center lg:text-start">
+      <p className="subtext mb-6 md:mb-10 lg:mb-16 text-center lg:text-start md:gap-0">
         Our teams at Cornell Assistive Technologies design adaptive technologies
         and foster partnerships to expand access to assistive solutions and STEM
         education.
@@ -57,7 +57,7 @@ const HeroGraphic = () => {
       </div>
       {/* mobile version */}
       <div className="flex lg:hidden items-end justify-center">
-        <div className="h-80 sm:h-86 w-106 -mb-5 sm:mb-0 origin-bottom scale-90 sm:scale-100 md:scale-100 lg:scale-75 xl:scale-100">
+        <div className="h-80 sm:h-86 w-106 -mb-10 mt-15 lg:my-0 origin-bottoms sm:scale-100 md:scale-110">
           <Image
             src={HeroPic}
             alt="Cornell Assistive Technologies team member working on the sensory watch project"
