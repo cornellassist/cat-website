@@ -22,6 +22,7 @@ interface EventCardProps {
   time: string;
   location: string;
   imageUrl: string;
+  archived: boolean;
 }
 
 interface OurEventsProps {
@@ -65,7 +66,7 @@ export function EventCard({
   date,
   time,
   tags = [],
-  imageUrl,
+  imageUrl, // prop destructure, do not include archived
 }: EventCardProps) {
   return (
     <div className="flex flex-col gap-4 md:gap-6 h-full">
@@ -131,6 +132,7 @@ export function OurEvents({ events }: OurEventsProps) {
     time,
     tags = [],
     imageUrl,
+    archived,
   }: EventCardProps) {
     return (
       <div
@@ -146,6 +148,7 @@ export function OurEvents({ events }: OurEventsProps) {
             time,
             tags,
             imageUrl,
+            archived,
           })}
       </div>
     );
@@ -161,20 +164,23 @@ export function OurEvents({ events }: OurEventsProps) {
         className={`grid 2xl:grid-cols-2 xl:grid-cols-2 grid-cols-1 gap-10 mt-10`}
       >
         {allEvents.length ? (
-          allEvents.map((item, index) => {
-            return (
-              <EventCardContainer
-                key={`event-${index}`}
-                title={item.title}
-                descrip={item.descrip}
-                location={item.location}
-                date={item.date}
-                time={item.time}
-                tags={item?.tags}
-                imageUrl={item.imageUrl}
-              />
-            );
-          })
+          allEvents
+            .filter((item) => !item.archived)
+            .map((item, index) => {
+              return (
+                <EventCardContainer
+                  key={`event-${index}`}
+                  title={item.title}
+                  descrip={item.descrip}
+                  location={item.location}
+                  date={item.date}
+                  time={item.time}
+                  tags={item?.tags}
+                  imageUrl={item.imageUrl}
+                  archived={item.archived}
+                />
+              );
+            })
         ) : (
           <div className="descriptext text-text-dk-grey">
             We're working on new events, stay tuned! An archive of past events
