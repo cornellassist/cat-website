@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
         time: body.time,
         location: body.location,
         imageUrl: body.imageUrl,
+        archived: body.archived,
       },
     });
     console.log(event);
