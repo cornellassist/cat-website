@@ -3,6 +3,8 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 
+const borderStyles = "border-theme-grey";
+
 export function AdminTable({ data }: { data?: any[] }) {
   const path = usePathname();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -12,7 +14,7 @@ export function AdminTable({ data }: { data?: any[] }) {
       <div className="flex justify-between items-center">
         <h2 className="heading">{path.split("/").pop()} Table</h2>
         <button
-          className="descriptext rounded-lg   border border-text-grey px-3 py-1 cursor-pointer 
+          className="descriptext rounded-lg border border-text-grey px-3 py-1 cursor-pointer 
         backdrop-blur-[2px] bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] hover:bg-text-lt-grey
         transition-color duration-200"
           onClick={() => {
@@ -38,7 +40,7 @@ export function AdminTable({ data }: { data?: any[] }) {
             <tr>
               {colHeaders.map((header, index) => {
                 return (
-                  <th key={index} className="text-left truncate pl-3">
+                  <th key={index} className="text-center truncate pl-3">
                     {header}
                   </th>
                 );
@@ -51,12 +53,19 @@ export function AdminTable({ data }: { data?: any[] }) {
               return (
                 <tr
                   key={index}
-                  className="text-left truncate h-15 border-collapse border-b last:border-0 hover:bg-text-lt-grey transition-colors duration-200"
+                  className={`text-left truncate h-15 border-collapse border-b last:border-0 hover:bg-text-lt-grey transition-colors duration-200 ${borderStyles}`}
                 >
                   {entryList.map((item, index) => {
+                    const displayItem = Array.isArray(item)
+                      ? `[${item.join(", ")}]`
+                      : item;
+
                     return (
-                      <td key={index} className="overflow-x-scroll pl-3">
-                        {(item as string) ?? (
+                      <td
+                        key={index}
+                        className={`overflow-x-scroll pl-3 border-x last:border-0 first:border-0 ${borderStyles}`}
+                      >
+                        {(displayItem as string) ?? (
                           <span className="text-theme-dk-red">None</span>
                         )}
                       </td>

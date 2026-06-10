@@ -48,6 +48,7 @@ model Event {
   time     String
   location String
   imageUrl String
+  archived Boolean
 }
 
 model Member {
