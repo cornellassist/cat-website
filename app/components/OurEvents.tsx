@@ -163,7 +163,7 @@ export function OurEvents({ events }: OurEventsProps) {
       <div
         className={`grid 2xl:grid-cols-2 xl:grid-cols-2 grid-cols-1 gap-10 mt-10`}
       >
-        {allEvents.length ? (
+        {allEvents.length && allEvents.every((e) => !e.archived) ? (
           allEvents
             .filter((item) => !item.archived)
             .map((item, index) => {
