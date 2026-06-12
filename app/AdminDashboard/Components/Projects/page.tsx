@@ -1,7 +1,7 @@
 "use client";
-import { DashboardWrapper } from "@/app/components/DashboardWrapper";
+import { DashboardWrapper } from "@/app/components/AdminDashboard/DashboardWrapper";
 import { useEffect, useState } from "react";
-import { AdminTable } from "@/app/components/AdminTable";
+import { AdminTable } from "@/app/components/AdminDashboard/AdminTable";
 import axios from "axios";
 
 export default function Projects() {

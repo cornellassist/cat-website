@@ -1,8 +1,8 @@
 import { Navbar } from "@/app/components/Navbar"
-import { AboutUsHero } from "@/app/components/AboutUsHero";
-import { Members } from "@/app/components/Members";
+import { AboutUsHero } from "@/app/components/AboutUs/AboutUsHero";
+import { Members } from "@/app/components/AboutUs/Members";
 import { Footer } from "@/app/components/Footer";
-import { ExploreOurTeams } from "@/app/components/ExploreOurTeams";
+import { ExploreOurTeams } from "@/app/components/AboutUs/ExploreOurTeams";
 
 export default function AboutUs() {
   return (

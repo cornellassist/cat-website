@@ -1,7 +1,7 @@
 "use client";
 import { createClient } from "@/utils/supabase/client";
 import axios from "axios";
-import { DashboardWrapper } from "../components/DashboardWrapper";
+import { DashboardWrapper } from "@/app/components/AdminDashboard/DashboardWrapper";
 
 export default function AdminDashboard() {
   // const supabase = createClient();

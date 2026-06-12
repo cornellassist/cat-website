@@ -1,6 +1,6 @@
-import type { ProjectCardProps } from "@/app/components/OurProjects";
+import type { ProjectCardProps } from "@/app/components/OurWork/OurProjects";
 import { BlogPostCardProps } from "@/app/components/BlogPostCard";
-import type { Member } from "@/app/components/Members";
+import type { Member } from "@/app/components/AboutUs/Members";
 
 interface EventPayload {
   title: string;

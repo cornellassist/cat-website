@@ -1,10 +1,10 @@
 "use client";
-import { ButtonRed } from "./Buttons";
+import { ButtonRed } from "@/app/components/Buttons";
 import HeroPic from "@/public/assets/Landing/hero-pic-full.jpg";
 import BlurTL from "@/public/assets/blur-tl.png";
 import BlurTR from "@/public/assets/blur-tr.png";
 import Image from "next/image";
-import { loadingComplete, imgLoadStyles } from "../../utils/imgLoad";
+import { loadingComplete, imgLoadStyles } from "@/utils/imgLoad";
 import HeroFrame from "@/public/assets/Landing/hero-complete-frame.svg";
 
 const HeroText = () => {

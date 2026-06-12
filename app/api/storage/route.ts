@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
   }
   try {
     const { searchParams } = new URL(request.url); // no json body for GET, use URL object to find param in url instead
-    const folderName = searchParams.get("folderName"); 
+    const folderName = searchParams.get("folderName");
     if (!folderName) {
       return NextResponse.json({ error: "Incorrect params" }, { status: 400 });
     }

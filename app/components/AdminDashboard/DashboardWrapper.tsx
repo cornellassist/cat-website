@@ -1,5 +1,5 @@
-import { ProfileMenu } from "../components/ProfileMenu";
-import { Sidebar } from "../components/Sidebar";
+import { ProfileMenu } from "./ProfileMenu";
+import { Sidebar } from "./Sidebar";
 import Image from "next/image";
 import BlurTL from "@/public/assets/blur-tl.png";
 import BlurTR from "@/public/assets/blur-tr.png";

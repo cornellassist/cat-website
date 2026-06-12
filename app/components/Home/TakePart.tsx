@@ -1,6 +1,6 @@
 "use client"
 
-import { ButtonRed, ButtonWhite } from "./Buttons";
+import { ButtonRed, ButtonWhite } from "@/app/components/Buttons";
 
 
 export function TakePart() {

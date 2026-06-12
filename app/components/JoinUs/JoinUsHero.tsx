@@ -1,10 +1,10 @@
 "use client";
-import { ButtonRed } from "./Buttons";
+import { ButtonRed } from "@/app/components/Buttons";
 import HeroPic from "@/public/assets/JoinUs/hero-pic.jpg";
 import Image from "next/image";
 import BlurTL from "@/public/assets/blur-tl.png";
 import BlurTR from "@/public/assets/blur-tr.png";
-import { loadingComplete, imgLoadStyles } from "../../utils/imgLoad";
+import { loadingComplete, imgLoadStyles } from "@/utils/imgLoad";
 
 const centered = "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2";
 

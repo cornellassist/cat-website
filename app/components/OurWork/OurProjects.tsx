@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ButtonRed, ButtonWhite } from "./Buttons";
+import { ButtonRed, ButtonWhite } from "@/app/components/Buttons";
 import { useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";

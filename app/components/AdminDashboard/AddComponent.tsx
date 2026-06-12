@@ -1,19 +1,19 @@
 "use client";
-import { EventCard } from "@/app/components/OurEvents";
-import { OurProjects, type ProjectCardProps } from "./OurProjects";
+import { EventCard } from "@/app/components/OurWork/OurEvents";
+import { OurProjects, type ProjectCardProps } from "@/app/components/OurWork/OurProjects";
 import { useState, useEffect } from "react";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
 // import axios from "axios";
-import type { AddComponentProps } from "../AdminDashboard/CreateComponent/page";
-import { BlogPostCard, type BlogPostCardProps } from "./BlogPostCard";
+import type { AddComponentProps } from "@/app/AdminDashboard/CreateComponent/page";
+import { BlogPostCard, type BlogPostCardProps } from "@/app/components/BlogPostCard";
 import {
   constructProjectObj,
   constructEventObj,
   constructBlogObj,
   constructMembersObj,
 } from "@/utils/componentConstruct";
-import { CommunityHighlights, type CommHighProps } from "./CommunityHighlights";
-import { Members, MemberCard, type Member } from "./Members";
+import { CommunityHighlights, type CommHighProps } from "@/app/components/Home/CommunityHighlights";
+import { Members, MemberCard, type Member } from "@/app/components/AboutUs/Members";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { ImgModal } from "./ImgModal";
 
