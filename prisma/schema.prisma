@@ -45,8 +45,8 @@ model Event {
   tags     String[]
   descrip  String
   date     DateTime
-  time     String
-  location String
+  time     String?
+  location String?
   imageUrl String
   archived Boolean
 }

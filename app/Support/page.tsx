@@ -1,6 +1,6 @@
 import { Navbar } from "@/app/components/Navbar"
 import { Footer } from "@/app/components/Footer";
-import { SupportPage } from "@/app/components/SupportPage";
+import { SupportPage } from "@/app/components/Support/SupportPage";
 
 
 export default function Support() {

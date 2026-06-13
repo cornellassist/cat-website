@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import { ButtonRed, ButtonWhite } from "./Buttons";
+import { ButtonRed, ButtonWhite } from "@/app/components/Buttons";
 import ImgT from "@/public/assets/Landing/img-tr.png";
 import ImgB from "@/public/assets/Landing/img-br.png";
-import { loadingComplete, imgLoadStyles } from "../../utils/imgLoad";
+import { loadingComplete, imgLoadStyles } from "@/utils/imgLoad";
 
 const imgStyles =
   "h-35 sm:h-50 w-full xl:h-60 xl:w-85 2xl:h-70 2xl:w-100 rounded-t-[20px] sm:rounded-[20px] shadow-[0_-2px_4px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)]";

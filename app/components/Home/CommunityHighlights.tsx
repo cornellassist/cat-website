@@ -2,7 +2,7 @@
 
 import { useState, useEffect, use } from "react";
 import Image from "next/image";
-import { ButtonRed, ButtonWhite } from "./Buttons";
+import { ButtonRed, ButtonWhite } from "@/app/components/Buttons";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { convertDate } from "@/utils/convertDate";
@@ -23,7 +23,40 @@ const imgStyles =
   "drop-shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] lg:drop-shadow-none rounded-[20px]";
 
 function CommHighTitle() {
-  return <h2 className="heading mb-4 xl:mb-8">Community Highlights</h2>;
+  return (
+    <h2 className="heading mb-4 xl:mb-8 relative z-10">Community Highlights</h2>
+  );
+}
+
+function CommHighDecorations() {
+  return (
+    <>
+      <img
+        src="/assets/Landing/hero-blob-clear.svg"
+        alt=""
+        aria-hidden
+        className="hidden lg:block absolute -left-20 xl:-left-12 top-1/2 -translate-y-1/2 -z-10 opacity-20 scale-[45%] xl:scale-[55%] pointer-events-none"
+      />
+      <img
+        src="/assets/Landing/mission-square-t.svg"
+        alt=""
+        aria-hidden
+        className="hidden sm:block absolute right-2 xl:right-10 top-16 xl:top-20 -z-10 scale-[40%] xl:scale-[50%] pointer-events-none"
+      />
+      <img
+        src="/assets/Landing/mission-square-b.svg"
+        alt=""
+        aria-hidden
+        className="hidden sm:block absolute right-6 xl:right-14 top-28 xl:top-36 -z-10 scale-[40%] xl:scale-[50%] pointer-events-none"
+      />
+      <img
+        src="/assets/Landing/mission-square-t.svg"
+        alt=""
+        aria-hidden
+        className="sm:hidden absolute -left-6 bottom-10 -z-10 scale-[30%] rotate-180 pointer-events-none"
+      />
+    </>
+  );
 }
 
 export function CommunityHighlights({ events }: CommHighProps) {
@@ -88,7 +121,9 @@ export function CommunityHighlights({ events }: CommHighProps) {
     }
 
     return (
-      <div className={`flex flex-col lg:gap-5 xl:gap-10 items-center w-full`}>
+      <div
+        className={`flex flex-col lg:gap-5 xl:gap-10 items-center w-full relative z-10`}
+      >
         <div
           ref={emblaRef}
           className="overflow-hidden w-full max-w-full h-90 lg:h-100"
@@ -101,16 +136,16 @@ export function CommunityHighlights({ events }: CommHighProps) {
               >
                 {/* desktop */}
                 <div
-                  className={`hidden relative lg:flex backdrop-blur-[2px] h-100 w-250 transition-all duration-300  ${index === activeIndex ? "scale-100 opacity-100 z-10" : "scale-90 opacity-50"}
+                  className={`hidden relative lg:flex backdrop-blur-[2px] bg-white h-100 w-250 transition-all duration-300  ${index === activeIndex ? "scale-100 z-10" : "scale-90"}
               rounded-[20px]`}
                 >
                   <div className="flex h-full w-1/2 items-center ml-7 relative z-10">
-                    <div className={`relative w-full max-w-96 h-80`}>
+                    <div className="relative w-full max-w-96 h-80 bg-white rounded-[20px] overflow-hidden">
                       <Image
                         src={pic}
                         alt={events[index].imageAlt}
                         fill
-                        className={`object-cover ${imgStyles} origin-left scale-100 border border-white/20`}
+                        className={`object-cover ${imgStyles} origin-left scale-100 border border-white/20 transition-opacity duration-300 ${index === activeIndex ? "opacity-100" : "opacity-50"}`}
                         sizes="(max-width: 768px) 100vw, 548px"
                       />
                     </div>
@@ -148,7 +183,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
                     src={pic}
                     alt={altDescriptions[index]}
                     fill
-                    className={`object-cover ${imgStyles}`}
+                    className={`object-cover ${imgStyles} transition-opacity duration-300 ${index === activeIndex ? "opacity-100" : "opacity-50"}`}
                     sizes="(max-width: 768px) 100vw, 548px"
                   />
                   <div
@@ -193,11 +228,10 @@ export function CommunityHighlights({ events }: CommHighProps) {
   }
 
   return (
-    <>
-      <div className="w-full h-130 md:h-135 lg:h-150 xl:h-170 flex flex-col items-center gap-5 mt-10 sm:mt-20 xl:mt-30 2xl:mt-40">
-        <CommHighTitle />
-        {!loading && <CommHighPics events={events} />}
-      </div>
-    </>
+    <div className="w-full h-130 md:h-135 lg:h-150 xl:h-170 flex flex-col items-center gap-5 mt-10 sm:mt-20 xl:mt-30 2xl:mt-40 relative overflow-hidden">
+      <CommHighDecorations />
+      <CommHighTitle />
+      {!loading && <CommHighPics events={events} />}
+    </div>
   );
 }

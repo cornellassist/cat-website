@@ -1,8 +1,8 @@
 "use client"
 import { useState } from "react";
-import { TeamsDashboard } from "@/app/components/TeamsDashboard";
-import { Sidebar } from "@/app/components/Sidebar";
-import { ProfileMenu } from "@/app/components/ProfileMenu";
+import { TeamsDashboard } from "@/app/components/AdminDashboard/TeamsDashboard";
+import { Sidebar } from "@/app/components/AdminDashboard/Sidebar";
+import { ProfileMenu } from "@/app/components/AdminDashboard/ProfileMenu";
 
 export default function CreateComponent() {
     return (

@@ -1,9 +1,9 @@
 "use client";
 
 import { Navbar } from "@/app/components/Navbar";
-import { OurWorkHero } from "@/app/components/OurWorkHero";
-import { OurProjects } from "@/app/components/OurProjects";
-import { OurEvents } from "@/app/components/OurEvents";
+import { OurWorkHero } from "@/app/components/OurWork/OurWorkHero";
+import { OurProjects } from "@/app/components/OurWork/OurProjects";
+import { OurEvents } from "@/app/components/OurWork/OurEvents";
 import { Footer } from "@/app/components/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";

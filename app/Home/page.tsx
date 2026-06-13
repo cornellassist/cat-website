@@ -1,16 +1,16 @@
 "use client";
 
 import { Navbar } from "@/app/components/Navbar";
-import { LandingHero } from "@/app/components/LandingHero";
-import { CommunityHighlights } from "@/app/components/CommunityHighlights";
-import { PartnersAndSponsors } from "@/app/components/PartnersAndSponsors";
-import { TakePart } from "@/app/components/TakePart";
+import { LandingHero } from "@/app/components/Home/LandingHero";
+import { CommunityHighlights } from "@/app/components/Home/CommunityHighlights";
+import { PartnersAndSponsors } from "@/app/components/Home/PartnersAndSponsors";
+import { TakePart } from "@/app/components/Home/TakePart";
 import { Footer } from "@/app/components/Footer";
-import { Mission } from "@/app/components/Mission";
-import { EventNotif } from "../components/EventNotif";
+import { Mission } from "@/app/components/Home/Mission";
+import { EventNotif } from "@/app/components/Home/EventNotif";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { UnderConstructionPopup } from "../components/UnderConstructionPopup";
+// import { UnderConstructionPopup } from "@/app/components/Home/UnderConstructionPopup";
 
 export default function Home() {
   const [highlights, setHighlights] = useState([]);

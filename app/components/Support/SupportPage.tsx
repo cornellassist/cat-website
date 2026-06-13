@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { ButtonRed } from "./Buttons";
+import { ButtonRed } from "@/app/components/Buttons";
 import SponsorImg from "@/public/assets/Support/sponsor-img.png"
 import Image from "next/image";
 import BlurTR from "@/public/assets/blur-tr.png"

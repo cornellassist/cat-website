@@ -1,7 +1,7 @@
 "use client";
-import { EventCard } from "@/app/components/OurEvents";
+import { EventCard } from "@/app/components/OurWork/OurEvents";
 import { useState } from "react";
-import { AddComponent } from "@/app/components/AddComponent";
+import { AddComponent } from "@/app/components/AdminDashboard/AddComponent";
 
 const componentCategories = [
   "Blog",
