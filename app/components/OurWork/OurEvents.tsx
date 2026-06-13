@@ -232,7 +232,10 @@ function OurArchivedEvents({
         titleText="Past Events"
         descrip="Explore our previous STEM education and community outreach events."
       />
-      <ArchivedEventsCarousel events={archivedEvents} loading={loading} />
+      {/* <ArchivedEventsCarousel events={archivedEvents} loading={loading} /> */}
+      <p className="descriptext mt-10 text-bg-dk-grey">
+        We will display our archived events soon!
+      </p>
     </div>
   );
 }
@@ -360,9 +363,9 @@ export function OurEvents({ events }: OurEventsProps) {
         )}
       </div>
       {/* Until the archived event descrips in the db have been updated, leave out the component */}
-      {/* {allEvents.some((e) => e.archived) && (
+      {allEvents.some((e) => e.archived) && (
         <OurArchivedEvents events={allEvents} loading={loading} />
-      )} */}
+      )}
     </div>
   );
 }
