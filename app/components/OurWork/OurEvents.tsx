@@ -6,6 +6,7 @@ import { convertDate } from "@/utils/convertDate";
 import { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { isURL } from "@/utils/imgLoad";
 
 type TagTitle =
   | "In-Person"
@@ -92,7 +93,7 @@ function ArchivedEventsCarousel({
   loading: boolean;
 }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
+    loop: false,
     align: "center",
     containScroll: false,
   });
@@ -148,35 +149,48 @@ function ArchivedEventsCarousel({
         ref={emblaRef}
       >
         <div className={`flex items-center ${cardHeight}`}>
-          {events.map((item, index) => (
-            <div
-              key={`archived-event-${index}`}
-              className="flex-[0_0_88%] sm:flex-[0_0_78%] xl:flex-[0_0_calc(50%-1.25rem)] min-w-0 pl-6 first:pl-0 h-full flex items-center"
-            >
+          {events
+            .sort((e1, e2) => {
+              // if e1 < e2, return 1 otherwise -1
+              const y1 = new Date(e1.date).getFullYear();
+              const y2 = new Date(e2.date).getFullYear();
+              if (y1 !== y2) return y1 > y2 ? -1 : 1;
+              const m1 = new Date(e1.date).getMonth();
+              const m2 = new Date(e2.date).getMonth();
+              if (m1 !== m2) return m1 > m2 ? -1 : 1;
+              const d1 = new Date(e1.date).getDate();
+              const d2 = new Date(e2.date).getDate();
+              return d1 < d2 ? 1 : -1;
+            })
+            .map((item, index) => (
               <div
-                ref={(node) => {
-                  tweenRefs.current[index] = node;
-                }}
-                className="w-full origin-center will-change-transform"
-                style={{
-                  transform: `scale(${MIN_SCALE})`,
-                  opacity: MIN_OPACITY,
-                }}
+                key={`archived-event-${index}`}
+                className="flex-[0_0_88%] sm:flex-[0_0_78%] xl:flex-[0_0_calc(50%-1.25rem)] min-w-0 pl-6 first:pl-0 h-full flex items-center"
               >
-                <EventCardContainer
-                  title={item.title}
-                  descrip={item.descrip}
-                  location={item.location}
-                  date={item.date}
-                  time={item.time}
-                  tags={item?.tags}
-                  imageUrl={item.imageUrl}
-                  archived={item.archived}
-                  loading={loading}
-                />
+                <div
+                  ref={(node) => {
+                    tweenRefs.current[index] = node;
+                  }}
+                  className="w-full origin-center will-change-transform"
+                  style={{
+                    transform: `scale(${MIN_SCALE})`,
+                    opacity: MIN_OPACITY,
+                  }}
+                >
+                  <EventCardContainer
+                    title={item.title}
+                    descrip={item.descrip}
+                    location={item.location}
+                    date={item.date}
+                    time={item.time}
+                    tags={item?.tags}
+                    imageUrl={item.imageUrl}
+                    archived={item.archived}
+                    loading={loading}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
       {events.length > 1 && (
@@ -256,7 +270,9 @@ export function EventCard({
     <div className="flex flex-col gap-4 md:gap-6 h-full">
       {/* photo */}
       <div className="h-1/2 relative w-full rounded-t-[20px] overflow-hidden">
-        <Image src={imageUrl} alt="" fill className="object-cover" />
+        {isURL(imageUrl) && (
+          <Image src={imageUrl} alt="" fill className="object-cover" />
+        )}
       </div>
       {/* content */}
       <div className="flex flex-col h-1/2 justify-between px-6 sm:px-8">
@@ -280,12 +296,14 @@ export function EventCard({
             />
           </div>
           <div className="hidden sm:block">
-            <ButtonRed
-              label="See Location"
-              to={location}
-              size="M"
-              behav="External"
-            />
+            {!archived && (
+              <ButtonRed
+                label="See Location"
+                to={location}
+                size="M"
+                behav="External"
+              />
+            )}
           </div>
           <div className="flex gap-4">
             <p className="cardtext font-semibold">{convertDate(date)}</p>
@@ -341,9 +359,10 @@ export function OurEvents({ events }: OurEventsProps) {
           </div>
         )}
       </div>
-      {allEvents.some((e) => e.archived) && (
+      {/* Until the archived event descrips in the db have been updated, leave out the component */}
+      {/* {allEvents.some((e) => e.archived) && (
         <OurArchivedEvents events={allEvents} loading={loading} />
-      )}
+      )} */}
     </div>
   );
 }
