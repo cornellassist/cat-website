@@ -2,11 +2,12 @@ import { useParams } from "react-router-dom";
 import { blogPosts, BlogPost } from "../blogData";
 import Image from "next/image";
 import { convertDate } from "@/utils/convertDate";
-interface Props {
-  params: Promise<{ slug: string }>;
-}
 
-export default async function Blog({ params }: Props) {
+export default async function Blog({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
 
   const blogPost = blogPosts.find((post: BlogPost) => post.slug === slug);
