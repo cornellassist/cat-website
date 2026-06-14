@@ -16,7 +16,11 @@ export type AddComponentProps = {
   componentCategory?: (typeof componentCategories)[number];
 };
 
-export default function CreateComponent() {
+export default function CreateComponent({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   return (
     <div>
       <AddComponent componentCategory="Event" />
