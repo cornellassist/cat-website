@@ -47,7 +47,7 @@ function OurEventsTopText({
   );
 }
 
-const cardHeight = "h-120 sm:h-115 md:h-130 lg:h-140 xl:h-150 2xl:h-155";
+const cardHeight = "h-130 sm:h-140 md:h-160 lg:h-170 xl:h-180 2xl:h-185";
 
 function EventCardContainer({
   title,
@@ -232,10 +232,10 @@ function OurArchivedEvents({
         titleText="Past Events"
         descrip="Explore our previous STEM education and community outreach events."
       />
-      {/* <ArchivedEventsCarousel events={archivedEvents} loading={loading} /> */}
-      <p className="descriptext mt-10 text-bg-dk-grey">
+      <ArchivedEventsCarousel events={archivedEvents} loading={loading} />
+      {/* <p className="descriptext mt-10 text-bg-dk-grey">
         We will display our archived events soon!
-      </p>
+      </p> */}
     </div>
   );
 }

@@ -60,6 +60,7 @@ function CommHighDecorations() {
 }
 
 export function CommunityHighlights({ events }: CommHighProps) {
+  // console.log(events);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (events.length !== 0) {
@@ -70,11 +71,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
   function CommHighPics({ events }: CommHighProps) {
     const [activeIndex, setActiveIndex] = useState(0);
     const pictures = events.map((item) => item.imageUrl);
-    const altDescriptions = [
-      "Team photo at Island Conference on Disability and Stem",
-      "Team photo at GoBabyGo 2025 at Ithaca College",
-      "Team photo at Sciencenter Workshop",
-    ];
+
     const [emblaRef, emblaApi] = useEmblaCarousel({
       loop: true,
       align: "center",
@@ -95,11 +92,15 @@ export function CommunityHighlights({ events }: CommHighProps) {
     function CommHighButtons() {
       return (
         <div className="flex gap-10 mx-5 sm:gap-20 sm:mx-0 items-center">
-          <div className="flex gap-2">
+          <div className="flex gap-10 items-center">
             <ChevronLeftIcon
               className="h-9 2xl:h-12 cursor-pointer text-text-grey hover:text-text-dk-grey"
               onClick={() => emblaApi?.scrollPrev()}
             />
+            <div className="subtext">
+              Highlight <span className="font-medium">{activeIndex + 1}</span>{" "}
+              of <span className="font-medium">{events.length}</span>
+            </div>
             <ChevronRightIcon
               className="h-9 2xl:h-12 cursor-pointer text-text-grey hover:text-text-dk-grey"
               onClick={() => emblaApi?.scrollNext()}
@@ -126,7 +127,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
       >
         <div
           ref={emblaRef}
-          className="overflow-hidden w-full max-w-full h-90 lg:h-100"
+          className="overflow-hidden w-full max-w-full h-90 lg:h-108"
         >
           <div className="flex">
             {pictures.map((pic, index) => (
@@ -137,7 +138,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
                 {/* desktop */}
                 <div
                   className={`hidden relative lg:flex backdrop-blur-[2px] bg-white h-100 w-250 transition-all duration-300  ${index === activeIndex ? "scale-100 z-10" : "scale-90"}
-              rounded-[20px]`}
+              rounded-[20px] shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)]`}
                 >
                   <div className="flex h-full w-1/2 items-center ml-7 relative z-10">
                     <div className="relative w-full max-w-96 h-80 bg-white rounded-[20px] overflow-hidden">
@@ -181,7 +182,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
                 >
                   <Image
                     src={pic}
-                    alt={altDescriptions[index]}
+                    alt={events[index].imageAlt}
                     fill
                     className={`object-cover ${imgStyles} transition-opacity duration-300 ${index === activeIndex ? "opacity-100" : "opacity-50"}`}
                     sizes="(max-width: 768px) 100vw, 548px"
