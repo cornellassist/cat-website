@@ -78,9 +78,10 @@ export async function PATCH(request: NextRequest) {
   }
 
   try {
-    const updatedProject = prisma.project.update({
-      where: { id: 100 },
-      data: { title: "hi" },
+    const { id, field, value } = await request.json();
+    const updatedProject = await prisma.project.update({
+      where: { id },
+      data: { [field]: value },
     });
     return ok();
   } catch (error) {
