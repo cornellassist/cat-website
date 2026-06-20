@@ -71,10 +71,15 @@ export function CommunityHighlights({ events }: CommHighProps) {
   function CommHighPics({ events }: CommHighProps) {
     const [activeIndex, setActiveIndex] = useState(0);
     const pictures = events.map((item) => item.imageUrl);
-    const cardColors = [
+    const cardBgColors = [
       "bg-theme-lt-red/40",
       "bg-theme-lt-blue/40",
       "bg-theme-lt-purple/40",
+    ];
+    const underlineColors = [
+      "decoration-theme-red",
+      "decoration-theme-blue",
+      "decoration-theme-purple",
     ];
 
     const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -142,7 +147,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
               >
                 {/* desktop */}
                 <div
-                  className={`hidden relative lg:flex backdrop-blur-[2px] ${cardColors[index % 3]} h-100 w-250 transition-all duration-300  ${index === activeIndex ? "scale-100 z-10" : "scale-90"}
+                  className={`hidden relative lg:flex backdrop-blur-[2px] ${cardBgColors[index % 3]} h-100 w-250 transition-all duration-300  ${index === activeIndex ? "scale-100 z-10" : "scale-90"}
               rounded-[20px] shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)]`}
                 >
                   <div className="flex h-full w-1/2 items-center ml-7 relative z-10">
@@ -159,7 +164,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
                   <div className="flex flex-col my-10 mx-10 w-1/2 justify-between relative z-10">
                     <div className="flex flex-col">
                       <h3
-                        className={`underline decoration-2 underline-offset-10 ${activeIndex === index ? "subheading text-text-dk-grey" : "subheading text-text-grey-muted"}`}
+                        className={`underline decoration-2 underline-offset-10 ${underlineColors[index % 3]} ${activeIndex === index ? "subheading text-text-dk-grey" : "subheading text-text-grey-muted"}`}
                       >
                         {events[index].title}
                       </h3>
