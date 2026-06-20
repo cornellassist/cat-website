@@ -159,7 +159,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
                   <div className="flex flex-col my-10 mx-10 w-1/2 justify-between relative z-10">
                     <div className="flex flex-col">
                       <h3
-                        className={`underline decoration-2 underline-offset-10 decoration-theme-red ${activeIndex === index ? "subheading text-text-dk-grey" : "subheading text-text-grey-muted"}`}
+                        className={`underline decoration-2 underline-offset-10 ${activeIndex === index ? "subheading text-text-dk-grey" : "subheading text-text-grey-muted"}`}
                       >
                         {events[index].title}
                       </h3>
