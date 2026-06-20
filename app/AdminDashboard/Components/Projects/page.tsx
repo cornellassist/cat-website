@@ -27,9 +27,20 @@ export default function Projects() {
     }
     getProjects();
   }, []);
+
+  const handleUpdate = async (
+    rowIndex: number,
+    field: string,
+    value: string,
+  ) => {
+    const row = projects?.[rowIndex];
+    if (!row) return;
+    await axios.patch("/api/projects", { id: row.id, field, value });
+  };
+
   return (
     <DashboardWrapper>
-      <AdminTable data={projects} />
+      <AdminTable data={projects} update={handleUpdate} />
     </DashboardWrapper>
   );
 }
