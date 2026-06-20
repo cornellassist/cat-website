@@ -71,6 +71,11 @@ export function CommunityHighlights({ events }: CommHighProps) {
   function CommHighPics({ events }: CommHighProps) {
     const [activeIndex, setActiveIndex] = useState(0);
     const pictures = events.map((item) => item.imageUrl);
+    const cardColors = [
+      "bg-theme-lt-red/40",
+      "bg-theme-lt-blue/40",
+      "bg-theme-lt-purple/40",
+    ];
 
     const [emblaRef, emblaApi] = useEmblaCarousel({
       loop: true,
@@ -137,7 +142,7 @@ export function CommunityHighlights({ events }: CommHighProps) {
               >
                 {/* desktop */}
                 <div
-                  className={`hidden relative lg:flex backdrop-blur-[2px] bg-white h-100 w-250 transition-all duration-300  ${index === activeIndex ? "scale-100 z-10" : "scale-90"}
+                  className={`hidden relative lg:flex backdrop-blur-[2px] ${cardColors[index % 3]} h-100 w-250 transition-all duration-300  ${index === activeIndex ? "scale-100 z-10" : "scale-90"}
               rounded-[20px] shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)]`}
                 >
                   <div className="flex h-full w-1/2 items-center ml-7 relative z-10">
