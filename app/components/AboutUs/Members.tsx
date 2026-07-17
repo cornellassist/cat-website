@@ -78,13 +78,17 @@ function createMemberCardInfo({ name }: CreateMemberCardProps): MemberCardInfo {
   }
 }
 
+// For now, commenting out names. Should make GET /team
 const teamLeadsInfo: CreateMemberCardProps[] = [
-  { name: "Lucas Keith" },
-  { name: "Mae Sliwinski" },
+  // { name: "Lucas Keith" },
+  // { name: "Mae Sliwinski" },
   { name: "Natalie Shepherd" },
-  { name: "Chris Parker" },
-  { name: "William Ellis" },
+  // { name: "Chris Parker" },
+  // { name: "William Ellis" },
   { name: "Savaas Iqbal" },
+  { name: "Alan Wu" },
+  { name: "Andy Chen" },
+  { name: "Rishabh Dholakia" },
   { name: "Josephine Kelly" },
   { name: "Zaid Al-Shoha" },
   { name: "Richard Ballard" },
@@ -93,14 +97,12 @@ const teamLeadsInfo: CreateMemberCardProps[] = [
 
 const engSubteamInfo: CreateMemberCardProps[] = [
   { name: "Shannon Lin" },
-  { name: "Alan Wu" },
   { name: "Annie Park" },
-  { name: "Rishabh Dholakia" },
   { name: "Emily Wang" },
   { name: "Liz Pappania" },
   { name: "Ajaa-Sungma Sigri-Naah" },
   { name: "Madhu Balaji" },
-  { name: "Selin Toker" },
+  // { name: "Selin Toker" },
   { name: "Lila Alderete" },
   { name: "Diya Sheth" },
   { name: "Merve Tutar" },
@@ -132,11 +134,10 @@ const eduOutSubteamInfo: CreateMemberCardProps[] = [
 ];
 
 const opsSubteamInfo: CreateMemberCardProps[] = [
-  { name: "Andy Chen" },
   { name: "Ariana Sanchez" },
   { name: "Scott Zinman" },
   { name: "Sonya Zheng" },
-  { name: "Jason Yang" },
+  // { name: "Jason Yang" },
   { name: "Dina Shlufman" },
 ];
 

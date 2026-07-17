@@ -10,14 +10,6 @@ export default function Projects() {
     async function getProjects() {
       // no need for auth check here
       try {
-        // const cachedProjects = localStorage.getItem("projects");
-        // if (cachedProjects) {
-        //   console.log("in cache");
-        //   setProjects(JSON.parse(cachedProjects));
-        //   console.log(JSON.parse(cachedProjects));
-        //   return;
-        // }
-        // console.log("not in cache");
         const { data } = await axios.get("/api/projects");
         setProjects(data);
         // localStorage.setItem("projects", JSON.stringify(data));
