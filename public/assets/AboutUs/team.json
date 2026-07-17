@@ -17,7 +17,7 @@
   },
   {
     "name": "Andy Chen",
-    "role": "Engineering Liaison",
+    "role": "Engineering Lead",
     "year": "2028",
     "major": "Mechanical Engineering",
     "college": "College of Engineering",
@@ -49,7 +49,7 @@
   },
   {
     "name": "Alan Wu",
-    "role": "Engineering",
+    "role": "Engineering Lead",
     "year": "2028",
     "major": "Biology (Neuroscience Concentration)",
     "college": "College of Agriculture and Life Sciences",
@@ -81,7 +81,7 @@
   },
   {
     "name": "Rishabh Dholakia",
-    "role": "Engineering",
+    "role": "Engineering Lead",
     "year": "2028",
     "major": "Mechanical Engineering",
     "college": "College of Engineering",
@@ -89,7 +89,7 @@
   },
   {
     "name": "Emmanuella Umoh",
-    "role":  "Outreach & Education",
+    "role": "Outreach & Education",
     "year": "2029",
     "major": "Public Policy",
     "college": "Brooks School of Public Policy",
@@ -150,7 +150,7 @@
   },
   {
     "name": "Natalie Shepherd",
-    "role": "Engineering Lead",
+    "role": "Full Team Lead",
     "year": "2027",
     "major": "BME",
     "college": "College of Engineering",
@@ -362,7 +362,7 @@
   },
   {
     "name": "Savaas Iqbal",
-    "role": "Engineering Lead",
+    "role": "Full Team Lead",
     "year": "2028",
     "major": "Electrical & Computer Engineering",
     "college": "College of Engineering",
