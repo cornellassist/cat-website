@@ -3,6 +3,10 @@ import { DashboardWrapper } from "@/app/components/AdminDashboard/DashboardWrapp
 import { useEffect, useState } from "react";
 import { AdminTable } from "@/app/components/AdminDashboard/AdminTable";
 import axios from "axios";
+import { createClient } from "@/utils/supabase/client";
+
+const supabase = createClient();
+
 
 export default function Projects() {
   const [projects, setProjects] = useState<any[]>();
@@ -11,6 +15,7 @@ export default function Projects() {
       // no need for auth check here
       try {
         const { data } = await axios.get("/api/projects");
+        setProjects(data);
         setProjects(data);
         // localStorage.setItem("projects", JSON.stringify(data));
       } catch (error) {
