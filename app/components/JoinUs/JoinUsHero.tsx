@@ -17,6 +17,7 @@ function HeroContent() {
         2026. Thank you for your interest, and we look forward to your
         applications!
       </p>
+      <ButtonRed label="Coffee Chat ☕️" to="https://docs.google.com/forms/d/e/1FAIpQLSeJl9iVXLuzeEw6SwTCo-gPT-32tMe_8c1X7UZg-GwNBobJBA/viewform" behav="External" />
       <div className="relative">
         <Image
           src={HeroPic}
@@ -44,7 +45,7 @@ function HeroContent() {
 
 const HeroContainer = ({ children }: any) => {
   return (
-    <div className="mt-16 sm:mt-16 md:mt-24 universepad relative overflow-hidden h-150 sm:h-180 md:h-180 lg:h-190 2xl:h-200">
+    <div className="mt-16 sm:mt-16 md:mt-24 mb-10 universepad relative overflow-hidden min-h-150 sm:min-h-180 md:min-h-180 lg:min-h-190 2xl:min-h-200">
       <Image
         src={BlurTL}
         alt=""
