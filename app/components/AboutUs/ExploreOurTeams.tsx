@@ -7,8 +7,8 @@ export function ExploreOurTeams() {
   const teams = [
     { id: "teamLeads", name: "Team Leads" },
     { id: "engineering", name: "Engineering" },
-    { id: "outreachAndEducation", name: "Outreach & Education" },
-    { id: "operations", name: "Operations" },
+    { id: "educationAndAdvocacy", name: "Education & Advocacy" },
+    { id: "business", name: "Business" },
   ];
 
   const scrollToSection = (id: any) => {

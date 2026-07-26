@@ -6,7 +6,6 @@ import {
   ok,
   deleted,
 } from "@/utils/http";
-import { createClient } from "@/utils/supabase/server";
 import { checkAuth } from "@/utils/checkAuth";
 import prisma from "@/utils/prisma";
 
@@ -15,10 +14,10 @@ export async function GET() {
     TEAM_LEADS: 0,
     ENGINEERING_LEADS: 1,
     OUTREACH_EDU_LEADS: 2,
-    OPERATIONS_LEADS: 3,
+    BUSINESS_LEADS: 3,
     ENGINEERING: 4,
     OUTREACH_EDU: 5,
-    OPERATIONS: 6,
+    BUSINESS: 6,
   };
   try {
     const member = await prisma.member.findMany({

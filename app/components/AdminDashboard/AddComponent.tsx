@@ -106,13 +106,11 @@ function FormField({
             <option value="">Select role</option>
             <option value="TEAM_LEADS">Lead</option>
             <option value="ENGINEERING_LEADS">Engineering Lead</option>
-            <option value="OPERATIONS_LEADS">Operations Lead</option>
-            <option value="OUTREACH_EDU_LEADS">
-              Outreach & Education Lead
-            </option>
+            <option value="BUSINESS_LEADS">Business Lead</option>
+            <option value="EDU_ADVO_LEADS">Education & Advocacy Lead</option>
             <option value="ENGINGEERING">Engineering</option>
-            <option value="OPERATIONS">Operations</option>
-            <option value="OUTREACH_EDU">Outreach & Education</option>
+            <option value="BUSINESS">Business</option>
+            <option value="EDU_ADVO">Education & Advocacy</option>
           </select>
         );
       default:
