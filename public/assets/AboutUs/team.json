@@ -1,7 +1,7 @@
 [
   {
     "name": "Richard Ballard",
-    "role": "Operations Lead",
+    "role": "Business Lead",
     "year": "2027",
     "major": "Information Science & Communication",
     "college": "College of Agriculture and Life Sciences",
@@ -9,7 +9,7 @@
   },
   {
     "name": "Abigail Jin",
-    "role": "Operations Lead",
+    "role": "Business Lead",
     "year": "2029",
     "major": "Economics",
     "college": "College of Arts & Sciences",
@@ -65,7 +65,7 @@
   },
   {
     "name": "Sonya Zheng",
-    "role": "Operations",
+    "role": "Business",
     "year": "2029",
     "major": "Computer Science",
     "college": "College of Engineering",
@@ -73,7 +73,7 @@
   },
   {
     "name": "Sarah Swee",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy",
     "year": "2027",
     "major": "Biometry and Statistics",
     "college": "College of Agriculture and Life Sciences",
@@ -89,7 +89,7 @@
   },
   {
     "name": "Emmanuella Umoh",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy",
     "year": "2029",
     "major": "Public Policy",
     "college": "Brooks School of Public Policy",
@@ -105,7 +105,7 @@
   },
   {
     "name": "David Han",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy",
     "year": "2028",
     "major": "HBHS",
     "college": "College of Human Ecology"
@@ -166,7 +166,7 @@
   },
   {
     "name": "Evan Lee",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy",
     "year": "2027",
     "major": "Hotel Administration",
     "college": "Nolan School of Hotel Administration",
@@ -174,7 +174,7 @@
   },
   {
     "name": "Ria Dhulia",
-    "role": "Engineering",
+    "role": "Engineering Lead",
     "year": "2028",
     "major": "Biomedical Engineering",
     "college": "College of Engineering",
@@ -189,7 +189,7 @@
   },
   {
     "name": "Josephine Kelly",
-    "role": "Outreach & Education Lead",
+    "role": "Education & Advocacy Lead",
     "year": "2027",
     "major": "Information Science & Cognitive Science",
     "college": "College of Arts and Sciences",
@@ -205,14 +205,14 @@
   },
   {
     "name": "Sophia Roache",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy Lead",
     "year": "2027",
     "major": "BME",
     "college": "College of Engineering"
   },
   {
     "name": "Morgan Ogata",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy",
     "year": "2027",
     "major": "Independent Major (Primary: BME, Secondary: Public Policy",
     "college": "College of Engineering",
@@ -236,7 +236,7 @@
   },
   {
     "name": "Rachel Turney",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy",
     "year": "2028",
     "major": "Information Science",
     "college": "College of Arts and Sciences",
@@ -268,14 +268,14 @@
   },
   {
     "name": "Vanessa Chen Hsieh",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy",
     "year": "2028",
     "major": "Biological Sciences",
     "college": "College of Arts and Sciences"
   },
   {
     "name": "Zaid Al-Shoha",
-    "role": "Outreach & Education Lead",
+    "role": "Education & Advocacy Lead",
     "year": "2028",
     "major": "Biological Sciences",
     "college": "College of Agriculture and Life Sciences",
@@ -283,7 +283,7 @@
   },
   {
     "name": "Omar Alkhitan",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy",
     "year": "2028",
     "major": "Applied Economics & Management ",
     "college": "Dyson School of Applied Economics and Management",
@@ -330,7 +330,7 @@
   },
   {
     "name": "Chloe Jung",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy",
     "year": "2027",
     "major": "Biology & Cognitive Science",
     "college": "College of Arts and Sciences",
@@ -338,7 +338,7 @@
   },
   {
     "name": "Scott Zinman",
-    "role": "Outreach & Education Liason",
+    "role": "Education & Advocacy Liason",
     "year": "2029",
     "major": "GPHS",
     "college": "College of Human Ecology",
@@ -354,7 +354,7 @@
   },
   {
     "name": "Dina Shlufman",
-    "role": "Operations",
+    "role": "Business",
     "year": "2027",
     "major": "Information Science",
     "college": "College of Arts and Sciences",
@@ -378,7 +378,7 @@
   },
   {
     "name": "Neel Behari",
-    "role": "Outreach & Education",
+    "role": "Education & Advocacy",
     "year": "2029",
     "major": "Public Policy",
     "college": "Brooks School of Public Policy",

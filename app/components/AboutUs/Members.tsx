@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
-import data from "@/public/assets/AboutUs/team.json";
+import data from "@/public/assets/AboutUs/team.json"; // auto parsed
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
 import { useState } from "react";
 import { loadingComplete, imgLoadStyles } from "@/utils/imgLoad";
@@ -79,6 +79,7 @@ function createMemberCardInfo({ name }: CreateMemberCardProps): MemberCardInfo {
 }
 
 // For now, commenting out names. Should make GET /team
+// leave past members, just in case we do alumni section
 const teamLeadsInfo: CreateMemberCardProps[] = [
   // { name: "Lucas Keith" },
   // { name: "Mae Sliwinski" },
@@ -88,9 +89,11 @@ const teamLeadsInfo: CreateMemberCardProps[] = [
   { name: "Savaas Iqbal" },
   { name: "Alan Wu" },
   { name: "Andy Chen" },
+  { name: "Ria Dhulia" },
   { name: "Rishabh Dholakia" },
   { name: "Josephine Kelly" },
-  { name: "Zaid Al-Shoha" },
+  { name: "Sophia Roache" },
+  // { name: "Zaid Al-Shoha" },
   { name: "Richard Ballard" },
   { name: "Abigail Jin" },
 ];
@@ -115,7 +118,7 @@ const engSubteamInfo: CreateMemberCardProps[] = [
   { name: "Brian Xia" },
   { name: "Saejoon Park" },
   { name: "Neha Chigurupati" },
-  { name: "Elom Eskender" },
+  // { name: "Elom Eskender" },
   { name: "Mihika Mukherjee" },
 ];
 
@@ -124,21 +127,20 @@ const eduOutSubteamInfo: CreateMemberCardProps[] = [
   { name: "Emmanuella Umoh" },
   { name: "David Han" },
   { name: "Evan Lee" },
-  { name: "Sophia Roache" },
   { name: "Morgan Ogata" },
   { name: "Rachel Turney" },
   { name: "Vanessa Chen Hsieh" },
-  { name: "Omar Alkhitan" },
+  // { name: "Omar Alkhitan" },
   { name: "Chloe Jung" },
-  { name: "Neel Behari" },
+  // { name: "Neel Behari" },
 ];
 
-const opsSubteamInfo: CreateMemberCardProps[] = [
+const businessSubteamInfo: CreateMemberCardProps[] = [
   { name: "Ariana Sanchez" },
   { name: "Scott Zinman" },
   { name: "Sonya Zheng" },
   // { name: "Jason Yang" },
-  { name: "Dina Shlufman" },
+  // { name: "Dina Shlufman" },
 ];
 
 // const alumniInfo: CreateMemberCardProps[] = [
@@ -157,7 +159,7 @@ const eduOutSubteam: MemberCardInfo[] = eduOutSubteamInfo.map((member) =>
   createMemberCardInfo({ name: member.name }),
 );
 
-const opsSubteam: MemberCardInfo[] = opsSubteamInfo.map((member) =>
+const businessSubteam: MemberCardInfo[] = businessSubteamInfo.map((member) =>
   createMemberCardInfo({ name: member.name }),
 );
 
@@ -180,8 +182,16 @@ function MemberModal({
 
   const labelStyles = "font-semibold";
   return (
-    <div className="fixed flex justify-center items-center bg-black/50 inset-0 z-50">
-      <div className="bg-text-dk-grey rounded-[20px] max-w-lg w-auto relative px-15 py-8">
+    <div
+      className="fixed flex justify-center items-center bg-black/50 inset-0 z-50"
+      onClick={closeModal}
+    >
+      <div
+        className="bg-text-dk-grey rounded-[20px] max-w-lg w-auto relative px-15 py-8"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <button className="absolute top-2 right-4 text-xl" onClick={closeModal}>
           <img
             src="/assets/close-icon.svg"
@@ -243,7 +253,7 @@ export function MemberCard({
         return "bg-[#444444]";
       } else if (lowerCaseRole == "engineering") {
         return "bg-[#D23333]";
-      } else if (lowerCaseRole == "outreach & education") {
+      } else if (lowerCaseRole == "education & advocacy") {
         return "bg-[#8E2800]";
       } else {
         return "bg-[#004AB9]";
@@ -309,10 +319,10 @@ function TeamSection({ title, team, clickMember }: SectionProps) {
       return "teamLeads";
     } else if (lowerCaseTitle.includes("engineering")) {
       return "engineering";
-    } else if (lowerCaseTitle.includes("outreach")) {
-      return "outreachAndEducation";
+    } else if (lowerCaseTitle.includes("business")) {
+      return "business";
     } else {
-      return "operations";
+      return "business";
     }
   };
   return (
@@ -380,13 +390,13 @@ export function Members() {
         clickMember={clickMember}
       />
       <TeamSection
-        title="Outreach & Education Subteam"
+        title="Education & Advocacy Subteam"
         team={eduOutSubteam}
         clickMember={clickMember}
       />
       <TeamSection
-        title="Operations Subteam"
-        team={opsSubteam}
+        title="Business Subteam"
+        team={businessSubteam}
         clickMember={clickMember}
       />
       {/* <TeamSection title="Our Alumni" team={alumni} clickMember={clickMember} /> */}
