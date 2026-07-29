@@ -231,6 +231,10 @@ function MemberModal({
   );
 }
 
+function WhereWeAreNow() {
+  return <div></div>;
+}
+
 export function MemberCard({
   member,
   onClick,

@@ -13,7 +13,7 @@ function HeroContent() {
     <div className="flex flex-col items-center gap-2 sm:gap-5">
       <h1 className="mainheading mt-10">Join Us</h1>
       <p className="subtext mt-4 w-4/5 text-center">
-        Thank you so much for your interest in joing us! This fall, we will be
+        Thank you so much for your interest in joining us! This fall, we will be
         accepting applications from August 17th to September 3rd, and we look
         forward to your applications!
       </p>
