@@ -45,7 +45,7 @@ function HeroContent() {
           alt="A Cornell Assistive Technology team work session"
           height={HeroPic.height}
           width={HeroPic.width}
-          className={`mt-5 h-80 sm:h-96 md:h-112 xl:h-128 2xl:h-144 w-auto rounded-[20px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] ${imgLoadStyles}`}
+          className={`mt-5 h-70 sm:h-86 md:h-102 xl:h-118 2xl:h-134 w-auto rounded-[20px] drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] ${imgLoadStyles}`}
           onLoadingComplete={(img) => {
             loadingComplete(img);
           }}

@@ -3,15 +3,15 @@
 import { useRouter } from "next/navigation";
 
 type ButtonProps = {
-  label: string
-  to: string
-  size?: "L" | "M" | "S"
-  behav?: "Internal" | "Scroll" | "External"
-  disabled?: boolean
-}
+  label: string;
+  to: string;
+  size?: "L" | "M" | "S";
+  behav?: "Internal" | "Scroll" | "External";
+  disabled?: boolean;
+};
 
-const baseButtonStyles = "rounded-[1000px]"
-const baseWidthStyles = "w-auto max-w-full"
+const baseButtonStyles = "rounded-full";
+const baseWidthStyles = "w-auto max-w-full";
 
 const sizeStyles = {
   L: "lgbutton",
@@ -19,7 +19,17 @@ const sizeStyles = {
   S: "smbutton",
 };
 
-function onClickNavigation({ to, behav = "Internal", disabled = false, router }: { to: string; behav: string; disabled: boolean; router: ReturnType<typeof useRouter> }) {
+function onClickNavigation({
+  to,
+  behav = "Internal",
+  disabled = false,
+  router,
+}: {
+  to: string;
+  behav: string;
+  disabled: boolean;
+  router: ReturnType<typeof useRouter>;
+}) {
   if (!disabled) {
     if (behav === "Scroll") {
       const element = document.getElementById(to);
@@ -29,41 +39,56 @@ function onClickNavigation({ to, behav = "Internal", disabled = false, router }:
         const offsetPosition = elementPosition + window.pageYOffset - offset;
         window.scrollTo({
           top: offsetPosition,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
       }
     } else if (behav === "Internal") {
-      router.push(to)
+      router.push(to);
     } else {
-      window.open(to, '_blank')
+      window.open(to, "_blank");
     }
   }
 }
 
-
-export function ButtonRed({ label, to, size = "L", behav = "Internal", disabled = false }: ButtonProps) {
+export function ButtonRed({
+  label,
+  to,
+  size = "L",
+  behav = "Internal",
+  disabled = false,
+}: ButtonProps) {
   const router = useRouter();
   return (
     <div className={baseWidthStyles}>
-      <button onClick={() => onClickNavigation({ to, behav, disabled, router })}
+      <button
+        onClick={() => onClickNavigation({ to, behav, disabled, router })}
         className={`${!disabled ? "bg-theme-red hover:bg-theme-dk-red cursor-pointer transition-colors duration-200" : "bg-theme-m-red"} text-theme-white ${baseButtonStyles} 
-         ${sizeStyles[size]}`}>
+         ${sizeStyles[size]}`}
+      >
         {label}
       </button>
     </div>
-  )
+  );
 }
 
-export function ButtonWhite({ label, to, size = "L", behav = "Internal", disabled = false }: ButtonProps) {
+export function ButtonWhite({
+  label,
+  to,
+  size = "L",
+  behav = "Internal",
+  disabled = false,
+}: ButtonProps) {
   const router = useRouter();
   return (
     <div className={baseWidthStyles}>
-      <button onClick={() => onClickNavigation({ to, behav, disabled, router })}
+      <button
+        onClick={() => onClickNavigation({ to, behav, disabled, router })}
         className={`${!disabled ? "bg-theme-white hover:bg-bg-lt-grey cursor-pointer transition-colors duration-200" : "bg-bg-lt-grey"} 
         text-text-dk-grey outline-[1.5px] outline-text-dk-grey -outline-offset-1 ${baseButtonStyles}
-          ${sizeStyles[size]}`}>
+          ${sizeStyles[size]}`}
+      >
         {label}
       </button>
     </div>
-  )
+  );
 }
