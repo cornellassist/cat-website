@@ -25,8 +25,8 @@ const engineering: Team = {
   teamName: "Engineering",
   description: [
     "We design and build assistive technology that helps members of the Ithaca community live more independently.",
-    "You'll join project sub-teams that work directly on ongoing builds. See current projects on our Projects page.",
-    "We welcome members from all backgrounds, including MechE, ECE, BME, CS and more.",
+    "You'll join project sub-teams that work directly on ongoing build.",
+    "We welcome members from all backgrounds!",
   ],
   miniDescription:
     "Design and build assistive technology for the Ithaca community.",
@@ -81,25 +81,27 @@ export const TeamCard = ({
     const pics = teamToPic(teamName);
     return (
       <div
-        className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center"
+        className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4"
         onClick={() => {
           setShowModal(false);
         }}
       >
         <div
-          className="h-120 w-250 flex p-6 gap-8 bg-bg-lt-grey rounded-2xl"
+          className="w-full lg:w-290 2xl:w-300 max-h-[90vh] lg:h-120 overflow-y-auto flex flex-col lg:flex-row p-4 sm:p-6 gap-4 sm:gap-6 lg:gap-8 bg-bg-lt-grey rounded-2xl"
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
           {/* pic gallery */}
-          <div className="w-70 flex flex-col justify-between gap-4">
+          <div className="w-full lg:w-70 flex flex-row lg:flex-col gap-4 lg:justify-between">
             {pics.map((p, index) => {
               return (
-                <div className="bg-theme-white rounded-2xl p-2 flex-1">
+                <div
+                  key={index}
+                  className="bg-theme-white rounded-2xl p-2 flex-1 h-28 sm:h-32 lg:h-auto"
+                >
                   <div className="relative h-full rounded-2xl overflow-hidden">
                     <Image
-                      key={index}
                       src={p}
                       alt={teamName}
                       fill
@@ -111,9 +113,9 @@ export const TeamCard = ({
             })}
           </div>
           {/* text */}
-          <div className="flex-1 flex flex-col bg-theme-white rounded-2xl p-6">
-            <h2 className="cardheading mb-6">{teamName}</h2>
-            <div className="flex flex-col gap-4 mb-10">
+          <div className="flex-1 flex flex-col bg-theme-white rounded-2xl p-4 sm:p-6">
+            <h2 className="cardheading mb-3 sm:mb-6">{teamName}</h2>
+            <div className="flex flex-col gap-3 sm:gap-4 mb-6 sm:mb-10">
               {description.map((d, index) => {
                 return (
                   <div key={index} className="descriptext text-text-dk-grey">
@@ -150,7 +152,7 @@ export const TeamCard = ({
         className="max-w-full min-h-full flex flex-col rounded-2xl
     border border-bg-lt-grey backdrop-blur-[2px] bg-theme-white/90"
       >
-        <div className="h-60 w-full relative rounded-t-lg overflow-hidden">
+        <div className="h-48 sm:h-56 lg:h-60 w-full relative rounded-t-lg overflow-hidden">
           <Image
             src={imgUrl}
             alt={`The ${teamName} subteam`}
@@ -158,10 +160,12 @@ export const TeamCard = ({
             className="object-cover"
           />
         </div>
-        <div className="flex flex-col justify-between mt-6 md:mt-0 p-6 flex-1 w-full">
+        <div className="flex flex-col justify-between mt-6 md:mt-0 p-4 sm:p-6 flex-1 w-full">
           <div>
-            <h3 className="cardheading mb-4 max-w-full">{teamName}</h3>
-            <p className="descriptext text-text-grey mb-6">{miniDescription}</p>
+            <h3 className="cardheading mb-3 sm:mb-4 max-w-full">{teamName}</h3>
+            <p className="descriptext text-text-grey mb-4 sm:mb-6">
+              {miniDescription}
+            </p>
             {/* {description.map((d, index) => {
           return (
             <p
@@ -192,7 +196,7 @@ export const AboutTeams = () => {
     <div className="universepad py-6">
       <h2 className="heading">Our Teams</h2>
       <p className="subtext">See how you can get involved!</p>
-      <div className="flex justify-center mt-10 gap-5">
+      <div className="flex flex-col sm:flex-row justify-center mt-6 sm:mt-10 gap-5">
         <TeamCard
           imgUrl={engineering.imgUrl}
           teamName={engineering.teamName}
