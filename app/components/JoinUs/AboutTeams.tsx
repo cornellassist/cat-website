@@ -24,8 +24,8 @@ const engineering: Team = {
   imgUrl: EngPic1,
   teamName: "Engineering",
   description: [
-    "Design and build assistive technology that helps members of the Ithaca community live more independently.",
-    "You'll join a project sub-team and work directly on one of our ongoing builds. See current projects on our Projects page.",
+    "We design and build assistive technology that helps members of the Ithaca community live more independently.",
+    "You'll join project sub-teams that work directly on ongoing builds. See current projects on our Projects page.",
     "We welcome members from all backgrounds, including MechE, ECE, BME, CS and more.",
   ],
   miniDescription:
@@ -37,12 +37,12 @@ const educationAndAdvocacy: Team = {
   imgUrl: EduAdvoPic1,
   teamName: "Education & Advocacy",
   description: [
-    "Create community outreach initiatives and foster K-12 STEM education in Ithaca.",
-    "You'll help run workshops, events, and campaigns that raise awareness for accessibility and assistive technology.",
-    "Modify toys to give kids with disabilities the opportunity to play.",
+    "We create community outreach initiatives and foster K-12 STEM education in Ithaca.",
+    "In addition, we help run workshops and events to raise awareness for accessibility and assistive technology.",
+    "We also modify toys to give kids with disabilities the opportunity to play.",
   ],
   miniDescription:
-    "Foster K-12 STEM education and adaptive toy modification in Ithaca.",
+    "Foster STEM education and modify toys for the Ithaca community.",
 };
 const educationAndAdvocacyPics = [EduAdvoPic1, EduAdvoPic2];
 
@@ -50,12 +50,10 @@ const business: Team = {
   imgUrl: BusinessPic1,
   teamName: "Business",
   description: [
-    "Promote brand awareness and handle internal operations for the club.",
-    "Work on marketing, finance, sponsorships, and partnerships to support CAT's functions.",
-    "Maintain and develop the organization's website, and build internal tools.",
+    "We promote brand awareness and handle internal operations, like marketing, finance, sponsorships, and partnerships to support CAT's functions.",
+    "We also help maintain the organization's website and build internal tools.",
   ],
-  miniDescription:
-    "Support internal operations, promote awareness, and develop CAT's own software.",
+  miniDescription: "Promote awareness and develop tools for CAT's operations.",
 };
 const businessPics = [BusinessPic1, BusinessPic2];
 
