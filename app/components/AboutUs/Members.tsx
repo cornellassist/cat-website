@@ -115,7 +115,6 @@ const engSubteamInfo: CreateMemberCardProps[] = [
   { name: "Serena Inderjit" },
   { name: "Sahana Behera" },
   { name: "David Shepherd" },
-  { name: "Brian Xia" },
   { name: "Saejoon Park" },
   { name: "Neha Chigurupati" },
   // { name: "Elom Eskender" },
@@ -138,9 +137,10 @@ const eduOutSubteamInfo: CreateMemberCardProps[] = [
 const businessSubteamInfo: CreateMemberCardProps[] = [
   { name: "Ariana Sanchez" },
   { name: "Scott Zinman" },
+  { name: "Brian Xia" },
   { name: "Sonya Zheng" },
   // { name: "Jason Yang" },
-  // { name: "Dina Shlufman" },
+  { name: "Dina Shlufman" },
 ];
 
 // const alumniInfo: CreateMemberCardProps[] = [
