@@ -98,7 +98,7 @@ export const TeamCard = ({
               return (
                 <div
                   key={index}
-                  className="rounded-2xl flex-1 h-28 sm:h-32 lg:h-auto"
+                  className="rounded-2xl flex-1 h-28 sm:h-50 lg:h-auto"
                 >
                   <div className="relative h-full rounded-2xl overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)]">
                     <Image
