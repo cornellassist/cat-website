@@ -1,74 +1,219 @@
+"use client";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
-import photoPlaceholder from "@/public/assets/JoinUs/hero-pic.jpg";
-import EngPic from "@/public/assets/JoinUs/eng-pic.jpg";
+// import photoPlaceholder from "@/public/assets/JoinUs/hero-pic.jpg";
+import EduAdvoPic1 from "@/public/assets/JoinUs/cornell_assist___sciencenter_2025-03-16r.jpg";
+import EduAdvoPic2 from "@/public/assets/JoinUs/cayuga_heights.webp";
+import EduAdvoPic3 from "@/public/assets/JoinUs/gobabygo2025.png";
+
+import EngPic1 from "@/public/assets/JoinUs/eng-pic.jpg";
+import EngPic2 from "@/public/assets/JoinUs/resna.webp";
+import BusinessPic1 from "@/public/assets/JoinUs/business-pic.png";
+import BusinessPic2 from "@/public/assets/JoinUs/cms.png";
+import { useState } from "react";
+import { ButtonRed } from "../Buttons";
 
 type Team = {
   imgUrl: StaticImageData;
   teamName: string;
-  description: string;
+  description: string[];
+  miniDescription?: string;
 };
 
-const engineeringTeam: Team = {
-  imgUrl: EngPic,
+const engineering: Team = {
+  imgUrl: EngPic1,
   teamName: "Engineering",
-  description:
-    "Design and create assistive solutions for the Ithaca community.",
+  description: [
+    "Design and build assistive technology that helps members of the Ithaca community live more independently.",
+    "You'll join a project sub-team and work directly on one of our ongoing builds. See current projects on our Projects page.",
+    "We welcome members from all backgrounds, including MechE, ECE, BME, CS and more.",
+  ],
+  miniDescription:
+    "Design and build assistive technology for the Ithaca community.",
 };
+const engineeringPics = [EngPic1, EngPic2];
 
-const outreachAndEducation: Team = {
-  imgUrl: photoPlaceholder,
-  teamName: "Outreach and Education",
-  description:
+const educationAndAdvocacy: Team = {
+  imgUrl: EduAdvoPic1,
+  teamName: "Education & Advocacy",
+  description: [
     "Create community outreach initiatives and foster K-12 STEM education in Ithaca.",
+    "You'll help run workshops, events, and campaigns that raise awareness for accessibility and assistive technology.",
+    "Modify toys to give kids with disabilities the opportunity to play.",
+  ],
+  miniDescription:
+    "Foster K-12 STEM education and adaptive toy modification in Ithaca.",
 };
+const educationAndAdvocacyPics = [EduAdvoPic1, EduAdvoPic2];
 
-const internalOperation: Team = {
-  imgUrl: photoPlaceholder,
+const business: Team = {
+  imgUrl: BusinessPic1,
   teamName: "Business",
-  description: "Promote brand awareness and handle internal operations",
+  description: [
+    "Promote brand awareness and handle internal operations for the club.",
+    "Work on marketing, finance, sponsorships, and partnerships to support CAT's functions.",
+    "Maintain and develop the organization's website, and build internal tools.",
+  ],
+  miniDescription:
+    "Support internal operations, promote awareness, and develop CAT's own software.",
 };
+const businessPics = [BusinessPic1, BusinessPic2];
 
-export const TeamCard = ({ imgUrl, teamName, description }: Team) => {
+function teamToPic(teamName: string): StaticImageData[] {
+  switch (teamName) {
+    case "Engineering":
+      return engineeringPics;
+    case "Education & Advocacy":
+      return educationAndAdvocacyPics;
+    case "Business":
+      return businessPics;
+    default:
+      return engineeringPics;
+  }
+}
+
+export const TeamCard = ({
+  imgUrl,
+  teamName,
+  miniDescription,
+  description,
+}: Team) => {
+  const [showModal, setShowModal] = useState(false);
+  function TeamCardModal({ teamName, description }: Team) {
+    const pics = teamToPic(teamName);
+    return (
+      <div
+        className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center"
+        onClick={() => {
+          setShowModal(false);
+        }}
+      >
+        <div
+          className="h-120 w-250 flex p-6 gap-8 bg-bg-lt-grey rounded-2xl"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          {/* pic gallery */}
+          <div className="w-70 flex flex-col justify-between gap-4">
+            {pics.map((p, index) => {
+              return (
+                <div className="bg-theme-white rounded-2xl p-2 flex-1">
+                  <div className="relative h-full rounded-2xl overflow-hidden">
+                    <Image
+                      key={index}
+                      src={p}
+                      alt={teamName}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {/* text */}
+          <div className="flex-1 flex flex-col bg-theme-white rounded-2xl p-6">
+            <h2 className="cardheading mb-6">{teamName}</h2>
+            <div className="flex flex-col gap-4 mb-10">
+              {description.map((d, index) => {
+                return (
+                  <div key={index} className="descriptext text-text-dk-grey">
+                    {d}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="">
+              <ButtonRed
+                label={"Apply Now"}
+                to={
+                  "https://docs.google.com/forms/d/e/1FAIpQLSdmcYlKCtSdxqLfEYYRJw3yBkByUdLtE6donpQ1nDo6mSDvgw/viewform"
+                }
+                size={"S"}
+                behav="External"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
-    <div className="shrink flex-1 min-w-0 h-full flex flex-col items-center pt-5 rounded-lg">
-      <Image
-        src={imgUrl}
-        alt={"The" + teamName + "subteam"}
-        className="w-full h-auto rounded-lg drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]"
-      />
-      <h3 className="subheading text-text-dk-grey max-w-full text-center">
-        {teamName}
-      </h3>
-      <p className="descriptext text-text-grey w-95 mt-2 px-2 max-w-full text-center">
-        {description}
-      </p>
+    <div className="flex-1 max-w-full">
+      {showModal && (
+        <TeamCardModal
+          imgUrl={imgUrl}
+          teamName={teamName}
+          description={description}
+        />
+      )}
+      <div
+        className="max-w-full min-h-full flex flex-col rounded-2xl
+    border border-bg-lt-grey backdrop-blur-[2px] bg-theme-white/90"
+      >
+        <div className="h-60 w-full relative rounded-t-lg overflow-hidden">
+          <Image
+            src={imgUrl}
+            alt={`The ${teamName} subteam`}
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="flex flex-col justify-between mt-6 md:mt-0 p-6 flex-1 w-full">
+          <div>
+            <h3 className="cardheading mb-4 max-w-full">{teamName}</h3>
+            <p className="descriptext text-text-grey mb-6">{miniDescription}</p>
+            {/* {description.map((d, index) => {
+          return (
+            <p
+              key={index}
+              className="descriptext text-text-grey mt-2 px-2 max-w-full"
+            >
+              {d}
+            </p>
+          );
+        })} */}
+          </div>
+          <button
+            className="smbutton bg-theme-white hover:bg-bg-lt-grey cursor-pointer transition-colors duration-200 text-text-dk-grey outline-[1.5px] outline-text-dk-grey -outline-offset-1 w-fit rounded-full"
+            onClick={() => {
+              setShowModal(true);
+            }}
+          >
+            Learn More
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
 export const AboutTeams = () => {
   return (
-    <div className="universepad py-5 xl:h-160 2xl:h-200">
+    <div className="universepad py-6">
       <h2 className="heading">Our Teams</h2>
       <p className="subtext">See how you can get involved!</p>
-      <div className="flex justify-between mt-10 gap-6 md:gap-8 2xl:gap-10">
+      <div className="flex justify-center mt-10 gap-5">
         <TeamCard
-          imgUrl={engineeringTeam.imgUrl}
-          teamName={engineeringTeam.teamName}
-          description={engineeringTeam.description}
+          imgUrl={engineering.imgUrl}
+          teamName={engineering.teamName}
+          description={engineering.description}
+          miniDescription={engineering.miniDescription}
         />
 
         <TeamCard
-          imgUrl={outreachAndEducation.imgUrl}
-          teamName={outreachAndEducation.teamName}
-          description={outreachAndEducation.description}
+          imgUrl={educationAndAdvocacy.imgUrl}
+          teamName={educationAndAdvocacy.teamName}
+          description={educationAndAdvocacy.description}
+          miniDescription={educationAndAdvocacy.miniDescription}
         />
 
         <TeamCard
-          imgUrl={internalOperation.imgUrl}
-          teamName={internalOperation.teamName}
-          description={internalOperation.description}
+          imgUrl={business.imgUrl}
+          teamName={business.teamName}
+          description={business.description}
+          miniDescription={business.miniDescription}
         />
       </div>
     </div>
