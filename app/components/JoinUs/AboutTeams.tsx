@@ -81,13 +81,13 @@ export const TeamCard = ({
     const pics = teamToPic(teamName);
     return (
       <div
-        className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4"
+        className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
         onClick={() => {
           setShowModal(false);
         }}
       >
         <div
-          className="w-full lg:w-290 2xl:w-300 max-h-[90vh] lg:h-120 overflow-y-auto flex flex-col lg:flex-row p-4 sm:p-6 gap-4 sm:gap-6 lg:gap-8 bg-bg-lt-grey rounded-2xl"
+          className="w-full lg:w-290 2xl:w-300 max-h-[90vh] lg:h-120 overflow-y-auto flex flex-col lg:flex-row p-4 sm:p-6 gap-4 sm:gap-6 lg:gap-8"
           onClick={(e) => {
             e.stopPropagation();
           }}
@@ -98,9 +98,9 @@ export const TeamCard = ({
               return (
                 <div
                   key={index}
-                  className="bg-theme-white rounded-2xl p-2 flex-1 h-28 sm:h-32 lg:h-auto"
+                  className="rounded-2xl flex-1 h-28 sm:h-32 lg:h-auto"
                 >
-                  <div className="relative h-full rounded-2xl overflow-hidden">
+                  <div className="relative h-full rounded-2xl overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)]">
                     <Image
                       src={p}
                       alt={teamName}
@@ -113,7 +113,7 @@ export const TeamCard = ({
             })}
           </div>
           {/* text */}
-          <div className="flex-1 flex flex-col bg-theme-white rounded-2xl p-4 sm:p-6">
+          <div className="flex-1 flex flex-col bg-theme-white rounded-2xl p-4 sm:p-6 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)]">
             <h2 className="cardheading mb-3 sm:mb-6">{teamName}</h2>
             <div className="flex flex-col gap-3 sm:gap-4 mb-6 sm:mb-10">
               {description.map((d, index) => {
