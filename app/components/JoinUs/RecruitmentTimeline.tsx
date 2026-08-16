@@ -189,7 +189,7 @@ export function RecruitmentTimelineSection() {
       <RecruitmentTimelineDecorations />
       <h1 className="heading">Fall Recruitment Timeline</h1>
       <p className="descriptext">
-        Details are being finalized, and more events may be added as we finalize
+        Details are being confirmed, and more events may be added as we finalize
         our recruitment schedule. Check back soon!
       </p>
       <div className="flex justify-center mt-10 mb-10">
