@@ -28,12 +28,12 @@ function RecruitmentTimeline() {
 
       <TimelineItem step={2}>
         <TimelineHeader>
-          <TimelineDate>August 26</TimelineDate>
+          <TimelineDate>August 29</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
             Education & Advocacy Info Session 1
           </TimelineTitle>
           <TimelineTitle className="text-sm">
-            Time TBD, Location TBD
+            4:00 - 5:30PM, Human Ecology Building, Room 2L32
           </TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
@@ -45,12 +45,12 @@ function RecruitmentTimeline() {
       </TimelineItem>
       <TimelineItem step={3}>
         <TimelineHeader>
-          <TimelineDate>August 29</TimelineDate>
+          <TimelineDate>August 30</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
             Education & Advocacy Info Session 2
           </TimelineTitle>
           <TimelineTitle className="text-sm">
-            Time TBD, Location TBD
+            4:00 - 5:30PM, Human Ecology Building, Room 2L32
           </TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
@@ -63,7 +63,7 @@ function RecruitmentTimeline() {
             Engineering Info Session
           </TimelineTitle>
           <TimelineTitle className="text-sm">
-            5PM - 6PM EST, Location TBD
+            5:00 - 6:00PM, Location TBD
           </TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
@@ -79,7 +79,7 @@ function RecruitmentTimeline() {
             Project Team Fest
           </TimelineTitle>
           <TimelineTitle className="text-sm">
-            4PM - 6PM EST, Duffield Attrium
+            4PM - 6PM, Duffield Attrium
           </TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
@@ -88,7 +88,7 @@ function RecruitmentTimeline() {
         </TimelineContent>
         <TimelineSeparator className="bg-theme-dk-red" />
       </TimelineItem>
-      <TimelineItem step={6}>
+      {/* <TimelineItem step={6}>
         <TimelineHeader>
           <TimelineDate>September 2</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -100,7 +100,7 @@ function RecruitmentTimeline() {
         </TimelineHeader>
         <TimelineIndicator />
         <TimelineSeparator className="bg-theme-dk-red" />
-      </TimelineItem>
+      </TimelineItem> */}
       <TimelineItem step={7}>
         <TimelineHeader>
           <TimelineDate>September 3</TimelineDate>
@@ -189,7 +189,7 @@ export function RecruitmentTimelineSection() {
       <RecruitmentTimelineDecorations />
       <h1 className="heading">Fall Recruitment Timeline</h1>
       <p className="descriptext">
-        Details are being confirmed, and more events may be added as we finalize
+        Details are being finalized, and more events may be added as we finalize
         our recruitment schedule. Check back soon!
       </p>
       <div className="flex justify-center mt-10 mb-10">
