@@ -27,6 +27,7 @@ interface CreateMemberCardProps {
 }
 
 interface SectionProps {
+  id: string;
   title: string;
   team: MemberCardInfo[];
   clickMember: (member: MemberCardInfo) => void;
@@ -316,22 +317,10 @@ export function MemberCard({
   );
 }
 
-function TeamSection({ title, team, clickMember }: SectionProps) {
-  const generateId = () => {
-    const lowerCaseTitle = title.toLowerCase();
-    if (lowerCaseTitle.includes("lead")) {
-      return "teamLeads";
-    } else if (lowerCaseTitle.includes("engineering")) {
-      return "engineering";
-    } else if (lowerCaseTitle.includes("business")) {
-      return "business";
-    } else {
-      return "business";
-    }
-  };
+function TeamSection({ id, title, team, clickMember }: SectionProps) {
   return (
     <div
-      id={generateId()}
+      id={id}
       className={`flex flex-col universepad w-full pt-10 pb-15`}
     >
       <h2 className="teamheading text-center rounded-sm mb-5">{title}</h2>
@@ -384,21 +373,25 @@ export function Members() {
       }}
     >
       <TeamSection
+        id="teamLeads"
         title="Our Team Leads"
         team={teamLeads}
         clickMember={clickMember}
       />
       <TeamSection
+        id="engineering"
         title="Engineering Subteam"
         team={engSubteam}
         clickMember={clickMember}
       />
       <TeamSection
+        id="education&Advocacy"
         title="Education & Advocacy Subteam"
         team={eduOutSubteam}
         clickMember={clickMember}
       />
       <TeamSection
+        id="business"
         title="Business Subteam"
         team={businessSubteam}
         clickMember={clickMember}

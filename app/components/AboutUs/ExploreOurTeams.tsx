@@ -3,11 +3,11 @@
 import { useState } from "react";
 
 export function ExploreOurTeams() {
-  const [active, setActive] = useState("all");
+  const [active, setActive] = useState("teamLeads");
   const teams = [
     { id: "teamLeads", name: "Team Leads" },
     { id: "engineering", name: "Engineering" },
-    { id: "educationAndAdvocacy", name: "Education & Advocacy" },
+    { id: "education&Advocacy", name: "Education & Advocacy" },
     { id: "business", name: "Business" },
   ];
 
@@ -19,8 +19,7 @@ export function ExploreOurTeams() {
         : document.getElementById(id);
     selectedElement?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   };
-  let subteamsList = teams.map((subteam) => subteam.id);
-  subteamsList = ["all"].concat(subteamsList);
+  const subteamsList = teams.map((subteam) => subteam.id);
 
   return (
     <div className="bg-linear-to-b from-transparent to-[#D1D1D1] mt-5 universepad">
