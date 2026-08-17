@@ -14,8 +14,8 @@ function HeroContent() {
       <h1 className="mainheading mt-10">Join Us</h1>
       <p className="subtext mt-4 w-4/5 text-center">
         Thank you so much for your interest in joining us! This fall, we will be
-        accepting applications from August 17th to September 3rd, and we look
-        forward to your applications!
+        accepting applications starting August 17th, and we look forward to your
+        applications!
       </p>
       <p className="subtext w-4/5 text-center">
         Stay tuned for more info about our teams and the recruiting timeline on
