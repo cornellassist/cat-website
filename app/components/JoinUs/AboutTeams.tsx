@@ -51,7 +51,7 @@ const business: Team = {
   teamName: "Business",
   description: [
     "We promote brand awareness and handle internal operations, like marketing, finance, sponsorships, and partnerships to support CAT's functions.",
-    "We also help maintain the organization's website and build internal tools.",
+    "We also help maintain the organization's website and build internal software tools, like the content management system.",
   ],
   miniDescription: "Promote awareness and develop tools for CAT's operations.",
 };
