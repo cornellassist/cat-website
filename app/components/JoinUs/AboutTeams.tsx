@@ -55,7 +55,7 @@ const business: Team = {
   ],
   miniDescription: "Promote awareness and develop tools for CAT's operations.",
 };
-const businessPics = [BusinessPic1, BusinessPic2];
+const businessPics = [BusinessPic1];
 
 function teamToPic(teamName: string): StaticImageData[] {
   switch (teamName) {
