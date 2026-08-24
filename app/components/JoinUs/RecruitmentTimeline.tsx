@@ -28,6 +28,22 @@ function RecruitmentTimeline() {
 
       <TimelineItem step={2}>
         <TimelineHeader>
+          <TimelineDate>August 28</TimelineDate>
+          <TimelineTitle className="timelinetitle text-theme-red">
+            All Subteam Info Session
+          </TimelineTitle>
+          <TimelineTitle className="text-sm">7:00 - 8:30PM, Zoom</TimelineTitle>
+        </TimelineHeader>
+        <TimelineIndicator />
+        <TimelineSeparator className="bg-theme-dk-red" />
+        <TimelineContent className="text-text-dk-grey">
+          Come learn more about each of our subteams, and how you can contribute
+          to each! Stay tuned for Zoom information.
+        </TimelineContent>
+      </TimelineItem>
+
+      <TimelineItem step={3}>
+        <TimelineHeader>
           <TimelineDate>August 29</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
             Education & Advocacy Info Session 1
@@ -43,7 +59,7 @@ function RecruitmentTimeline() {
           subteam and how our team adapts toys.
         </TimelineContent>
       </TimelineItem>
-      <TimelineItem step={3}>
+      <TimelineItem step={4}>
         <TimelineHeader>
           <TimelineDate>August 30</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -56,7 +72,7 @@ function RecruitmentTimeline() {
         <TimelineIndicator />
         <TimelineSeparator className="bg-theme-dk-red" />
       </TimelineItem>
-      <TimelineItem step={4}>
+      <TimelineItem step={5}>
         <TimelineHeader>
           <TimelineDate>August 31</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -72,7 +88,7 @@ function RecruitmentTimeline() {
           Come learn more about how you can join the Engineering subteam.
         </TimelineContent>
       </TimelineItem>
-      <TimelineItem step={5}>
+      <TimelineItem step={6}>
         <TimelineHeader>
           <TimelineDate>September 1</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">

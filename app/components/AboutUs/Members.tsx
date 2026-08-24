@@ -124,11 +124,9 @@ const engSubteamInfo: CreateMemberCardProps[] = [
 
 const eduOutSubteamInfo: CreateMemberCardProps[] = [
   { name: "Sarah Swee" },
-  { name: "Emmanuella Umoh" },
   { name: "David Han" },
   { name: "Evan Lee" },
   { name: "Morgan Ogata" },
-  { name: "Rachel Turney" },
   { name: "Vanessa Chen Hsieh" },
   // { name: "Omar Alkhitan" },
   { name: "Chloe Jung" },
@@ -138,6 +136,8 @@ const eduOutSubteamInfo: CreateMemberCardProps[] = [
 const businessSubteamInfo: CreateMemberCardProps[] = [
   { name: "Ariana Sanchez" },
   { name: "Scott Zinman" },
+  { name: "Emmanuella Umoh" },
+  { name: "Rachel Turney" },
   { name: "Brian Xia" },
   { name: "Sonya Zheng" },
   // { name: "Jason Yang" },
@@ -319,10 +319,7 @@ export function MemberCard({
 
 function TeamSection({ id, title, team, clickMember }: SectionProps) {
   return (
-    <div
-      id={id}
-      className={`flex flex-col universepad w-full pt-10 pb-15`}
-    >
+    <div id={id} className={`flex flex-col universepad w-full pt-10 pb-15`}>
       <h2 className="teamheading text-center rounded-sm mb-5">{title}</h2>
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 2xl:gap-20 xl:gap-12 lg:gap-12 md:gap-15 sm:gap-10 gap-10 mt-10 place-items-center">
         {team.map((item, index) => {
