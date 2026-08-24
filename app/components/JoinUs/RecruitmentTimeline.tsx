@@ -38,7 +38,16 @@ function RecruitmentTimeline() {
         <TimelineSeparator className="bg-theme-dk-red" />
         <TimelineContent className="text-text-dk-grey">
           Come learn more about each of our subteams, and how you can contribute
-          to each! Stay tuned for Zoom information.
+          to each!{" "}
+        </TimelineContent>
+        <TimelineContent>
+          {" "}
+          <a
+            href="https://cornell.zoom.us/j/97005410756?pwd=sUSamQaSRxebYNUhiU3PwhVcwFDglQ.1"
+            className="text-blue-600 underline"
+          >
+            Meeting Link
+          </a>
         </TimelineContent>
       </TimelineItem>
 
