@@ -55,7 +55,7 @@ function RecruitmentTimeline() {
         <TimelineHeader>
           <TimelineDate>August 29</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            Education & Advocacy Info Session 1
+            Toy Adapting Session 1
           </TimelineTitle>
           <TimelineTitle className="text-sm">
             4:00 - 5:30PM, Human Ecology Building, Room 2L32
@@ -72,7 +72,7 @@ function RecruitmentTimeline() {
         <TimelineHeader>
           <TimelineDate>August 30</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            Education & Advocacy Info Session 2
+            Toy Adapting Session 2
           </TimelineTitle>
           <TimelineTitle className="text-sm">
             4:00 - 5:30PM, Human Ecology Building, Room 2L32
