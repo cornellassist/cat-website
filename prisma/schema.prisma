@@ -52,22 +52,21 @@ model Event {
 }
 
 model Member {
-  id       Int         @id @default(autoincrement())
-  name     String
-  role     MemberRole?
-  year     String
-  major    String
-  college  String
-  linkedin String      @default("")
+  id      Int        @id @default(autoincrement())
+  name    String
+  role    MemberRole
+  year    String
+  major   String
+  college String
 }
 
 enum MemberRole {
   TEAM_LEADS
   ENGINEERING_LEADS
   BUSINESS_LEADS
-  OUTREACH_ADVO_LEADS
+  OUTREACH_EDU_LEADS
   ENGINEERING
-  OUTREACH_ADVO
+  OUTREACH_EDU
   BUSINESS
 }
 
