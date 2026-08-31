@@ -83,18 +83,18 @@ function RecruitmentTimeline() {
       </TimelineItem>
       <TimelineItem step={5}>
         <TimelineHeader>
-          <TimelineDate>August 31</TimelineDate>
+          <TimelineDate>September 1</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            Engineering Info Session
+            EWB x Cornell Assistive Tech x CUBMD Info Session
           </TimelineTitle>
           <TimelineTitle className="text-sm">
-            5:00 - 6:00PM, Location TBD
+            6:30 - 7:30PM, Gates 114
           </TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
         <TimelineSeparator className="bg-theme-dk-red" />
         <TimelineContent className="">
-          Come learn more about how you can join the Engineering subteam.
+          Learn more about the 3 teams, what we do, and meet our members!
         </TimelineContent>
       </TimelineItem>
       <TimelineItem step={6}>
