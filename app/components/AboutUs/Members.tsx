@@ -130,7 +130,7 @@ const eduOutSubteamInfo: CreateMemberCardProps[] = [
   { name: "Vanessa Chen Hsieh" },
   // { name: "Omar Alkhitan" },
   { name: "Chloe Jung" },
-  // { name: "Neel Behari" },
+  { name: "Neel Behari" },
 ];
 
 const businessSubteamInfo: CreateMemberCardProps[] = [
