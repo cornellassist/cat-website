@@ -104,7 +104,7 @@ function RecruitmentTimeline() {
             Project Team Fest
           </TimelineTitle>
           <TimelineTitle className="text-sm">
-            4PM - 6PM, Duffield Attrium
+            4:00 - 6:00PM, Duffield Attrium
           </TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
