@@ -28,19 +28,19 @@ function RecruitmentTimeline() {
 
       <TimelineItem step={2}>
         <TimelineHeader>
-          <TimelineDate>August 28</TimelineDate>
+          <TimelineDate>September 19</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            All Subteam Info Session
+            Engineering Info Session 1
           </TimelineTitle>
-          <TimelineTitle className="text-sm">7:00 - 8:30PM, Zoom</TimelineTitle>
+          <TimelineTitle className="text-sm">5:00 - 6:00PM, Zoom</TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
         <TimelineSeparator className="bg-theme-dk-red" />
         <TimelineContent className="text-text-dk-grey">
-          Come learn more about each of our subteams, and how you can contribute
-          to each!{" "}
+          Come learn more about our Engineering subteam, and how you can
+          contribute to our projects! Stay tuned for a Zoom link.
         </TimelineContent>
-        <TimelineContent>
+        {/* <TimelineContent>
           {" "}
           <a
             href="https://cornell.zoom.us/j/97005410756?pwd=sUSamQaSRxebYNUhiU3PwhVcwFDglQ.1"
@@ -48,17 +48,34 @@ function RecruitmentTimeline() {
           >
             Meeting Link
           </a>
-        </TimelineContent>
+        </TimelineContent> */}
       </TimelineItem>
 
       <TimelineItem step={3}>
         <TimelineHeader>
-          <TimelineDate>August 29</TimelineDate>
+          <TimelineDate>September 25</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            Toy Adapting Session 1
+            Cookies with CAT
           </TimelineTitle>
           <TimelineTitle className="text-sm">
-            4:00 - 5:30PM, Human Ecology Building, Room 2L32
+            6:00 - 7:00PM, Upson Hall, Room 216
+          </TimelineTitle>
+        </TimelineHeader>
+        <TimelineIndicator />
+        <TimelineSeparator className="bg-theme-dk-red" />
+        <TimelineContent className="text-text-dk-grey">
+          Come for some free cookies and learn more about our different
+          subteams!
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem step={4}>
+        <TimelineHeader>
+          <TimelineDate>September 26</TimelineDate>
+          <TimelineTitle className="timelinetitle text-theme-red">
+            Toy Adapting Workshop 1
+          </TimelineTitle>
+          <TimelineTitle className="text-sm">
+            3:00 - 4:30PM, Martha Van Rensselaer Hall, Room 1153
           </TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
@@ -68,50 +85,46 @@ function RecruitmentTimeline() {
           subteam and how our team adapts toys.
         </TimelineContent>
       </TimelineItem>
-      <TimelineItem step={4}>
-        <TimelineHeader>
-          <TimelineDate>August 30</TimelineDate>
-          <TimelineTitle className="timelinetitle text-theme-red">
-            Toy Adapting Session 2
-          </TimelineTitle>
-          <TimelineTitle className="text-sm">
-            4:00 - 5:30PM, Human Ecology Building, Room 2L32
-          </TimelineTitle>
-        </TimelineHeader>
-        <TimelineIndicator />
-        <TimelineSeparator className="bg-theme-dk-red" />
-      </TimelineItem>
       <TimelineItem step={5}>
         <TimelineHeader>
-          <TimelineDate>September 1</TimelineDate>
+          <TimelineDate>September 26</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            EWB x Cornell Assistive Tech x CUBMD Info Session
+            Engineering Info Session 2
           </TimelineTitle>
-          <TimelineTitle className="text-sm">
-            6:30 - 7:30PM, Gates 114
-          </TimelineTitle>
+          <TimelineTitle className="text-sm">6:00 - 7:00PM, Zoom</TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
         <TimelineSeparator className="bg-theme-dk-red" />
-        <TimelineContent className="">
-          Learn more about the 3 teams, what we do, and meet our members!
-        </TimelineContent>
+        {/* <TimelineContent className="text-text-dk-grey">
+          Come learn more about our Engineering subteam, and how you can
+          contribute to our projects! Stay tuned for a Zoom link.
+        </TimelineContent> */}
+        {/* <TimelineContent>
+          {" "}
+          <a
+            href="https://cornell.zoom.us/j/97005410756?pwd=sUSamQaSRxebYNUhiU3PwhVcwFDglQ.1"
+            className="text-blue-600 underline"
+          >
+            Meeting Link
+          </a>
+        </TimelineContent> */}
       </TimelineItem>
       <TimelineItem step={6}>
         <TimelineHeader>
-          <TimelineDate>September 1</TimelineDate>
+          <TimelineDate>September 27</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            Project Team Fest
+            Toy Adapting Workshop 2
           </TimelineTitle>
           <TimelineTitle className="text-sm">
-            4:00 - 6:00PM, Duffield Attrium
+            4:30 - 6:00PM, Martha Van Rensselaer Hall, Room 1153
           </TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
-        <TimelineContent className="">
-          Check us out and learn about our mission at Project Team Fest!
-        </TimelineContent>
         <TimelineSeparator className="bg-theme-dk-red" />
+        {/* <TimelineContent className="text-text-dk-grey">
+          Come learn more about how you can join the Education & Advocacy
+          subteam and how our team adapts toys.
+        </TimelineContent> */}
       </TimelineItem>
       {/* <TimelineItem step={6}>
         <TimelineHeader>
@@ -128,15 +141,65 @@ function RecruitmentTimeline() {
       </TimelineItem> */}
       <TimelineItem step={7}>
         <TimelineHeader>
-          <TimelineDate>September 3</TimelineDate>
+          <TimelineDate>September 30</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            Applications due (Sophomores, Juniors, and Seniors)
+            Business Info Session
+          </TimelineTitle>
+          <TimelineTitle className="text-sm">
+            5:00 - 6:00PM, Statler Hall, Room 291
           </TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
         <TimelineSeparator className="bg-theme-dk-red" />
+        <TimelineContent className="text-text-dk-grey">
+          Come learn more about the Business subteam and how you can join our
+          work.
+        </TimelineContent>
       </TimelineItem>
       <TimelineItem step={8}>
+        <TimelineHeader>
+          <TimelineDate>October 2</TimelineDate>
+          <TimelineTitle className="timelinetitle text-theme-red">
+            Engineering Info Session 3
+          </TimelineTitle>
+          <TimelineTitle className="text-sm">
+            5:30 - 6:30PM, Location TBD
+          </TimelineTitle>
+        </TimelineHeader>
+        <TimelineIndicator />
+        <TimelineSeparator className="bg-theme-dk-red" />
+        {/* <TimelineContent className="text-text-dk-grey">
+          Come learn more about our Engineering subteam, and how you can
+          contribute to our projects!
+        </TimelineContent> */}
+        {/* <TimelineContent>
+          {" "}
+          <a
+            href="https://cornell.zoom.us/j/97005410756?pwd=sUSamQaSRxebYNUhiU3PwhVcwFDglQ.1"
+            className="text-blue-600 underline"
+          >
+            Meeting Link
+          </a>
+        </TimelineContent> */}
+      </TimelineItem>
+      <TimelineItem step={9}>
+        <TimelineHeader>
+          <TimelineDate>October 4</TimelineDate>
+          <TimelineTitle className="timelinetitle text-theme-red">
+            Toy Adapting Workshop 2
+          </TimelineTitle>
+          <TimelineTitle className="text-sm">
+            4:30 - 6:00PM, Martha Van Rensselaer Hall, Room 1153
+          </TimelineTitle>
+        </TimelineHeader>
+        <TimelineIndicator />
+        <TimelineSeparator className="bg-theme-dk-red" />
+        {/* <TimelineContent className="text-text-dk-grey">
+          Come learn more about how you can join the Education & Advocacy
+          subteam and how our team adapts toys.
+        </TimelineContent> */}
+      </TimelineItem>
+      <TimelineItem step={10}>
         <TimelineHeader>
           <TimelineDate>October 15</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
