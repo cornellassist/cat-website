@@ -25,7 +25,31 @@ function RecruitmentTimeline() {
           We look forward to your applications!
         </TimelineContent>
       </TimelineItem>
-
+      <TimelineItem step={4}>
+        <TimelineHeader>
+          <TimelineDate>September 13</TimelineDate>
+          <TimelineTitle className="timelinetitle text-theme-red">
+            Toy Adapting Workshop 1
+          </TimelineTitle>
+          <TimelineTitle className="text-sm">
+            4:00 - 5:30PM, Martha Van Rensselaer Hall, Room 1153
+          </TimelineTitle>
+        </TimelineHeader>
+        <TimelineIndicator />
+        <TimelineSeparator className="bg-theme-dk-red" />
+        <TimelineContent className="text-text-dk-grey">
+          Come learn more about how you can join the Education & Advocacy
+          subteam and how our team adapts toys.
+        </TimelineContent>
+        <TimelineContent>
+          <a
+            href="https://cornell.campusgroups.com/APDI/rsvp_boot?id=2311129"
+            className="text-blue-600 underline"
+          >
+            Campus Groups
+          </a>
+        </TimelineContent>
+      </TimelineItem>
       <TimelineItem step={2}>
         <TimelineHeader>
           <TimelineDate>September 19</TimelineDate>
@@ -68,11 +92,12 @@ function RecruitmentTimeline() {
           subteams!
         </TimelineContent>
       </TimelineItem>
+
       <TimelineItem step={4}>
         <TimelineHeader>
           <TimelineDate>September 26</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            Toy Adapting Workshop 1
+            Toy Adapting Workshop 2
           </TimelineTitle>
           <TimelineTitle className="text-sm">
             3:00 - 4:30PM, Martha Van Rensselaer Hall, Room 1153
@@ -80,9 +105,17 @@ function RecruitmentTimeline() {
         </TimelineHeader>
         <TimelineIndicator />
         <TimelineSeparator className="bg-theme-dk-red" />
-        <TimelineContent className="text-text-dk-grey">
+        {/* <TimelineContent className="text-text-dk-grey">
           Come learn more about how you can join the Education & Advocacy
           subteam and how our team adapts toys.
+        </TimelineContent> */}
+        <TimelineContent>
+          <a
+            href="https://cornell.campusgroups.com/APDI/rsvp_boot?id=2311133"
+            className="text-blue-600 underline"
+          >
+            Campus Groups
+          </a>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem step={5}>
@@ -113,7 +146,7 @@ function RecruitmentTimeline() {
         <TimelineHeader>
           <TimelineDate>September 27</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            Toy Adapting Workshop 2
+            Toy Adapting Workshop 3
           </TimelineTitle>
           <TimelineTitle className="text-sm">
             4:30 - 6:00PM, Martha Van Rensselaer Hall, Room 1153
@@ -125,6 +158,14 @@ function RecruitmentTimeline() {
           Come learn more about how you can join the Education & Advocacy
           subteam and how our team adapts toys.
         </TimelineContent> */}
+        <TimelineContent>
+          <a
+            href="https://cornell.campusgroups.com/APDI/rsvp_boot?id=2311134"
+            className="text-blue-600 underline"
+          >
+            Campus Groups
+          </a>
+        </TimelineContent>
       </TimelineItem>
       {/* <TimelineItem step={6}>
         <TimelineHeader>
@@ -186,7 +227,7 @@ function RecruitmentTimeline() {
         <TimelineHeader>
           <TimelineDate>October 4</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            Toy Adapting Workshop 2
+            Toy Adapting Workshop 4
           </TimelineTitle>
           <TimelineTitle className="text-sm">
             4:30 - 6:00PM, Martha Van Rensselaer Hall, Room 1153
@@ -198,6 +239,14 @@ function RecruitmentTimeline() {
           Come learn more about how you can join the Education & Advocacy
           subteam and how our team adapts toys.
         </TimelineContent> */}
+        <TimelineContent>
+          <a
+            href="https://cornell.campusgroups.com/APDI/rsvp_boot?id=2311135"
+            className="text-blue-600 underline"
+          >
+            Campus Groups
+          </a>
+        </TimelineContent>
       </TimelineItem>
       <TimelineItem step={10}>
         <TimelineHeader>
