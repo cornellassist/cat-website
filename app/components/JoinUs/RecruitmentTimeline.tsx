@@ -62,17 +62,16 @@ function RecruitmentTimeline() {
         <TimelineSeparator className="bg-theme-dk-red" />
         <TimelineContent className="text-text-dk-grey">
           Come learn more about our Engineering subteam, and how you can
-          contribute to our projects! Stay tuned for a Zoom link.
+          contribute to our projects!
         </TimelineContent>
-        {/* <TimelineContent>
-          {" "}
+        <TimelineContent>
           <a
-            href="https://cornell.zoom.us/j/97005410756?pwd=sUSamQaSRxebYNUhiU3PwhVcwFDglQ.1"
+            href="https://cornell.zoom.us/j/95546042622?pwd=wbtei7za5ru9j9c8ub83v2nonh5vch.1"
             className="text-blue-600 underline"
           >
             Meeting Link
           </a>
-        </TimelineContent> */}
+        </TimelineContent>
       </TimelineItem>
 
       <TimelineItem step={4} date={new Date(2026, 8, 25)}>
@@ -132,15 +131,14 @@ function RecruitmentTimeline() {
           Come learn more about our Engineering subteam, and how you can
           contribute to our projects! Stay tuned for a Zoom link.
         </TimelineContent> */}
-        {/* <TimelineContent>
-          {" "}
+        <TimelineContent>
           <a
-            href="https://cornell.zoom.us/j/97005410756?pwd=sUSamQaSRxebYNUhiU3PwhVcwFDglQ.1"
+            href="https://cornell.zoom.us/j/98393504375?pwd=DRHAp7uKThgp0xagKM2wc6soAgXkjn.1"
             className="text-blue-600 underline"
           >
             Meeting Link
           </a>
-        </TimelineContent> */}
+        </TimelineContent>
       </TimelineItem>
       <TimelineItem step={7} date={new Date(2026, 8, 27)}>
         <TimelineHeader>
