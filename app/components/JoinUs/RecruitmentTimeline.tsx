@@ -12,7 +12,7 @@ import {
 function RecruitmentTimeline() {
   return (
     <Timeline defaultValue={2} className="w-full max-w-md">
-      <TimelineItem step={1}>
+      <TimelineItem step={1} date={new Date(2026, 7, 17)}>
         <TimelineHeader>
           <TimelineDate>August 17</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -25,7 +25,7 @@ function RecruitmentTimeline() {
           We look forward to your applications!
         </TimelineContent>
       </TimelineItem>
-      <TimelineItem step={4}>
+      <TimelineItem step={2} date={new Date(2026, 8, 13)}>
         <TimelineHeader>
           <TimelineDate>September 13</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -50,7 +50,7 @@ function RecruitmentTimeline() {
           </a>
         </TimelineContent>
       </TimelineItem>
-      <TimelineItem step={2}>
+      <TimelineItem step={3} date={new Date(2026, 8, 19)}>
         <TimelineHeader>
           <TimelineDate>September 19</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -75,7 +75,7 @@ function RecruitmentTimeline() {
         </TimelineContent> */}
       </TimelineItem>
 
-      <TimelineItem step={3}>
+      <TimelineItem step={4} date={new Date(2026, 8, 25)}>
         <TimelineHeader>
           <TimelineDate>September 25</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -93,7 +93,7 @@ function RecruitmentTimeline() {
         </TimelineContent>
       </TimelineItem>
 
-      <TimelineItem step={4}>
+      <TimelineItem step={5} date={new Date(2026, 8, 26)}>
         <TimelineHeader>
           <TimelineDate>September 26</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -118,7 +118,7 @@ function RecruitmentTimeline() {
           </a>
         </TimelineContent>
       </TimelineItem>
-      <TimelineItem step={5}>
+      <TimelineItem step={6} date={new Date(2026, 8, 26)}>
         <TimelineHeader>
           <TimelineDate>September 26</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -142,7 +142,7 @@ function RecruitmentTimeline() {
           </a>
         </TimelineContent> */}
       </TimelineItem>
-      <TimelineItem step={6}>
+      <TimelineItem step={7} date={new Date(2026, 8, 27)}>
         <TimelineHeader>
           <TimelineDate>September 27</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -180,24 +180,8 @@ function RecruitmentTimeline() {
         <TimelineIndicator />
         <TimelineSeparator className="bg-theme-dk-red" />
       </TimelineItem> */}
-      <TimelineItem step={7}>
-        <TimelineHeader>
-          <TimelineDate>September 30</TimelineDate>
-          <TimelineTitle className="timelinetitle text-theme-red">
-            Business Info Session
-          </TimelineTitle>
-          <TimelineTitle className="text-sm">
-            5:00 - 6:00PM, Statler Hall, Room 291
-          </TimelineTitle>
-        </TimelineHeader>
-        <TimelineIndicator />
-        <TimelineSeparator className="bg-theme-dk-red" />
-        <TimelineContent className="text-text-dk-grey">
-          Come learn more about the Business subteam and how you can join our
-          work.
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem step={8}>
+
+      <TimelineItem step={8} date={new Date(2026, 9, 2)}>
         <TimelineHeader>
           <TimelineDate>October 2</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -223,7 +207,7 @@ function RecruitmentTimeline() {
           </a>
         </TimelineContent> */}
       </TimelineItem>
-      <TimelineItem step={9}>
+      <TimelineItem step={9} date={new Date(2026, 9, 4)}>
         <TimelineHeader>
           <TimelineDate>October 4</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
@@ -248,7 +232,24 @@ function RecruitmentTimeline() {
           </a>
         </TimelineContent>
       </TimelineItem>
-      <TimelineItem step={10}>
+      <TimelineItem step={10} date={new Date(2026, 9, 6)}>
+        <TimelineHeader>
+          <TimelineDate>October 6</TimelineDate>
+          <TimelineTitle className="timelinetitle text-theme-red">
+            CRC x EWB x CAT Business Info Session
+          </TimelineTitle>
+          <TimelineTitle className="text-sm">
+            5:00 - 6:00PM, Hollister Hall, Room 206
+          </TimelineTitle>
+        </TimelineHeader>
+        <TimelineIndicator />
+        <TimelineSeparator className="bg-theme-dk-red" />
+        <TimelineContent className="text-text-dk-grey">
+          Come learn more about the Business subteams across our 3 subteams and
+          how you can join each of our team's work.
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem step={11} date={new Date(2026, 9, 15)}>
         <TimelineHeader>
           <TimelineDate>October 15</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">

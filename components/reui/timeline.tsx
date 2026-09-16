@@ -111,7 +111,7 @@ function TimelineDate({
 }: TimelineDateProps) {
   const defaultProps = {
     className: cn(
-      "block font-medium text-xs whitespace-nowrap group-data-[orientation=vertical]/timeline:absolute group-data-[orientation=vertical]/timeline:top-0 group-data-[orientation=vertical]/timeline:right-full group-data-[orientation=vertical]/timeline:mr-10 group-data-[orientation=vertical]/timeline:text-right group-data-[orientation=horizontal]/timeline:mb-1",
+      "block font-medium text-xs leading-5 whitespace-nowrap group-data-[orientation=vertical]/timeline:absolute group-data-[orientation=vertical]/timeline:top-0 group-data-[orientation=vertical]/timeline:right-full group-data-[orientation=vertical]/timeline:mr-10 group-data-[orientation=vertical]/timeline:text-right group-data-[orientation=horizontal]/timeline:mb-1",
       className,
     ),
     "data-slot": "timeline-date",
@@ -133,7 +133,7 @@ function TimelineHeader({
   ...props
 }: useRender.ComponentProps<"div">) {
   const defaultProps = {
-    className: cn(className),
+    className: cn("-mt-1", className),
     "data-slot": "timeline-header",
     children,
   };
@@ -157,7 +157,7 @@ function TimelineIndicator({
   const defaultProps = {
     "aria-hidden": true,
     className: cn(
-      "group-data-[orientation=horizontal]/timeline:-top-6 group-data-[orientation=horizontal]/timeline:-translate-y-1/2 group-data-[orientation=vertical]/timeline:-left-6 group-data-[orientation=vertical]/timeline:-translate-x-1/2 absolute size-4 rounded-full border-2 group-data-[orientation=vertical]/timeline:top-0 group-data-[orientation=horizontal]/timeline:left-0",
+      "group-data-[orientation=horizontal]/timeline:-top-6 group-data-[orientation=horizontal]/timeline:-translate-y-1/2 group-data-[orientation=vertical]/timeline:-left-6 group-data-[orientation=vertical]/timeline:-translate-x-1/2 absolute size-4 rounded-full border-2 border-theme-dk-red bg-white transition-colors group-data-[completed]/timeline-item:bg-theme-dk-red group-data-[orientation=vertical]/timeline:top-0 group-data-[orientation=horizontal]/timeline:left-0",
       className,
     ),
     "data-slot": "timeline-indicator",
@@ -174,10 +174,12 @@ function TimelineIndicator({
 // TimelineItem
 interface TimelineItemProps extends useRender.ComponentProps<"div"> {
   step: number;
+  date?: Date;
 }
 
 function TimelineItem({
   step,
+  date,
   className,
   render,
   children,
@@ -185,12 +187,14 @@ function TimelineItem({
 }: TimelineItemProps) {
   const { activeStep } = useTimeline();
 
+  const isCompleted = date ? date.getTime() <= Date.now() : step <= activeStep;
+
   const defaultProps = {
     className: cn(
       "group/timeline-item relative flex flex-1 flex-col gap-1.5 group-data-[orientation=vertical]/timeline:ms-8 group-data-[orientation=horizontal]/timeline:mt-8 group-data-[orientation=horizontal]/timeline:not-last:pe-8 group-data-[orientation=vertical]/timeline:not-last:pb-12",
       className,
     ),
-    "data-completed": step <= activeStep || undefined,
+    "data-completed": isCompleted || undefined,
     "data-slot": "timeline-item",
     children,
   };
