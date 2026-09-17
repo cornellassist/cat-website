@@ -4,11 +4,11 @@ import { useState, useEffect, cache } from "react";
 import { AdminTable } from "@/app/components/AdminDashboard/AdminTable";
 import axios from "axios";
 
-export default function CommunityHighlights() {
-  const [highlights, setHighlights] = useState<any[]>();
+export default function Events() {
+  const [events, setEvents] = useState<any[]>();
 
   useEffect(() => {
-    async function getHighlights() {
+    async function getEvents() {
       try {
         // const cachedHighlights = localStorage.getItem("highlights");
         // if (cachedHighlights) {
@@ -17,14 +17,14 @@ export default function CommunityHighlights() {
         //   return;
         // }
         // console.log("not in cache");
-        const { data } = await axios.get("/api/highlights");
-        setHighlights(data);
+        const { data } = await axios.get("/api/events");
+        setEvents(data);
         // localStorage.setItem("highlights", JSON.stringify(data));
       } catch (error) {
         console.error(error);
       }
     }
-    getHighlights();
+    getEvents();
   }, []);
 
   const handleUpdate = async (
@@ -32,14 +32,14 @@ export default function CommunityHighlights() {
     field: string,
     value: string,
   ) => {
-    const row = highlights?.[rowIndex];
+    const row = events?.[rowIndex];
     if (!row) return;
-    await axios.patch("/api/highlights", { id: row.id, field, value });
+    await axios.patch("/api/events", { id: row.id, field, value });
   };
 
   return (
     <DashboardWrapper>
-      <AdminTable data={highlights} update={handleUpdate} />
+      <AdminTable data={events} update={handleUpdate} />
     </DashboardWrapper>
   );
 }

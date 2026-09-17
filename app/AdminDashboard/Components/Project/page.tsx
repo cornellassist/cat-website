@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { AdminTable } from "@/app/components/AdminDashboard/AdminTable";
 import axios from "axios";
 
-export default function Projects() {
+export default function Project() {
   const [projects, setProjects] = useState<any[]>();
   useEffect(() => {
     async function getProjects() {
