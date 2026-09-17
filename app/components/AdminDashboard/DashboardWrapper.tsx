@@ -6,7 +6,7 @@ import BlurTR from "@/public/assets/blur-tr.png";
 
 export function DashboardWrapper({ children }: { children?: React.ReactNode }) {
   return (
-    <div className="min-h-screen w-screen relative">
+    <div className="min-h-screen w-full relative">
       <div className="pl-70 ">
         <Sidebar />
         <div className="flex justify-end">

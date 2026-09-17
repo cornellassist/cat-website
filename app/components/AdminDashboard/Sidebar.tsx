@@ -30,7 +30,7 @@ export function Sidebar() {
     {
       label: "Components",
       icon: SquaresPlusIcon,
-      dropdown: ["Projects", "Community Highlights", "Events", "Sponsors"],
+      dropdown: ["Project", "Community Highlights", "Events"],
     },
     { label: "Images", icon: PhotoIcon },
     { label: "Members", icon: UserGroupIcon },

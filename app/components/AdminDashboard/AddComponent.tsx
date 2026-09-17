@@ -6,7 +6,6 @@ import {
 } from "@/app/components/OurWork/OurProjects";
 import { useState, useEffect } from "react";
 import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
-// import axios from "axios";
 import type { AddComponentProps } from "@/app/AdminDashboard/CreateComponent/[slug]/page";
 import {
   BlogPostCard,

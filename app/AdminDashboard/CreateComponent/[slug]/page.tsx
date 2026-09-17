@@ -1,7 +1,6 @@
 "use client";
-import { EventCard } from "@/app/components/OurWork/OurEvents";
-import { useState } from "react";
 import { AddComponent } from "@/app/components/AdminDashboard/AddComponent";
+import { useParams } from "next/navigation";
 
 const componentCategories = [
   "Blog",
@@ -21,13 +20,16 @@ export default function CreateComponent({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  const { slug } = useParams<{ slug: string }>();
   return (
     <div>
-      <AddComponent componentCategory="Event" />
+      {/* <AddComponent componentCategory="Event" />
       <AddComponent componentCategory="Blog" />
       <AddComponent componentCategory="Highlight" />
-      <AddComponent componentCategory="Member" />
-      <AddComponent componentCategory="Project" />
+      <AddComponent componentCategory="Member" /> */}
+      <AddComponent
+        componentCategory={slug as (typeof componentCategories)[number]}
+      />
     </div>
   );
 }
