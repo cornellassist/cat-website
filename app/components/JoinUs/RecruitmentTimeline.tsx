@@ -50,13 +50,13 @@ function RecruitmentTimeline() {
           </a>
         </TimelineContent>
       </TimelineItem>
-      <TimelineItem step={3} date={new Date(2026, 8, 19)}>
+      <TimelineItem step={3} date={new Date(2026, 11, 31)}>
         <TimelineHeader>
-          <TimelineDate>September 19</TimelineDate>
+          <TimelineDate>Date TBD</TimelineDate>
           <TimelineTitle className="timelinetitle text-theme-red">
-            Engineering Info Session 1
+            Engineering Info Session 1 (Rescheduled)
           </TimelineTitle>
-          <TimelineTitle className="text-sm">5:00 - 6:00PM, Zoom</TimelineTitle>
+          <TimelineTitle className="text-sm">Time TBD, Zoom</TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />
         <TimelineSeparator className="bg-theme-dk-red" />
@@ -64,14 +64,14 @@ function RecruitmentTimeline() {
           Come learn more about our Engineering subteam, and how you can
           contribute to our projects!
         </TimelineContent>
-        <TimelineContent>
+        {/* <TimelineContent>
           <a
             href="https://cornell.zoom.us/j/95546042622?pwd=wbtei7za5ru9j9c8ub83v2nonh5vch.1"
             className="text-blue-600 underline"
           >
             Meeting Link
           </a>
-        </TimelineContent>
+        </TimelineContent> */}
       </TimelineItem>
 
       <TimelineItem step={4} date={new Date(2026, 8, 25)}>
@@ -133,10 +133,10 @@ function RecruitmentTimeline() {
         </TimelineContent> */}
         <TimelineContent>
           <a
-            href="https://cornell.zoom.us/j/98393504375?pwd=DRHAp7uKThgp0xagKM2wc6soAgXkjn.1"
+            href="https://cornell.zoom.us/meetings/98393504375/invitations?signature=NPVq-_hMes6afobtTSq1Xxr8gy4Pk9UrGcrwH7lZnf4"
             className="text-blue-600 underline"
           >
-            Meeting Link
+            Meeting Link and Instructions
           </a>
         </TimelineContent>
       </TimelineItem>
