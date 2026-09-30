@@ -186,7 +186,7 @@ function RecruitmentTimeline() {
             Engineering Info Session 3
           </TimelineTitle>
           <TimelineTitle className="text-sm">
-            5:30 - 6:30PM, Location TBD
+            5:30 - 6:30PM, HLS 320
           </TimelineTitle>
         </TimelineHeader>
         <TimelineIndicator />

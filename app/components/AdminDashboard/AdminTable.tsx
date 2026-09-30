@@ -11,49 +11,47 @@ import {
   CommunityHighlights,
   CommHighProps,
 } from "@/app/components/Home/CommunityHighlights";
-import { EventCard } from "@/app/components/OurWork/OurEvents";
+import { OurEvents } from "@/app/components/OurWork/OurEvents";
 import { MemberCard } from "@/app/components/AboutUs/Members";
 
 const IMAGE_COLUMNS = ["imageUrl", "imageUrls"];
 
 function ComponentPreview({
   component,
-  row,
+  rows,
 }: {
   component: string;
-  row: Record<string, unknown>;
+  rows: Record<string, unknown>[];
 }) {
   switch (component) {
     case "Project":
       return (
         <OurProjects
-          projects={[row as unknown as ProjectCardProps]}
-          showButtons={false}
+          projects={rows as unknown as ProjectCardProps[]}
+          showButtons={rows.length > 1}
         />
       );
     case "CommunityHighlights":
       return (
         <CommunityHighlights
-          events={[row as unknown as CommHighProps["events"][number]]}
+          events={rows as unknown as CommHighProps["events"]}
         />
       );
     case "Events":
       return (
-        <div
-          className="backdrop-blur-[2px] bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)]
-          rounded-[20px] pb-6 h-130 sm:h-140 md:h-160 w-full max-w-md mx-auto"
-        >
-          <EventCard
-            {...(row as unknown as ComponentProps<typeof EventCard>)}
-          />
-        </div>
+        <OurEvents events={rows as unknown as ComponentProps<typeof OurEvents>["events"]} />
       );
     case "Members":
       return (
-        <MemberCard
-          member={row as unknown as ComponentProps<typeof MemberCard>["member"]}
-          onClick={() => {}}
-        />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 place-items-center">
+          {rows.map((row, i) => (
+            <MemberCard
+              key={i}
+              member={row as unknown as ComponentProps<typeof MemberCard>["member"]}
+              onClick={() => {}}
+            />
+          ))}
+        </div>
       );
     default:
       return (
@@ -78,9 +76,6 @@ export function AdminTable({
   );
   const [editedValue, setEditedValue] = useState<string>("");
   const [previewImages, setPreviewImages] = useState<string[] | null>(null);
-  const [previewRow, setPreviewRow] = useState<Record<string, unknown> | null>(
-    null,
-  );
   const [tableData, setTableData] = useState(data);
   const [pendingChanges, setPendingChanges] = useState<
     { row: number; field: string; value: string }[]
@@ -160,7 +155,6 @@ export function AdminTable({
           >
             <thead className="h-8 rounded-lg bg-text-dk-grey text-white">
               <tr>
-                <th className="text-left pl-3 w-24"></th>
                 {colHeaders.map((header, index) => (
                   <th key={index} className="text-left truncate pl-3">
                     {header}
@@ -174,15 +168,6 @@ export function AdminTable({
                   key={rowIndex}
                   className="text-left h-15 border-collapse border-b last:border-0 hover:bg-text-lt-grey transition-colors duration-200"
                 >
-                  <td className="pl-3 relative">
-                    <button
-                      className="rounded-md border border-text-grey px-1 cursor-pointer
-                    backdrop-blur-[2px] bg-theme-white/90 hover:bg-text-lt-grey transition-color duration-200"
-                      onClick={() => setPreviewRow(entry)}
-                    >
-                      Preview
-                    </button>
-                  </td>
                   {colHeaders.map((col) => {
                     const cellValue = entry[col];
                     const isImageCol = IMAGE_COLUMNS.includes(col);
@@ -303,31 +288,12 @@ export function AdminTable({
         </div>
       )}
 
-      {previewRow && (
-        <div className="fixed inset-0 flex items-center justify-center z-10">
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setPreviewRow(null)}
+      {tableData && tableData.length > 0 && (
+        <div className="mt-4">
+          <ComponentPreview
+            component={path.split("/").pop() ?? ""}
+            rows={tableData}
           />
-          <div
-            className="relative w-[95vw] max-w-[1400px] mx-4 p-6 flex flex-col gap-4 backdrop-blur-[2px] bg-theme-white
-            shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)] rounded-xl max-h-[92vh] overflow-auto"
-          >
-            <div className="flex justify-end">
-              <button
-                className="descriptext rounded-lg border border-text-grey px-3 py-1 cursor-pointer
-                backdrop-blur-[2px] bg-theme-white/90 shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_24px_rgba(0,0,0,0.08)]
-                hover:bg-text-lt-grey transition-color duration-200"
-                onClick={() => setPreviewRow(null)}
-              >
-                Close
-              </button>
-            </div>
-            <ComponentPreview
-              component={path.split("/").pop() ?? ""}
-              row={previewRow}
-            />
-          </div>
         </div>
       )}
 
