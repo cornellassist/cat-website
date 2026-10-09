@@ -111,7 +111,7 @@ const engSubteamInfo: CreateMemberCardProps[] = [
   { name: "Diya Sheth" },
   { name: "Merve Tutar" },
   { name: "Jay Zhu" },
-  { name: "Jenny Dong" },
+  // { name: "Jenny Dong" },
   { name: "Jayesha Sharma" },
   { name: "Serena Inderjit" },
   { name: "Sahana Behera" },
@@ -129,7 +129,7 @@ const eduOutSubteamInfo: CreateMemberCardProps[] = [
   { name: "Morgan Ogata" },
   { name: "Vanessa Chen Hsieh" },
   // { name: "Omar Alkhitan" },
-  { name: "Chloe Jung" },
+  // { name: "Chloe Jung" },
   { name: "Neel Behari" },
 ];
 
@@ -137,7 +137,7 @@ const businessSubteamInfo: CreateMemberCardProps[] = [
   { name: "Ariana Sanchez" },
   { name: "Scott Zinman" },
   { name: "Emmanuella Umoh" },
-  { name: "Rachel Turney" },
+  // { name: "Rachel Turney" },
   { name: "Brian Xia" },
   { name: "Sonya Zheng" },
   // { name: "Jason Yang" },
