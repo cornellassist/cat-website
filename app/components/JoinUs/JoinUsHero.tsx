@@ -13,15 +13,15 @@ function HeroContent() {
     <div className="flex flex-col items-center gap-2 sm:gap-5">
       <h1 className="mainheading mt-10">Join Us</h1>
       <p className="subtext mt-4 w-4/5 text-center">
-        Thank you so much for your interest in joining us! This fall, we will be
-        accepting applications starting August 17th, and we look forward to your
+        Thank you so much for your interest in joining us! We will open
+        applications again in Fall 2027, and we look forward to your
         applications!
       </p>
-      <p className="subtext w-4/5 text-center">
+      {/* <p className="subtext w-4/5 text-center">
         Stay tuned for more info about our teams and the recruiting timeline on
         this page!
-      </p>
-      <div className="flex gap-6 flex-wrap justify-center items-center mt-8">
+      </p> */}
+      {/* <div className="flex gap-6 flex-wrap justify-center items-center mt-8">
         <ButtonRed
           label={"Application Form"}
           to={
@@ -38,7 +38,7 @@ function HeroContent() {
           size={"M"}
           behav="External"
         />
-      </div>
+      </div> */}
       <div className="relative">
         <Image
           src={HeroPic}
