@@ -10,7 +10,7 @@ export default function JoinUs() {
       <Navbar />
       <JoinUsHero />
       <AboutTeams />
-      <RecruitmentTimelineSection />
+      {/* <RecruitmentTimelineSection /> */}
       <Footer />
     </div>
   );

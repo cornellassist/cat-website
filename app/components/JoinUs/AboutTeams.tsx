@@ -124,7 +124,7 @@ export const TeamCard = ({
                 );
               })}
             </div>
-            <div className="">
+            {/* <div className="">
               <ButtonRed
                 label={"Apply Now"}
                 to={
@@ -133,7 +133,7 @@ export const TeamCard = ({
                 size={"S"}
                 behav="External"
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -193,7 +193,7 @@ export const TeamCard = ({
 
 export const AboutTeams = () => {
   return (
-    <div className="universepad py-6">
+    <div className="universepad py-6 mb-6">
       <h2 className="heading">Our Teams</h2>
       <p className="subtext">See how you can get involved!</p>
       <div className="flex flex-col sm:flex-row justify-center mt-6 sm:mt-10 gap-5">
