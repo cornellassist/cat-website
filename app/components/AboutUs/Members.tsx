@@ -2,9 +2,9 @@
 import Image from "next/image";
 import { StaticImageData } from "next/image";
 import data from "@/public/assets/AboutUs/team.json"; // auto parsed
-import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder.png";
+import portraitPlaceholder from "@/public/assets/AboutUs/ProfilePics/portrait-placeholder copy.jpg";
 import { useState } from "react";
-import { loadingComplete, imgLoadStyles } from "@/utils/imgLoad";
+import { loadingComplete } from "@/utils/imgLoad";
 
 export interface Member {
   name: string;
@@ -112,6 +112,7 @@ const engSubteamInfo: CreateMemberCardProps[] = [
   { name: "Merve Tutar" },
   { name: "Jay Zhu" },
   // { name: "Jenny Dong" },
+  { name: "Logan Roberts" },
   { name: "Jayesha Sharma" },
   { name: "Serena Inderjit" },
   { name: "Sahana Behera" },
@@ -120,6 +121,14 @@ const engSubteamInfo: CreateMemberCardProps[] = [
   { name: "Neha Chigurupati" },
   // { name: "Elom Eskender" },
   { name: "Mihika Mukherjee" },
+  { name: "Su Latt Yati" },
+  { name: "Umang Sharma" },
+  { name: "Arpi Abrahamian" },
+  { name: "Yvonne Ye" },
+  { name: "Sriram Vaidhyanathan" },
+  { name: "Jenny Goraczko" },
+  { name: "Chloe Dewar" },
+  { name: "Kyle Ciurczak" },
 ];
 
 const eduOutSubteamInfo: CreateMemberCardProps[] = [
@@ -131,6 +140,14 @@ const eduOutSubteamInfo: CreateMemberCardProps[] = [
   // { name: "Omar Alkhitan" },
   // { name: "Chloe Jung" },
   { name: "Neel Behari" },
+  { name: "Suri Wang" },
+  { name: "Meilissa McLain" },
+  { name: "Charvi Kanna" },
+  { name: "Sophia Chen" },
+  { name: "Korra Littwin" },
+  { name: "Soorya Krishnan" },
+  { name: "Zaria St. Clair" },
+  { name: "Sophia Park" },
 ];
 
 const businessSubteamInfo: CreateMemberCardProps[] = [
@@ -142,6 +159,11 @@ const businessSubteamInfo: CreateMemberCardProps[] = [
   { name: "Sonya Zheng" },
   // { name: "Jason Yang" },
   // { name: "Dina Shlufman" },
+  { name: "Cindy Lin" },
+  { name: "Tony Yuan" },
+  { name: "Veronica Chen" },
+  { name: "Tristan Albano" },
+  { name: "Mikayla Loh" },
 ];
 
 // const alumniInfo: CreateMemberCardProps[] = [
@@ -275,7 +297,7 @@ export function MemberCard({
           width={300}
           height={300}
           // className={`w-auto rounded-[15px] cursor-pointer ${imgLoadStyles}`} onClick={onClick} onLoadingComplete={(img) => { loadingComplete(img) }} />
-          className={`2xl-100 xl:w-70 lg:w-60 rounded-[15px] cursor-pointer border border-gray-500/50 p-1`}
+          className={`2xl-100 xl:w-70 lg:w-60 aspect-[2305/3293] object-cover rounded-[15px] cursor-pointer border border-gray-500/50 p-1`}
           onClick={onClick}
           onLoadingComplete={(img) => {
             loadingComplete(img);
